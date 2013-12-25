@@ -235,6 +235,8 @@
 		7855E0E1153FEF240059DD9A /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 7855E0DF153FEF240059DD9A /* Default.png */; };
 		9FD8609E185F179C00266E1E /* Send.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FD8609C185F179C00266E1E /* Send.png */; };
 		9FD8609F185F179C00266E1E /* SendHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FD8609D185F179C00266E1E /* SendHighlighted.png */; };
+		9FF7CE641862BF2200C463AD /* Network.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9FF7CE621862BF2100C463AD /* Network.cpp */; };
+		9FFC1C4818698DD1005671C4 /* kopute.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FFC1C4718698DD1005671C4 /* kopute.png */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712461292920000B8313A /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB212928DE900B8313A /* libxml2.dylib */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
@@ -732,6 +734,11 @@
 		9FD8609B185F166000266E1E /* picojson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = picojson.h; path = ../Classes/picojson.h; sourceTree = "<group>"; };
 		9FD8609C185F179C00266E1E /* Send.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Send.png; sourceTree = "<group>"; };
 		9FD8609D185F179C00266E1E /* SendHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SendHighlighted.png; sourceTree = "<group>"; };
+		9FF7CE621862BF2100C463AD /* Network.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Network.cpp; path = ../Classes/Network.cpp; sourceTree = "<group>"; };
+		9FF7CE631862BF2200C463AD /* Network.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Network.h; path = ../Classes/Network.h; sourceTree = "<group>"; };
+		9FFC1C3E1869596D005671C4 /* DefPosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DefPosition.h; path = ../Classes/DefPosition.h; sourceTree = "<group>"; };
+		9FFC1C4718698DD1005671C4 /* kopute.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kopute.png; sourceTree = "<group>"; };
+		9FFC1C491869B823005671C4 /* DefTags.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefTags.h; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB212928DE900B8313A /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -1271,6 +1278,10 @@
 				1AFAF8B416D35DE700DB1158 /* AppDelegate.h */,
 				1AFAF8B516D35DE700DB1158 /* HelloWorldScene.cpp */,
 				1AFAF8B616D35DE700DB1158 /* HelloWorldScene.h */,
+				9FF7CE621862BF2100C463AD /* Network.cpp */,
+				9FF7CE631862BF2200C463AD /* Network.h */,
+				9FFC1C3E1869596D005671C4 /* DefPosition.h */,
+				9FFC1C491869B823005671C4 /* DefTags.h */,
 			);
 			name = Classes;
 			path = ../classes;
@@ -1715,6 +1726,7 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9FFC1C4718698DD1005671C4 /* kopute.png */,
 				9FD8609C185F179C00266E1E /* Send.png */,
 				9FD8609D185F179C00266E1E /* SendHighlighted.png */,
 				1AFAF8B916D35E4900DB1158 /* CloseNormal.png */,
@@ -1804,6 +1816,7 @@
 				7855E0E1153FEF240059DD9A /* Default.png in Resources */,
 				D4EF949A15BD2D8B00D803EB /* Icon-57.png in Resources */,
 				D4EF949C15BD2D8E00D803EB /* Icon-114.png in Resources */,
+				9FFC1C4818698DD1005671C4 /* kopute.png in Resources */,
 				D4EF949E15BD2D9600D803EB /* Icon-72.png in Resources */,
 				D4EF94A015BD2D9800D803EB /* Icon-144.png in Resources */,
 				9FD8609E185F179C00266E1E /* Send.png in Resources */,
@@ -1853,6 +1866,7 @@
 				15A3D9151682F7D5002FB0C5 /* b2World.cpp in Sources */,
 				15A3D9161682F7D5002FB0C5 /* b2WorldCallbacks.cpp in Sources */,
 				15A3D9171682F7D5002FB0C5 /* b2ChainAndCircleContact.cpp in Sources */,
+				9FF7CE641862BF2200C463AD /* Network.cpp in Sources */,
 				15A3D9181682F7D5002FB0C5 /* b2ChainAndPolygonContact.cpp in Sources */,
 				15A3D9191682F7D5002FB0C5 /* b2CircleContact.cpp in Sources */,
 				15A3D91A1682F7D5002FB0C5 /* b2Contact.cpp in Sources */,

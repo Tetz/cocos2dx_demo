@@ -432,7 +432,7 @@ obj/local/armeabi/objs/cocos2dcpp_shared/__/__/Classes/HelloWorldScene.o: \
  /Users/ted/cdroid/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/cassert \
  /Users/ted/cdroid/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/cmath \
  /Users/ted/cdroid/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/iterator \
- jni/../../Classes/JNICalls/InterfaceJNI.h
+ jni/../../Classes/DefTags.h jni/../../Classes/JNICalls/InterfaceJNI.h
 
 jni/../../Classes/HelloWorldScene.h:
 
@@ -1297,5 +1297,7 @@ jni/../../Classes/picojson.h:
 /Users/ted/cdroid/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/cmath:
 
 /Users/ted/cdroid/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/iterator:
+
+jni/../../Classes/DefTags.h:
 
 jni/../../Classes/JNICalls/InterfaceJNI.h:
