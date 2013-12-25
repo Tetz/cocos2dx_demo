@@ -86,10 +86,22 @@ bool HelloWorld::init()
     
     // My Pet
     CCSpriteBatchNode * batchNode = CCSpriteBatchNode::create("kopute.png");
+    batchNode->setTag(_SPRITE_MY_PET_);
     CCSprite * pet = CCSprite::createWithTexture(batchNode->getTexture(), CCRect(0,0,128,128));
     pet->setPosition(CCPointMake(visibleSize.width/2, visibleSize.height/10 * 3));
-    pet->setTag(5);
     this->addChild(pet);
+    
+    // Animation
+    CCAnimation * animation = CCAnimation::create();
+    animation->addSpriteFrameWithTexture(batchNode->getTexture(), CCRect(128*0,0,128,128));
+    animation->addSpriteFrameWithTexture(batchNode->getTexture(), CCRect(128*3,0,128,128));
+    animation->addSpriteFrameWithTexture(batchNode->getTexture(), CCRect(128*0,0,128,128));
+    animation->addSpriteFrameWithTexture(batchNode->getTexture(), CCRect(128*4,0,128,128));
+    animation->setDelayPerUnit(0.5f / 4.0f);
+    animation->setRestoreOriginalFrame(true);
+    CCAnimate * action = CCAnimate::create(animation);
+    CCRepeatForever * actionreq = CCRepeatForever::create(action);
+    pet->runAction(actionreq);
     
     // Label Tag 3
     CCLabelTTF * text3 = CCLabelTTF::create("", "arial", 48);
@@ -140,7 +152,7 @@ void HelloWorld::onClick1()
     text->setColor(ccc3(25, 25, 25));
     text->setPosition(CCPointMake(visibleSize.width/2, visibleSize.height/10 * 2));
     text->setString(uuid);
-    
+ 
     // Set Key and Value
     int numberOfPair = 4;
     std::pair <const char *, const char *> * pair;
@@ -195,7 +207,7 @@ void HelloWorld::onClick1()
    
 }
 
-// Maching users
+// Matching users
 void HelloWorld::onClick2()
 {
     // Set parameters
