@@ -8,6 +8,8 @@ class HelloWorld : public cocos2d::CCLayerColor
 protected:
     
 private:
+    int randNum;
+    const char * monsterAry;
     
 public:
     virtual bool init();

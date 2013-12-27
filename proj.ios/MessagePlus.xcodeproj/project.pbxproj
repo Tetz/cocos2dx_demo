@@ -237,6 +237,10 @@
 		9FD8609F185F179C00266E1E /* SendHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FD8609D185F179C00266E1E /* SendHighlighted.png */; };
 		9FF7CE641862BF2200C463AD /* Network.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9FF7CE621862BF2100C463AD /* Network.cpp */; };
 		9FFC1C4818698DD1005671C4 /* kopute.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FFC1C4718698DD1005671C4 /* kopute.png */; };
+		9FFC1C4E186ADB52005671C4 /* baby.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FFC1C4A186ADB52005671C4 /* baby.png */; };
+		9FFC1C4F186ADB52005671C4 /* giga.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FFC1C4B186ADB52005671C4 /* giga.png */; };
+		9FFC1C50186ADB52005671C4 /* kodora.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FFC1C4C186ADB52005671C4 /* kodora.png */; };
+		9FFC1C51186ADB52005671C4 /* meca.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FFC1C4D186ADB52005671C4 /* meca.png */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712461292920000B8313A /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB212928DE900B8313A /* libxml2.dylib */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
@@ -739,6 +743,10 @@
 		9FFC1C3E1869596D005671C4 /* DefPosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DefPosition.h; path = ../Classes/DefPosition.h; sourceTree = "<group>"; };
 		9FFC1C4718698DD1005671C4 /* kopute.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kopute.png; sourceTree = "<group>"; };
 		9FFC1C491869B823005671C4 /* DefTags.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefTags.h; sourceTree = "<group>"; };
+		9FFC1C4A186ADB52005671C4 /* baby.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = baby.png; sourceTree = "<group>"; };
+		9FFC1C4B186ADB52005671C4 /* giga.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = giga.png; sourceTree = "<group>"; };
+		9FFC1C4C186ADB52005671C4 /* kodora.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kodora.png; sourceTree = "<group>"; };
+		9FFC1C4D186ADB52005671C4 /* meca.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = meca.png; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB212928DE900B8313A /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -1726,6 +1734,10 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9FFC1C4A186ADB52005671C4 /* baby.png */,
+				9FFC1C4B186ADB52005671C4 /* giga.png */,
+				9FFC1C4C186ADB52005671C4 /* kodora.png */,
+				9FFC1C4D186ADB52005671C4 /* meca.png */,
 				9FFC1C4718698DD1005671C4 /* kopute.png */,
 				9FD8609C185F179C00266E1E /* Send.png */,
 				9FD8609D185F179C00266E1E /* SendHighlighted.png */,
@@ -1824,8 +1836,12 @@
 				D41A0AD1160F154A004552AE /* Default-568h@2x.png in Resources */,
 				D446FD6E16102124000ADA7B /* Default@2x.png in Resources */,
 				15A3D9961682F7F9002FB0C5 /* CMakeLists.txt in Resources */,
+				9FFC1C51186ADB52005671C4 /* meca.png in Resources */,
+				9FFC1C4F186ADB52005671C4 /* giga.png in Resources */,
 				1AFAF8BC16D35E4900DB1158 /* CloseNormal.png in Resources */,
+				9FFC1C4E186ADB52005671C4 /* baby.png in Resources */,
 				1AFAF8BD16D35E4900DB1158 /* CloseSelected.png in Resources */,
+				9FFC1C50186ADB52005671C4 /* kodora.png in Resources */,
 				1AFAF8BE16D35E4900DB1158 /* HelloWorld.png in Resources */,
 				379BB9CC17F03F3700829B88 /* json_internalarray.inl in Resources */,
 				379BB9CD17F03F3700829B88 /* json_internalmap.inl in Resources */,

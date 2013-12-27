@@ -12,7 +12,15 @@ USING_NS_CC_EXT;
 #include "JNICalls/InterfaceJNI.h"
 #endif
 
-// Basically, This app works with messagePlus(/var/mplus).
+// Basically, this app works with messagePlus(/var/mplus).
+
+//typedef enum {
+//      Monster1 = "baby.png",
+//      Monster2 = "giga.png",
+//      Monster3 = "kodora.png",
+//      Monster4 = "meca.png",
+//      Monster5 = "kopute.png"
+//} MonsterList;
 
 CCScene* HelloWorld::scene()
 {
@@ -24,6 +32,8 @@ CCScene* HelloWorld::scene()
 
 bool HelloWorld::init()
 {
+    randNum = 3;
+    
     if ( CCLayerColor::initWithColor(ccc4(255,255,255,255)) )
     {
     }
@@ -70,6 +80,16 @@ bool HelloWorld::init()
     menu_2->setPosition(CCPointZero);
     this->addChild(menu_2,1);
     
+    // Monsters List
+    int num = 0;
+    const char * monsterList[4];
+    monsterList[num++] = "baby.png";
+    monsterList[num++] = "giga.png";
+    monsterList[num++] = "kodora.png";
+    monsterList[num++] = "meca.png";
+    monsterList[num++] = "kopute.png";
+    
+    
     // Label Tag 1
     CCLabelTTF * text = CCLabelTTF::create("", "arial", 48);
     text->setColor(ccc3(25, 25, 25));
@@ -85,10 +105,10 @@ bool HelloWorld::init()
     this->addChild(text2);
     
     // My Pet
-    CCSpriteBatchNode * batchNode = CCSpriteBatchNode::create("kopute.png");
-    batchNode->setTag(_SPRITE_MY_PET_);
+    CCSpriteBatchNode * batchNode = CCSpriteBatchNode::create(monsterList[randNum]);
     CCSprite * pet = CCSprite::createWithTexture(batchNode->getTexture(), CCRect(0,0,128,128));
     pet->setPosition(CCPointMake(visibleSize.width/2, visibleSize.height/10 * 3));
+    pet->setTag(_SPRITE_MY_PET_);
     this->addChild(pet);
     
     // Animation
@@ -97,7 +117,7 @@ bool HelloWorld::init()
     animation->addSpriteFrameWithTexture(batchNode->getTexture(), CCRect(128*3,0,128,128));
     animation->addSpriteFrameWithTexture(batchNode->getTexture(), CCRect(128*0,0,128,128));
     animation->addSpriteFrameWithTexture(batchNode->getTexture(), CCRect(128*4,0,128,128));
-    animation->setDelayPerUnit(0.5f / 4.0f);
+    animation->setDelayPerUnit(0.8f / 4.0f);
     animation->setRestoreOriginalFrame(true);
     CCAnimate * action = CCAnimate::create(animation);
     CCRepeatForever * actionreq = CCRepeatForever::create(action);
@@ -117,11 +137,13 @@ bool HelloWorld::init()
     text4->setTag(_LABEL_UUID_1_);
     this->addChild(text4);
     
+   
     // Other Pets
-    CCSprite * pet2 = CCSprite::create("kopute.png");
+    CCSprite * pet2 = CCSprite::create(monsterList[randNum]);
     pet2->setPosition(CCPointMake(visibleSize.width/2, visibleSize.height/10 * 8));
     this->addChild(pet2);
-    
+   
+   
     return true;
 }
 
@@ -141,13 +163,48 @@ void HelloWorld::menuCloseCallback(CCObject* pSender)
 // OnClick Action
 void HelloWorld::onClick1()
 {
+    // Get Size of Device Display
+    CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
+    
+    // Remove the sprite
+    CCSprite * prepet = (CCSprite *)this->getChildByTag(_SPRITE_MY_PET_);
+    prepet->removeFromParent();
+    
+    // Monsters List
+    int num2 = 0;
+    const char * monsterList[4];
+    monsterList[num2++] = "baby.png";
+    monsterList[num2++] = "giga.png";
+    monsterList[num2++] = "kodora.png";
+    monsterList[num2++] = "meca.png";
+    monsterList[num2++] = "kopute.png";
+    
+    // Set Random Number
+    randNum = rand() % 4;
+    CCSpriteBatchNode * batchNode = CCSpriteBatchNode::create(monsterList[randNum]);
+    CCSprite * pet = CCSprite::createWithTexture(batchNode->getTexture(), CCRect(0,0,128,128));
+    pet->setPosition(CCPointMake(visibleSize.width/2, visibleSize.height/10 * 3));
+    pet->setTag(_SPRITE_MY_PET_);
+    this->addChild(pet);
+    
+    // Animation
+    CCAnimation * animation = CCAnimation::create();
+    animation->addSpriteFrameWithTexture(batchNode->getTexture(), CCRect(128*0,0,128,128));
+    animation->addSpriteFrameWithTexture(batchNode->getTexture(), CCRect(128*3,0,128,128));
+    animation->addSpriteFrameWithTexture(batchNode->getTexture(), CCRect(128*0,0,128,128));
+    animation->addSpriteFrameWithTexture(batchNode->getTexture(), CCRect(128*4,0,128,128));
+    animation->setDelayPerUnit(0.8f / 4.0f);
+    animation->setRestoreOriginalFrame(true);
+    CCAnimate * action = CCAnimate::create(animation);
+    CCRepeatForever * actionreq = CCRepeatForever::create(action);
+    pet->runAction(actionreq);
+   
     // Set parameters
     std::string uuid_str = HelloWorld::getUUID();
     const char * uuid = uuid_str.c_str();
     CCLog("getUUID : %s", uuid);
     
     // Show UUID
-    CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
     CCLabelTTF * text = (CCLabelTTF*)this->getChildByTag(_LABEL_MY_UUID_);
     text->setColor(ccc3(25, 25, 25));
     text->setPosition(CCPointMake(visibleSize.width/2, visibleSize.height/10 * 2));
@@ -167,7 +224,7 @@ void HelloWorld::onClick1()
     int count_char = 0;
     
     // Calculate Memory Size
-    for (int cnt = 0; cnt < numberOfPair; cnt++)
+    for (int cnt = 0; cnt < num; cnt++)
     {
         count_char += strlen(pair[cnt].first);
         count_char += strlen(pair[cnt].second);
@@ -182,7 +239,7 @@ void HelloWorld::onClick1()
     *jsonData = '\0';
     
     // Set jsonData
-    jsonGenerator(numberOfPair, jsonData, pair);
+    jsonGenerator(num, jsonData, pair);
     
     // Create Json Object
     const char * postData = jsonData;
