@@ -9,7 +9,7 @@ protected:
     
 private:
     int randNum;
-    const char * monsterAry;
+    const char * monsterAry[4];
     
 public:
     virtual bool init();
@@ -36,7 +36,7 @@ public:
     // JSON Generator
     virtual void jsonGenerator(int, char*, std::pair<const char*, const char*>[]);
     
-    
+   
 };
 
 #endif // __HELLOWORLD_SCENE_H__

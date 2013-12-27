@@ -14,14 +14,6 @@ USING_NS_CC_EXT;
 
 // Basically, this app works with messagePlus(/var/mplus).
 
-//typedef enum {
-//      Monster1 = "baby.png",
-//      Monster2 = "giga.png",
-//      Monster3 = "kodora.png",
-//      Monster4 = "meca.png",
-//      Monster5 = "kopute.png"
-//} MonsterList;
-
 CCScene* HelloWorld::scene()
 {
     CCScene *scene = CCScene::create();
@@ -82,12 +74,12 @@ bool HelloWorld::init()
     
     // Monsters List
     int num = 0;
-    const char * monsterList[4];
-    monsterList[num++] = "baby.png";
-    monsterList[num++] = "giga.png";
-    monsterList[num++] = "kodora.png";
-    monsterList[num++] = "meca.png";
-    monsterList[num++] = "kopute.png";
+
+    monsterAry[num++] = "baby.png";
+    monsterAry[num++] = "giga.png";
+    monsterAry[num++] = "kodora.png";
+    monsterAry[num++] = "meca.png";
+    monsterAry[num++] = "kopute.png";
     
     
     // Label Tag 1
@@ -105,7 +97,7 @@ bool HelloWorld::init()
     this->addChild(text2);
     
     // My Pet
-    CCSpriteBatchNode * batchNode = CCSpriteBatchNode::create(monsterList[randNum]);
+    CCSpriteBatchNode * batchNode = CCSpriteBatchNode::create(monsterAry[randNum]);
     CCSprite * pet = CCSprite::createWithTexture(batchNode->getTexture(), CCRect(0,0,128,128));
     pet->setPosition(CCPointMake(visibleSize.width/2, visibleSize.height/10 * 3));
     pet->setTag(_SPRITE_MY_PET_);
@@ -139,7 +131,7 @@ bool HelloWorld::init()
     
    
     // Other Pets
-    CCSprite * pet2 = CCSprite::create(monsterList[randNum]);
+    CCSprite * pet2 = CCSprite::create(monsterAry[randNum]);
     pet2->setPosition(CCPointMake(visibleSize.width/2, visibleSize.height/10 * 8));
     this->addChild(pet2);
    
@@ -170,18 +162,9 @@ void HelloWorld::onClick1()
     CCSprite * prepet = (CCSprite *)this->getChildByTag(_SPRITE_MY_PET_);
     prepet->removeFromParent();
     
-    // Monsters List
-    int num2 = 0;
-    const char * monsterList[4];
-    monsterList[num2++] = "baby.png";
-    monsterList[num2++] = "giga.png";
-    monsterList[num2++] = "kodora.png";
-    monsterList[num2++] = "meca.png";
-    monsterList[num2++] = "kopute.png";
-    
     // Set Random Number
     randNum = rand() % 4;
-    CCSpriteBatchNode * batchNode = CCSpriteBatchNode::create(monsterList[randNum]);
+    CCSpriteBatchNode * batchNode = CCSpriteBatchNode::create(monsterAry[randNum]);
     CCSprite * pet = CCSprite::createWithTexture(batchNode->getTexture(), CCRect(0,0,128,128));
     pet->setPosition(CCPointMake(visibleSize.width/2, visibleSize.height/10 * 3));
     pet->setTag(_SPRITE_MY_PET_);
