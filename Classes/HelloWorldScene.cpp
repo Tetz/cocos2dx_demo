@@ -4,6 +4,7 @@
 #include "spine/Json.h"
 #include "picojson.h"
 #include "DefTags.h"
+#include "Getter.h"
 
 USING_NS_CC;
 USING_NS_CC_EXT;
@@ -155,6 +156,9 @@ void HelloWorld::menuCloseCallback(CCObject* pSender)
 // OnClick Action
 void HelloWorld::onClick1()
 {
+	// TODO Debug
+	CCLog("Getter:: %s","test4");
+
     // Get Size of Device Display
     CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
     
@@ -183,9 +187,9 @@ void HelloWorld::onClick1()
     pet->runAction(actionreq);
    
     // Set parameters
-    std::string uuid_str = HelloWorld::getUUID();
+    std::string uuid_str = Getter::getUUID();
     const char * uuid = uuid_str.c_str();
-    CCLog("getUUID : %s", uuid);
+    CCLog("Getter::getUUID : %s", uuid);
     
     // Show UUID
     CCLabelTTF * text = (CCLabelTTF*)this->getChildByTag(_LABEL_MY_UUID_);
@@ -251,9 +255,9 @@ void HelloWorld::onClick1()
 void HelloWorld::onClick2()
 {
     // Set parameters
-    std::string uuid_str = HelloWorld::getUUID();
+    std::string uuid_str = Getter::getUUID();
     const char * uuid = uuid_str.c_str();
-    CCLog("getUUID : %s", uuid);
+    CCLog("Getter::getUUID : %s", uuid);
     
     // Show UUID
     CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
@@ -407,38 +411,6 @@ void HelloWorld::onHttpRequestCompleted(cocos2d::CCNode *sender, void *data)
     // Delete the JSON structure
     Json_dispose(json);
     
-}
-
-
-// Getter
-std::string HelloWorld::getUUID()
-{
-    // Java Native Interface
-    std::string uuid;
-    #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-    InterfaceJNI::func1();
-    uuid = InterfaceJNI::getUUID();
-    #endif
-    return uuid;
-}
-
-const char * HelloWorld::getName()
-{
-    const char * name = "Miky";
-    return name;
-}
-
-const char * HelloWorld::getMessages()
-{
-    const char * uuid = "Hello, I am Miky! How are you doing?";
-    return uuid;
-}
-
-const char * HelloWorld::getFood()
-{
-    CCString ccstr = "test";
-    const char * uuid = "meat";
-    return uuid;
 }
 
 

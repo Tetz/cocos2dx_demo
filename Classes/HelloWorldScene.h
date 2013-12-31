@@ -27,12 +27,6 @@ public:
     // HTTP
     virtual void onHttpRequestCompleted(cocos2d::CCNode *sender, void *data);
     
-    // UUID Getter
-    virtual std::string getUUID();
-    virtual const char * getName();
-    virtual const char * getMessages();
-    virtual const char * getFood();
-    
     // JSON Generator
     virtual void jsonGenerator(int, char*, std::pair<const char*, const char*>[]);
     
