@@ -26,10 +26,7 @@ public:
     
     // HTTP
     virtual void onHttpRequestCompleted(cocos2d::CCNode *sender, void *data);
-    
-    // JSON Generator
-    virtual void jsonGenerator(int, char*, std::pair<const char*, const char*>[]);
-    
+   
    
 };
 

@@ -5,6 +5,7 @@
 #include "picojson.h"
 #include "DefTags.h"
 #include "Getter.h"
+#include "JsonGenerator.h"
 
 USING_NS_CC;
 USING_NS_CC_EXT;
@@ -157,7 +158,7 @@ void HelloWorld::menuCloseCallback(CCObject* pSender)
 void HelloWorld::onClick1()
 {
 	// TODO Debug
-	CCLog("Getter:: %s","test4");
+	CCLog("Getter:: %s","test7");
 
     // Get Size of Device Display
     CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
@@ -226,7 +227,9 @@ void HelloWorld::onClick1()
     *jsonData = '\0';
     
     // Set jsonData
-    jsonGenerator(num, jsonData, pair);
+    JsonGenerator * jsonGenerator = new JsonGenerator();
+    jsonGenerator->generate(num, jsonData, pair);
+    jsonGenerator->DisposeObject();
     
     // Create Json Object
     const char * postData = jsonData;
@@ -295,7 +298,9 @@ void HelloWorld::onClick2()
     *jsonData = '\0';
     
     // Set jsonData
-    jsonGenerator(numberOfPair, jsonData, pair);
+    JsonGenerator * jsonGenerator = new JsonGenerator();
+    jsonGenerator->generate(num, jsonData, pair);
+    jsonGenerator->DisposeObject();
     
     // Create Json Object
     const char * postData = jsonData;
@@ -318,29 +323,6 @@ void HelloWorld::onClick2()
     delete[] pair;
     delete[] jsonData;
 }
-
-
-
-// JSON Generator
-void HelloWorld::jsonGenerator(int numberOfPair, char json[], std::pair<const char*, const char*> pair[])
-{
-    int max = numberOfPair;
-    
-    strcat(json, "{");
-    for (int cnt = 0; cnt < max; cnt++)
-    {
-        strcat(json, "\"");
-        strcat(json, pair[cnt].first);
-        strcat(json, "\":\"");
-        strcat(json, pair[cnt].second);
-        strcat(json, "\"");
-        if(cnt != max-1){
-            strcat(json, ",");
-        }
-    }
-    strcat(json, "}");
-}
-
 
 void HelloWorld::onHttpRequestCompleted(cocos2d::CCNode *sender, void *data)
 {
