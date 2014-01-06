@@ -158,7 +158,7 @@ void HelloWorld::menuCloseCallback(CCObject* pSender)
 void HelloWorld::onClick1()
 {
 	// TODO Debug
-	CCLog("Dev=> %s","test8");
+	CCLog("Dev=> %s","test9");
 
     // Get Size of Device Display
     CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
