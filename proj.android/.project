@@ -110,22 +110,22 @@
 		<link>
 			<name>Classes</name>
 			<type>2</type>
-			<location>/Users/ted/dev/cocos/project/messageplus/Classes</location>
+			<location>/Users/ted/cdroid/cocos/projects/MessagePlus/Classes</location>
 		</link>
 		<link>
 			<name>cocos2dx</name>
 			<type>2</type>
-			<location>/Users/ted/dev/cocos/cocos2dx</location>
+			<locationURI>COCOS2DX/cocos2dx</locationURI>
 		</link>
 		<link>
 			<name>extensions</name>
 			<type>2</type>
-			<location>/Users/ted/dev/cocos/extensions</location>
+			<locationURI>COCOS2DX/extensions</locationURI>
 		</link>
 		<link>
 			<name>scripting</name>
 			<type>2</type>
-			<location>/Users/ted/dev/cocos/scripting</location>
+			<locationURI>COCOS2DX/scripting</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

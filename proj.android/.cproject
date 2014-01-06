@@ -6,10 +6,10 @@
 		<cconfiguration id="0.756827735">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="0.756827735" moduleId="org.eclipse.cdt.core.settings" name="Default">
 				<macros>
-					<stringMacro name="ANDROID_NDK_ROOT" type="VALUE_TEXT" value="/Users/ted/dev/adt/ndk/"/>
-					<stringMacro name="COCOS2DX_ROOT" type="VALUE_TEXT" value="/Users/ted/dev/cocos/"/>
-					<stringMacro name="NDK_ROOT" type="VALUE_TEXT" value="/Users/ted/dev/adt/ndk/"/>
-					<stringMacro name="COCOS2DX" type="VALUE_TEXT" value="/Users/ted/dev/cocos/"/>
+					<stringMacro name="ANDROID_NDK_ROOT" type="VALUE_TEXT" value="/Users/ted/cdroid/ndk"/>
+					<stringMacro name="COCOS2DX_ROOT" type="VALUE_TEXT" value="/Users/ted/cdroid/cocos/"/>
+					<stringMacro name="NDK_ROOT" type="VALUE_TEXT" value="/Users/ted/cdroid/ndk"/>
+					<stringMacro name="COCOS2DX" type="VALUE_TEXT" value="/Users/ted/cdroid/cocos/"/>
 				</macros>
 				<externalSettings/>
 				<extensions>
