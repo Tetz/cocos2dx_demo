@@ -8,6 +8,8 @@
 				<macros>
 					<stringMacro name="ANDROID_NDK_ROOT" type="VALUE_TEXT" value="/Users/ted/cdroid/ndk"/>
 					<stringMacro name="COCOS2DX_ROOT" type="VALUE_TEXT" value="/Users/ted/cdroid/cocos/"/>
+					<stringMacro name="NDK_ROOT" type="VALUE_TEXT" value="/Users/ted/cdroid/ndk"/>
+					<stringMacro name="COCOS2DX" type="VALUE_TEXT" value="/Users/ted/cdroid/cocos/"/>
 				</macros>
 				<externalSettings/>
 				<extensions>
@@ -106,10 +108,8 @@
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
 		</scannerConfigBuildInfo>
 	</storageModule>
-	<storageModule moduleId="refreshScope" versionNumber="2">
-		<configuration configurationName="Default">
-			<resource resourceType="PROJECT" workspacePath="/HelloCpp"/>
-		</configuration>
+	<storageModule moduleId="refreshScope" versionNumber="1">
+		<resource resourceType="PROJECT" workspacePath="/MessagePlus"/>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>

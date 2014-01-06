@@ -8,32 +8,26 @@ class HelloWorld : public cocos2d::CCLayerColor
 protected:
     
 private:
+    int randNum;
+    const char * monsterAry[4];
     
 public:
     virtual bool init();
     
-    static cocos2d::CCScene* scene();
+    static cocos2d::CCScene * scene();
     
-    void menuCloseCallback(CCObject* pSender);
+    void menuCloseCallback(CCObject * pSender);
     
     CREATE_FUNC(HelloWorld);
     
-    // Send Messages
-    virtual void sendOnclick();
+    // This is button that puts monster
+    virtual void onClick1();
+    virtual void onClick2();
     
     // HTTP
     virtual void onHttpRequestCompleted(cocos2d::CCNode *sender, void *data);
-    
-    // UUID Getter
-    virtual const char* getUUID();
-    virtual const char* getName();
-    virtual const char* getMessages();
-    virtual const char* getFood();
-    
-    // JSON Generator
-    virtual void jsonGenerator(int, char*, std::pair<const char*, const char*>[]);
-    
-    
+   
+   
 };
 
 #endif // __HELLOWORLD_SCENE_H__
