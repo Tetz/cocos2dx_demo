@@ -26,6 +26,7 @@ public:
     
     // HTTP
     virtual void onHttpRequestCompleted(cocos2d::CCNode *sender, void *data);
+    virtual void onHttpRequestCompleted2(cocos2d::CCNode *sender, void *data);
    
    
 };
