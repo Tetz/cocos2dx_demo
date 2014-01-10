@@ -203,7 +203,7 @@ obj/local/armeabi/objs/cocos2dcpp_shared/__/__/Classes/AppDelegate.o: \
  /Users/ted/cdroid/cocos/projects/MessagePlus/proj.android/../../../cocos2dx/support/data_support/uthash.h \
  /Users/ted/cdroid/cocos/projects/MessagePlus/proj.android/../../../cocos2dx/support/component/CCComponent.h \
  /Users/ted/cdroid/cocos/projects/MessagePlus/proj.android/../../../cocos2dx/support/component/CCComponentContainer.h \
- jni/../../Classes/HelloWorldScene.h
+ jni/../../Classes/FarmScene.h
 
 jni/../../Classes/AppDelegate.h:
 
@@ -613,4 +613,4 @@ jni/../../Classes/AppDelegate.h:
 
 /Users/ted/cdroid/cocos/projects/MessagePlus/proj.android/../../../cocos2dx/support/component/CCComponentContainer.h:
 
-jni/../../Classes/HelloWorldScene.h:
+jni/../../Classes/FarmScene.h:

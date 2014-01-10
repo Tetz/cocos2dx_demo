@@ -1,15 +1,16 @@
-#ifndef __HELLOWORLD_SCENE_H__
-#define __HELLOWORLD_SCENE_H__
+#ifndef __FARM_SCENE_H__
+#define __FARM_SCENE_H__
 
 #include "cocos2d.h"
 
-class HelloWorld : public cocos2d::CCLayerColor
+class Farm : public cocos2d::CCLayerColor
 {
 protected:
     
 private:
     int randNum;
     const char * monsterAry[4];
+    cocos2d::CCSize visibleSize;
     
 public:
     virtual bool init();
@@ -18,7 +19,7 @@ public:
     
     void menuCloseCallback(CCObject * pSender);
     
-    CREATE_FUNC(HelloWorld);
+    CREATE_FUNC(Farm);
     
     // This is button that puts monster
     virtual void onClick1();
@@ -27,8 +28,11 @@ public:
     // HTTP
     virtual void onHttpRequestCompleted(cocos2d::CCNode *sender, void *data);
     virtual void onHttpRequestCompleted2(cocos2d::CCNode *sender, void *data);
+    
+    // background
+    virtual void setBackground();
    
    
 };
 
-#endif // __HELLOWORLD_SCENE_H__
+#endif // __FARM_SCENE_H__

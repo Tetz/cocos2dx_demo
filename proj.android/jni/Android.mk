@@ -11,8 +11,9 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/JNICalls/InterfaceJNI.cpp \
                    ../../Classes/Network.cpp \
                    ../../Classes/Getter.cpp \
+                   ../../Classes/Setter.cpp \
                    ../../Classes/JsonGenerator.cpp \
-                   ../../Classes/HelloWorldScene.cpp
+                   ../../Classes/FarmScene.cpp
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes
 

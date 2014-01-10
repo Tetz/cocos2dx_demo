@@ -9,11 +9,11 @@ obj/local/armeabi/objs/cocos_extension_static/CocoStudio/Json/lib_json/json_valu
  /Users/ted/cdroid/cocos/projects/MessagePlus/proj.android/../../../extensions/CocoStudio/Json/lib_json/writer.h \
  /Users/ted/cdroid/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/iostream \
  /Users/ted/cdroid/cocos/projects/MessagePlus/proj.android/../../../extensions/CocoStudio/Json/lib_json/json_batchallocator.h \
- /Users/ted/cdroid/ndk/platforms/android-18/arch-arm/usr/include/stdlib.h \
- /Users/ted/cdroid/ndk/platforms/android-18/arch-arm/usr/include/alloca.h \
- /Users/ted/cdroid/ndk/platforms/android-18/arch-arm/usr/include/strings.h \
- /Users/ted/cdroid/ndk/platforms/android-18/arch-arm/usr/include/memory.h \
- /Users/ted/cdroid/ndk/platforms/android-18/arch-arm/usr/include/assert.h \
+ /Users/ted/cdroid/ndk/platforms/android-8/arch-arm/usr/include/stdlib.h \
+ /Users/ted/cdroid/ndk/platforms/android-8/arch-arm/usr/include/alloca.h \
+ /Users/ted/cdroid/ndk/platforms/android-8/arch-arm/usr/include/strings.h \
+ /Users/ted/cdroid/ndk/platforms/android-8/arch-arm/usr/include/memory.h \
+ /Users/ted/cdroid/ndk/platforms/android-8/arch-arm/usr/include/assert.h \
  /Users/ted/cdroid/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/utility \
  /Users/ted/cdroid/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/stdexcept \
  /Users/ted/cdroid/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/cstring \
@@ -39,15 +39,15 @@ obj/local/armeabi/objs/cocos_extension_static/CocoStudio/Json/lib_json/json_valu
 
 /Users/ted/cdroid/cocos/projects/MessagePlus/proj.android/../../../extensions/CocoStudio/Json/lib_json/json_batchallocator.h:
 
-/Users/ted/cdroid/ndk/platforms/android-18/arch-arm/usr/include/stdlib.h:
+/Users/ted/cdroid/ndk/platforms/android-8/arch-arm/usr/include/stdlib.h:
 
-/Users/ted/cdroid/ndk/platforms/android-18/arch-arm/usr/include/alloca.h:
+/Users/ted/cdroid/ndk/platforms/android-8/arch-arm/usr/include/alloca.h:
 
-/Users/ted/cdroid/ndk/platforms/android-18/arch-arm/usr/include/strings.h:
+/Users/ted/cdroid/ndk/platforms/android-8/arch-arm/usr/include/strings.h:
 
-/Users/ted/cdroid/ndk/platforms/android-18/arch-arm/usr/include/memory.h:
+/Users/ted/cdroid/ndk/platforms/android-8/arch-arm/usr/include/memory.h:
 
-/Users/ted/cdroid/ndk/platforms/android-18/arch-arm/usr/include/assert.h:
+/Users/ted/cdroid/ndk/platforms/android-8/arch-arm/usr/include/assert.h:
 
 /Users/ted/cdroid/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/utility:
 

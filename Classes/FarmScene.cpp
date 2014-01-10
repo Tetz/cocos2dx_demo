@@ -1,4 +1,4 @@
-#include "HelloWorldScene.h"
+#include "FarmScene.h"
 #include "cocos2d.h"
 #include "cocos-ext.h"
 #include "spine/Json.h"
@@ -6,6 +6,7 @@
 #include "DefTags.h"
 #include "Getter.h"
 #include "JsonGenerator.h"
+#include <string>
 
 USING_NS_CC;
 USING_NS_CC_EXT;
@@ -16,15 +17,15 @@ USING_NS_CC_EXT;
 
 // Basically, this app works with messagePlus(/var/mplus).
 
-CCScene* HelloWorld::scene()
+CCScene* Farm::scene()
 {
     CCScene *scene = CCScene::create();
-    HelloWorld *layer = HelloWorld::create();
+    Farm *layer = Farm::create();
     scene->addChild(layer);
     return scene;
 }
 
-bool HelloWorld::init()
+bool Farm::init()
 {
     randNum = 4;
     
@@ -33,13 +34,17 @@ bool HelloWorld::init()
     }
     
     CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
+    
+    // Set background
+    setBackground();
+    
     CCPoint origin = CCDirector::sharedDirector()->getVisibleOrigin();
     
     CCMenuItemImage * pCloseItem = CCMenuItemImage::create(
                                                           "CloseNormal.png",
                                                           "CloseSelected.png",
                                                           this,
-                                                          menu_selector(HelloWorld::menuCloseCallback));
+                                                          menu_selector(Farm::menuCloseCallback));
     
 	pCloseItem->setPosition(ccp(origin.x + visibleSize.width - pCloseItem->getContentSize().width/2 ,
                                 origin.y + pCloseItem->getContentSize().height/2));
@@ -55,7 +60,7 @@ bool HelloWorld::init()
     ccS9S_on_1->setContentSize(CCSizeMake(200, 120));
     
     // onClick1
-    CCMenuItemSprite * ccMIS_1 = CCMenuItemSprite::create(ccS9S_1, ccS9S_on_1, this, menu_selector(HelloWorld::onClick1));
+    CCMenuItemSprite * ccMIS_1 = CCMenuItemSprite::create(ccS9S_1, ccS9S_on_1, this, menu_selector(Farm::onClick1));
     ccMIS_1->setPosition(ccp(visibleSize.width/4,120));
     CCMenu* menu_1 = CCMenu::create(ccMIS_1,NULL);
     menu_1->setPosition(CCPointZero);
@@ -68,7 +73,7 @@ bool HelloWorld::init()
     ccS9S_on_2->setContentSize(CCSizeMake(200, 120));
     
     // onClick2
-    CCMenuItemSprite * ccMIS_2 = CCMenuItemSprite::create(ccS9S_2, ccS9S_on_2, this, menu_selector(HelloWorld::onClick2));
+    CCMenuItemSprite * ccMIS_2 = CCMenuItemSprite::create(ccS9S_2, ccS9S_on_2, this, menu_selector(Farm::onClick2));
     ccMIS_2->setPosition(ccp(visibleSize.width/4*3,120));
     CCMenu* menu_2 = CCMenu::create(ccMIS_2,NULL);
     menu_2->setPosition(CCPointZero);
@@ -104,7 +109,8 @@ bool HelloWorld::init()
     pet->setPosition(CCPointMake(visibleSize.width/2, visibleSize.height/10 * 3));
     pet->setTag(_SPRITE_MY_PET_);
     this->addChild(pet);
-    
+  
+   
     // Animation
     CCAnimation * animation = CCAnimation::create();
     animation->addSpriteFrameWithTexture(batchNode->getTexture(), CCRect(128*0,0,128,128));
@@ -143,7 +149,7 @@ bool HelloWorld::init()
 }
 
 
-void HelloWorld::menuCloseCallback(CCObject* pSender)
+void Farm::menuCloseCallback(CCObject* pSender)
 {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT) || (CC_TARGET_PLATFORM == CC_PLATFORM_WP8)
 	CCMessageBox("You pressed the close button. Windows Store Apps do not implement a close button.","Alert");
@@ -156,7 +162,7 @@ void HelloWorld::menuCloseCallback(CCObject* pSender)
 }
 
 // OnClick Action
-void HelloWorld::onClick1()
+void Farm::onClick1()
 {
 	// TODO Debug
 	CCLog("Dev=> %s","onClick1");
@@ -187,7 +193,12 @@ void HelloWorld::onClick1()
     CCAnimate * action = CCAnimate::create(animation);
     CCRepeatForever * actionreq = CCRepeatForever::create(action);
     pet->runAction(actionreq);
-   
+    // TODO
+    CCLabelTTF * label_monsters_host = (CCLabelTTF*)this->getChildByTag(_LABEL_MY_MONSTERID_);
+    label_monsters_host->setColor(ccc3(25, 25, 25));
+    label_monsters_host->setPosition(CCPointMake(visibleSize.width/2, visibleSize.height/10 * 4));
+    label_monsters_host->setString(monsterAry[randNum]);
+    
     // Set parameters
     std::string uuid_str = Getter::getUUID();
     const char * uuid = uuid_str.c_str();
@@ -205,7 +216,7 @@ void HelloWorld::onClick1()
     pair = new std::pair <const char *, const char *> [numberOfPair];
     int num = 0;
     pair[num++] = std::make_pair("uuid", uuid);
-    pair[num++] = std::make_pair("name","Pikaho");
+    pair[num++] = std::make_pair("fname",monsterAry[randNum]);
     pair[num++] = std::make_pair("message","Hello, I am pikaho");
     pair[num++] = std::make_pair("food","meat");
     
@@ -242,11 +253,11 @@ void HelloWorld::onClick1()
     cocos2d::extension::CCHttpRequest* request = new cocos2d::extension::CCHttpRequest();
     request->setUrl("http://49.212.139.75:9000/main");
     request->setRequestType(cocos2d::extension::CCHttpRequest::kHttpPost);
-    request->setResponseCallback(this, httpresponse_selector(HelloWorld::onHttpRequestCompleted));
+    request->setResponseCallback(this, httpresponse_selector(Farm::onHttpRequestCompleted));
     request->setRequestData(postData, strlen(postData));
     request->setHeaders(headers);
     request->setTag("POST Request");
-    cocos2d::extension::CCHttpClient::getInstance()->send(request);
+    //cocos2d::extension::CCHttpClient::getInstance()->send(request);
     
     // Release memory
     request->release();
@@ -256,7 +267,7 @@ void HelloWorld::onClick1()
 }
 
 // Matching users
-void HelloWorld::onClick2()
+void Farm::onClick2()
 {
   	// TODO Debug
 	CCLog("Dev=> %s","onClick2");
@@ -279,7 +290,7 @@ void HelloWorld::onClick2()
     pair = new std::pair <const char *, const char *> [numberOfPair];
     int num = 0;
     pair[num++] = std::make_pair("uuid", uuid);
-    pair[num++] = std::make_pair("name","Pikaho");
+    pair[num++] = std::make_pair("fname","Pikaho");
     pair[num++] = std::make_pair("message","Hello, I am pikaho");
     pair[num++] = std::make_pair("food","meat");
     
@@ -316,7 +327,7 @@ void HelloWorld::onClick2()
     cocos2d::extension::CCHttpRequest* request = new cocos2d::extension::CCHttpRequest();
     request->setUrl("http://49.212.139.75:9000/main");
     request->setRequestType(cocos2d::extension::CCHttpRequest::kHttpPost);
-    request->setResponseCallback(this, httpresponse_selector(HelloWorld::onHttpRequestCompleted2));
+    request->setResponseCallback(this, httpresponse_selector(Farm::onHttpRequestCompleted2));
     request->setRequestData(postData, strlen(postData));
     request->setHeaders(headers);
     request->setTag("POST Request");
@@ -328,7 +339,7 @@ void HelloWorld::onClick2()
     delete[] jsonData;
 }
 
-void HelloWorld::onHttpRequestCompleted(cocos2d::CCNode *sender, void *data)
+void Farm::onHttpRequestCompleted(cocos2d::CCNode *sender, void *data)
 {
     cocos2d::extension::CCHttpResponse *response = (cocos2d::extension::CCHttpResponse*)data;
     
@@ -366,32 +377,32 @@ void HelloWorld::onHttpRequestCompleted(cocos2d::CCNode *sender, void *data)
     
     // JSON Parser
     Json * json = Json_create(concatenated);
-    const char * f1_uuid = Json_getString(json, "f1_uuid", "default");
-    const char * f1_monster_id = Json_getString(json, "f1_monster_id", "default");
-    const char * monsters_id = Json_getString(json, "monsters_id", "default");
-    const char * monsters_name = Json_getString(json, "monsters_name", "default");
-    CCLog("HTTP Response : key 1 : %s", monsters_id);
-    CCLog("HTTP Response : key 2 : %s", monsters_name);
-    
+    const char * host = Json_getString(json, "host", "default");
+    const char * friend1 = Json_getString(json, "friend1", "default");
+    const char * friend2 = Json_getString(json, "friend2", "default");
+    const char * friend3 = Json_getString(json, "friend3", "default");
+    const char * friend4 = Json_getString(json, "friend4", "default");
+    const char * monsters_host = Json_getString(json, "monsters_host", "default");
+    const char * monsters_friend1 = Json_getString(json, "monsters_friend1", "default");
+    const char * monsters_friend2 = Json_getString(json, "monsters_friend2", "default");
+    const char * monsters_friend3 = Json_getString(json, "monsters_friend3", "default");
+    const char * monsters_friend4 = Json_getString(json, "monsters_friend4", "default");
+    const char * info = Json_getString(json, "info", "default");
     
     // Show JSON data
     CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
-    CCLabelTTF * text = (CCLabelTTF*)this->getChildByTag(_LABEL_MY_MONSTERID_);
-    text->setColor(ccc3(25, 25, 25));
-    text->setPosition(CCPointMake(visibleSize.width/2, visibleSize.height/10 * 4));
-    text->setString(monsters_name);
-    
+   
     // Show Friend MONSTER ID
     CCLabelTTF * text2 = (CCLabelTTF*)this->getChildByTag(_LABEL_MONSTERID_1_);
     text2->setColor(ccc3(25, 25, 25));
     text2->setPosition(CCPointMake(visibleSize.width/2, visibleSize.height/10 * 9));
-    text2->setString(f1_monster_id);
+    text2->setString(monsters_friend1);
     
     // Show Friend UUID
     CCLabelTTF * text3 = (CCLabelTTF*)this->getChildByTag(_LABEL_UUID_1_);
     text3->setColor(ccc3(25, 25, 25));
     text3->setPosition(CCPointMake(visibleSize.width/2, visibleSize.height/10 * 7));
-    text3->setString(f1_uuid);
+    text3->setString(friend1);
     
     
     // Delete the JSON structure
@@ -399,7 +410,7 @@ void HelloWorld::onHttpRequestCompleted(cocos2d::CCNode *sender, void *data)
     
 }
 
-void HelloWorld::onHttpRequestCompleted2(cocos2d::CCNode *sender, void *data)
+void Farm::onHttpRequestCompleted2(cocos2d::CCNode *sender, void *data)
 {
     cocos2d::extension::CCHttpResponse *response = (cocos2d::extension::CCHttpResponse*)data;
     
@@ -437,32 +448,32 @@ void HelloWorld::onHttpRequestCompleted2(cocos2d::CCNode *sender, void *data)
     
     // JSON Parser
     Json * json = Json_create(concatenated);
-    const char * f1_uuid = Json_getString(json, "f1_uuid", "default");
-    const char * f1_monster_id = Json_getString(json, "f1_monster_id", "default");
-    const char * monsters_id = Json_getString(json, "monsters_id", "default");
-    const char * monsters_name = Json_getString(json, "monsters_name", "default");
-    CCLog("HTTP Response : key 1 : %s", monsters_id);
-    CCLog("HTTP Response : key 2 : %s", monsters_name);
-    
+    const char * host = Json_getString(json, "host", "default");
+    const char * friend1 = Json_getString(json, "friend1", "default");
+    const char * friend2 = Json_getString(json, "friend2", "default");
+    const char * friend3 = Json_getString(json, "friend3", "default");
+    const char * friend4 = Json_getString(json, "friend4", "default");
+    const char * monsters_host = Json_getString(json, "monsters_host", "default");
+    const char * monsters_friend1 = Json_getString(json, "monsters_friend1", "default");
+    const char * monsters_friend2 = Json_getString(json, "monsters_friend2", "default");
+    const char * monsters_friend3 = Json_getString(json, "monsters_friend3", "default");
+    const char * monsters_friend4 = Json_getString(json, "monsters_friend4", "default");
+    const char * info = Json_getString(json, "info", "default");
     
     // Show JSON data
     CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
-    CCLabelTTF * text = (CCLabelTTF*)this->getChildByTag(_LABEL_MY_MONSTERID_);
-    text->setColor(ccc3(25, 25, 25));
-    text->setPosition(CCPointMake(visibleSize.width/2, visibleSize.height/10 * 4));
-    text->setString(monsters_name);
-    
+   
     // Show Friend MONSTER ID
     CCLabelTTF * text2 = (CCLabelTTF*)this->getChildByTag(_LABEL_MONSTERID_1_);
     text2->setColor(ccc3(25, 25, 25));
     text2->setPosition(CCPointMake(visibleSize.width/2, visibleSize.height/10 * 9));
-    text2->setString(f1_monster_id);
+    text2->setString(monsters_friend1);
     
     // Show Friend UUID
     CCLabelTTF * text3 = (CCLabelTTF*)this->getChildByTag(_LABEL_UUID_1_);
     text3->setColor(ccc3(25, 25, 25));
     text3->setPosition(CCPointMake(visibleSize.width/2, visibleSize.height/10 * 7));
-    text3->setString(f1_uuid);
+    text3->setString(friend1);
     
     // Show Friend's Pets
     
@@ -472,7 +483,7 @@ void HelloWorld::onHttpRequestCompleted2(cocos2d::CCNode *sender, void *data)
     
     // Set Random Number
     randNum = rand() % 5;
-    CCSpriteBatchNode * batchNode = CCSpriteBatchNode::create(monsterAry[randNum]);
+    CCSpriteBatchNode * batchNode = CCSpriteBatchNode::create(monsters_friend1);
     CCSprite * pet = CCSprite::createWithTexture(batchNode->getTexture(), CCRect(0,0,128,128));
     pet->setPosition(CCPointMake(visibleSize.width/2, visibleSize.height/10 * 8));
     pet->setTag(_SPRITE_PET_1_);
@@ -490,8 +501,20 @@ void HelloWorld::onHttpRequestCompleted2(cocos2d::CCNode *sender, void *data)
     CCRepeatForever * actionreq = CCRepeatForever::create(action);
     pet->runAction(actionreq);
     
-    
     // Delete the JSON structure
     Json_dispose(json);
     
 }
+
+void Farm::setBackground()
+{
+    CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
+    CCSprite* background = CCSprite::create("normalGrass.png");
+    background->setPosition(CCPoint(visibleSize.width/2, visibleSize.height/2));
+    float scaleWidth = visibleSize.width/background->getContentSize().width;
+    float scaleHeight = visibleSize.height/background->getContentSize().height;
+    background->setScaleY(scaleHeight);
+    background->setScaleX(scaleWidth);
+    this->addChild(background, 0);
+}
+
