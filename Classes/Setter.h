@@ -23,7 +23,7 @@ USING_NS_CC_EXT;
 class Setter : public cocos2d::CCLayerColor
 {
 public:
-    
+    static void setBackground(cocos2d::CCLayerColor * context);
 };
 
 #endif /* defined(_Setter_) */

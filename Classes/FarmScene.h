@@ -11,6 +11,7 @@ private:
     int randNum;
     const char * monsterAry[4];
     cocos2d::CCSize visibleSize;
+    int mLoopCount;
     
 public:
     virtual bool init();
@@ -29,9 +30,8 @@ public:
     virtual void onHttpRequestCompleted(cocos2d::CCNode *sender, void *data);
     virtual void onHttpRequestCompleted2(cocos2d::CCNode *sender, void *data);
     
-    // background
-    virtual void setBackground();
-   
+    // Animation
+    virtual void animationLogic();
    
 };
 

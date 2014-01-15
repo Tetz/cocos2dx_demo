@@ -432,7 +432,7 @@ obj/local/armeabi/objs/cocos2dcpp_shared/__/__/Classes/FarmScene.o: \
  /Users/ted/cdroid/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/cmath \
  /Users/ted/cdroid/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/iterator \
  jni/../../Classes/DefTags.h jni/../../Classes/Getter.h \
- jni/../../Classes/JNICalls/InterfaceJNI.h \
+ jni/../../Classes/JNICalls/InterfaceJNI.h jni/../../Classes/Setter.h \
  jni/../../Classes/JsonGenerator.h
 
 jni/../../Classes/FarmScene.h:
@@ -1304,5 +1304,7 @@ jni/../../Classes/DefTags.h:
 jni/../../Classes/Getter.h:
 
 jni/../../Classes/JNICalls/InterfaceJNI.h:
+
+jni/../../Classes/Setter.h:
 
 jni/../../Classes/JsonGenerator.h:

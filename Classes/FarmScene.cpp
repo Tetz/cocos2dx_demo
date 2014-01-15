@@ -5,6 +5,7 @@
 #include "picojson.h"
 #include "DefTags.h"
 #include "Getter.h"
+#include "Setter.h"
 #include "JsonGenerator.h"
 #include <string>
 
@@ -27,7 +28,6 @@ CCScene* Farm::scene()
 
 bool Farm::init()
 {
-    randNum = 4;
     
     if ( CCLayerColor::initWithColor(ccc4(255,255,255,255)) )
     {
@@ -36,7 +36,7 @@ bool Farm::init()
     CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
     
     // Set background
-    setBackground();
+    Setter::setBackground(this);
     
     CCPoint origin = CCDirector::sharedDirector()->getVisibleOrigin();
     
@@ -81,13 +81,11 @@ bool Farm::init()
     
     // Monsters List
     int num = 0;
-
     monsterAry[num++] = "baby.png";
     monsterAry[num++] = "giga.png";
     monsterAry[num++] = "kodora.png";
     monsterAry[num++] = "meca.png";
     monsterAry[num++] = "kopute.png";
-    
     
     // Label Tag 1
     CCLabelTTF * text = CCLabelTTF::create("", "arial", 48);
@@ -104,12 +102,12 @@ bool Farm::init()
     this->addChild(text2);
     
     // My Pet
+    randNum = 4;
     CCSpriteBatchNode * batchNode = CCSpriteBatchNode::create(monsterAry[randNum]);
     CCSprite * pet = CCSprite::createWithTexture(batchNode->getTexture(), CCRect(0,0,128,128));
     pet->setPosition(CCPointMake(visibleSize.width/2, visibleSize.height/10 * 3));
     pet->setTag(_SPRITE_MY_PET_);
     this->addChild(pet);
-  
    
     // Animation
     CCAnimation * animation = CCAnimation::create();
@@ -122,6 +120,25 @@ bool Farm::init()
     CCAnimate * action = CCAnimate::create(animation);
     CCRepeatForever * actionreq = CCRepeatForever::create(action);
     pet->runAction(actionreq);
+    
+    // Other Pets
+    CCSpriteBatchNode * batchNode2 = CCSpriteBatchNode::create(monsterAry[randNum]);
+    CCSprite * pet2 = CCSprite::createWithTexture(batchNode2->getTexture(), CCRect(0,0,128,128));
+    pet2->setPosition(CCPointMake(visibleSize.width/2, visibleSize.height/10 * 8));
+    pet2->setTag(_SPRITE_PET_1_);
+    this->addChild(pet2);
+    
+    // Animation
+    CCAnimation * animation2 = CCAnimation::create();
+    animation2->addSpriteFrameWithTexture(batchNode->getTexture(), CCRect(128*0,0,128,128));
+    animation2->addSpriteFrameWithTexture(batchNode->getTexture(), CCRect(128*3,0,128,128));
+    animation2->addSpriteFrameWithTexture(batchNode->getTexture(), CCRect(128*0,0,128,128));
+    animation2->addSpriteFrameWithTexture(batchNode->getTexture(), CCRect(128*4,0,128,128));
+    animation2->setDelayPerUnit(0.8f / 4.0f);
+    animation2->setRestoreOriginalFrame(true);
+    CCAnimate * action2 = CCAnimate::create(animation2);
+    CCRepeatForever * actionreq2 = CCRepeatForever::create(action2);
+    pet->runAction(actionreq2);
     
     // Label Tag 3
     CCLabelTTF * text3 = CCLabelTTF::create("", "arial", 48);
@@ -137,15 +154,38 @@ bool Farm::init()
     text4->setTag(_LABEL_UUID_1_);
     this->addChild(text4);
     
-   
-    // Other Pets
-    CCSprite * pet2 = CCSprite::create(monsterAry[randNum]);
-    pet2->setPosition(CCPointMake(visibleSize.width/2, visibleSize.height/10 * 8));
-    pet2->setTag(_SPRITE_PET_1_);
-    this->addChild(pet2);
-   
+    // Schecule
+    this->schedule(schedule_selector(Farm::animationLogic), 1.0/10.0);
    
     return true;
+}
+
+
+void Farm::animationLogic()
+{
+    
+    // Get Size of Device Display
+    CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
+    
+    // moving
+    float x = 0;
+    const float PI = 3.1415f;
+    int max_cnt = 60 * 1;
+    float cos_val = cosf(PI * (float)this->mLoopCount++ /(float)max_cnt);
+    x = (float)visibleSize.width/3 * cos_val;
+    if( this->mLoopCount > (max_cnt * 2))
+    {
+        this->mLoopCount = 0;
+    }
+   
+    CCSprite * pet = (CCSprite *)this->getChildByTag(_SPRITE_MY_PET_);
+    pet->setPosition(CCPointMake(x + visibleSize.width/2, visibleSize.height/10 * 3));
+    pet->setTag(_SPRITE_MY_PET_);
+    
+    CCSprite * pet2 = (CCSprite *)this->getChildByTag(_SPRITE_PET_1_);
+    pet2->setPosition(CCPointMake(x + visibleSize.width/2, visibleSize.height/10 * 8));
+    pet2->setTag(_SPRITE_PET_1_);
+    
 }
 
 
@@ -475,46 +515,22 @@ void Farm::onHttpRequestCompleted2(cocos2d::CCNode *sender, void *data)
     text3->setPosition(CCPointMake(visibleSize.width/2, visibleSize.height/10 * 7));
     text3->setString(friend1);
     
-    // Show Friend's Pets
-    
     // Remove the sprite
     CCSprite * prepet = (CCSprite *)this->getChildByTag(_SPRITE_PET_1_);
     prepet->removeFromParent();
     
     // Set Random Number
-    randNum = rand() % 5;
     CCSpriteBatchNode * batchNode = CCSpriteBatchNode::create(monsters_friend1);
     CCSprite * pet = CCSprite::createWithTexture(batchNode->getTexture(), CCRect(0,0,128,128));
     pet->setPosition(CCPointMake(visibleSize.width/2, visibleSize.height/10 * 8));
     pet->setTag(_SPRITE_PET_1_);
     this->addChild(pet);
     
-    // Animation
-    CCAnimation * animation = CCAnimation::create();
-    animation->addSpriteFrameWithTexture(batchNode->getTexture(), CCRect(128*0,0,128,128));
-    animation->addSpriteFrameWithTexture(batchNode->getTexture(), CCRect(128*3,0,128,128));
-    animation->addSpriteFrameWithTexture(batchNode->getTexture(), CCRect(128*0,0,128,128));
-    animation->addSpriteFrameWithTexture(batchNode->getTexture(), CCRect(128*4,0,128,128));
-    animation->setDelayPerUnit(0.8f / 4.0f);
-    animation->setRestoreOriginalFrame(true);
-    CCAnimate * action = CCAnimate::create(animation);
-    CCRepeatForever * actionreq = CCRepeatForever::create(action);
-    pet->runAction(actionreq);
-    
+   
     // Delete the JSON structure
     Json_dispose(json);
     
 }
 
-void Farm::setBackground()
-{
-    CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
-    CCSprite* background = CCSprite::create("normalGrass.png");
-    background->setPosition(CCPoint(visibleSize.width/2, visibleSize.height/2));
-    float scaleWidth = visibleSize.width/background->getContentSize().width;
-    float scaleHeight = visibleSize.height/background->getContentSize().height;
-    background->setScaleY(scaleHeight);
-    background->setScaleX(scaleWidth);
-    this->addChild(background, 0);
-}
+
 
