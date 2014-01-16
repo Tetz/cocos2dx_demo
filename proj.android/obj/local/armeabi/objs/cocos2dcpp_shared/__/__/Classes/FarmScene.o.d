@@ -203,6 +203,7 @@ obj/local/armeabi/objs/cocos2dcpp_shared/__/__/Classes/FarmScene.o: \
  /Users/ted/cdroid/cocos/projects/MessagePlus/proj.android/../../../cocos2dx/support/data_support/uthash.h \
  /Users/ted/cdroid/cocos/projects/MessagePlus/proj.android/../../../cocos2dx/support/component/CCComponent.h \
  /Users/ted/cdroid/cocos/projects/MessagePlus/proj.android/../../../cocos2dx/support/component/CCComponentContainer.h \
+ jni/../../Classes/FriendsListScene.h jni/../../Classes/all_in_one.h \
  /Users/ted/cdroid/cocos/projects/MessagePlus/proj.android/../../../extensions/cocos-ext.h \
  /Users/ted/cdroid/cocos/projects/MessagePlus/proj.android/../../../extensions/ExtensionMacros.h \
  /Users/ted/cdroid/cocos/projects/MessagePlus/proj.android/../../../extensions/CCBReader/CCBFileLoader.h \
@@ -433,7 +434,9 @@ obj/local/armeabi/objs/cocos2dcpp_shared/__/__/Classes/FarmScene.o: \
  /Users/ted/cdroid/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/iterator \
  jni/../../Classes/DefTags.h jni/../../Classes/Getter.h \
  jni/../../Classes/JNICalls/InterfaceJNI.h jni/../../Classes/Setter.h \
- jni/../../Classes/JsonGenerator.h
+ jni/../../Classes/JsonGenerator.h jni/../../Classes/SwipeLayer.h \
+ jni/../../Classes/XTLayer.h jni/../../Classes/SwipeLayer2.h \
+ jni/../../Classes/SwipeLayer3.h
 
 jni/../../Classes/FarmScene.h:
 
@@ -842,6 +845,10 @@ jni/../../Classes/FarmScene.h:
 /Users/ted/cdroid/cocos/projects/MessagePlus/proj.android/../../../cocos2dx/support/component/CCComponent.h:
 
 /Users/ted/cdroid/cocos/projects/MessagePlus/proj.android/../../../cocos2dx/support/component/CCComponentContainer.h:
+
+jni/../../Classes/FriendsListScene.h:
+
+jni/../../Classes/all_in_one.h:
 
 /Users/ted/cdroid/cocos/projects/MessagePlus/proj.android/../../../extensions/cocos-ext.h:
 
@@ -1308,3 +1315,11 @@ jni/../../Classes/JNICalls/InterfaceJNI.h:
 jni/../../Classes/Setter.h:
 
 jni/../../Classes/JsonGenerator.h:
+
+jni/../../Classes/SwipeLayer.h:
+
+jni/../../Classes/XTLayer.h:
+
+jni/../../Classes/SwipeLayer2.h:
+
+jni/../../Classes/SwipeLayer3.h:

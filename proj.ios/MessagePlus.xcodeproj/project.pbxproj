@@ -235,6 +235,12 @@
 		7855E0E1153FEF240059DD9A /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 7855E0DF153FEF240059DD9A /* Default.png */; };
 		9F6553EF187CFDDA00B641AA /* Setter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F6553ED187CFDDA00B641AA /* Setter.cpp */; };
 		9F655418187E48CB00B641AA /* normalGrass.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F655417187E48CB00B641AA /* normalGrass.png */; };
+		9F65541B1886A84D00B641AA /* SwipeLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F6554191886A84D00B641AA /* SwipeLayer.cpp */; };
+		9F65541E1886AAB500B641AA /* XTLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F65541C1886AAB500B641AA /* XTLayer.cpp */; };
+		9F6554211887836F00B641AA /* FriendsListScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F65541F1887836F00B641AA /* FriendsListScene.cpp */; };
+		9F65542C1887B51E00B641AA /* SwipeLayer2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F65542A1887B51E00B641AA /* SwipeLayer2.cpp */; };
+		9F65542F1887BD8800B641AA /* SwipeLayer3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F65542D1887BD8800B641AA /* SwipeLayer3.cpp */; };
+		9F6554311887C22700B641AA /* SocialScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F6554301887C22700B641AA /* SocialScene.cpp */; };
 		9FB1A9F11872E79A006D104A /* Getter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9FB1A9EF1872E79A006D104A /* Getter.cpp */; };
 		9FB1A9F41873B136006D104A /* JsonGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9FB1A9F21873B136006D104A /* JsonGenerator.cpp */; };
 		9FD8609E185F179C00266E1E /* Send.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FD8609C185F179C00266E1E /* Send.png */; };
@@ -742,6 +748,20 @@
 		9F6553ED187CFDDA00B641AA /* Setter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Setter.cpp; path = ../Classes/Setter.cpp; sourceTree = "<group>"; };
 		9F6553EE187CFDDA00B641AA /* Setter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Setter.h; path = ../Classes/Setter.h; sourceTree = "<group>"; };
 		9F655417187E48CB00B641AA /* normalGrass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = normalGrass.png; sourceTree = "<group>"; };
+		9F6554191886A84D00B641AA /* SwipeLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SwipeLayer.cpp; path = ../Classes/SwipeLayer.cpp; sourceTree = "<group>"; };
+		9F65541A1886A84D00B641AA /* SwipeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SwipeLayer.h; path = ../Classes/SwipeLayer.h; sourceTree = "<group>"; };
+		9F65541C1886AAB500B641AA /* XTLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = XTLayer.cpp; sourceTree = "<group>"; };
+		9F65541D1886AAB500B641AA /* XTLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XTLayer.h; sourceTree = "<group>"; };
+		9F65541F1887836F00B641AA /* FriendsListScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FriendsListScene.cpp; sourceTree = "<group>"; };
+		9F6554201887836F00B641AA /* FriendsListScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsListScene.h; sourceTree = "<group>"; };
+		9F6554231887947000B641AA /* all_in_one.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = all_in_one.h; sourceTree = "<group>"; };
+		9F65542A1887B51E00B641AA /* SwipeLayer2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SwipeLayer2.cpp; sourceTree = "<group>"; };
+		9F65542B1887B51E00B641AA /* SwipeLayer2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwipeLayer2.h; sourceTree = "<group>"; };
+		9F65542D1887BD8800B641AA /* SwipeLayer3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SwipeLayer3.cpp; sourceTree = "<group>"; };
+		9F65542E1887BD8800B641AA /* SwipeLayer3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwipeLayer3.h; sourceTree = "<group>"; };
+		9F6554301887C22700B641AA /* SocialScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SocialScene.cpp; path = ../Classes/SocialScene.cpp; sourceTree = "<group>"; };
+		9F6554321887C23000B641AA /* SocialScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SocialScene.h; path = ../Classes/SocialScene.h; sourceTree = "<group>"; };
+		9F6554331887C8F200B641AA /* allScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = allScene.h; sourceTree = "<group>"; };
 		9FB1A9EF1872E79A006D104A /* Getter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Getter.cpp; sourceTree = "<group>"; };
 		9FB1A9F01872E79A006D104A /* Getter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Getter.h; sourceTree = "<group>"; };
 		9FB1A9F21873B136006D104A /* JsonGenerator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JsonGenerator.cpp; sourceTree = "<group>"; };
@@ -1292,21 +1312,14 @@
 		15AA9C4015B7EC450033D6C2 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				9FD8609B185F166000266E1E /* picojson.h */,
 				1AFAF8B316D35DE700DB1158 /* AppDelegate.cpp */,
 				1AFAF8B416D35DE700DB1158 /* AppDelegate.h */,
-				1AFAF8B516D35DE700DB1158 /* FarmScene.cpp */,
-				1AFAF8B616D35DE700DB1158 /* FarmScene.h */,
-				9FF7CE621862BF2100C463AD /* Network.cpp */,
-				9FF7CE631862BF2200C463AD /* Network.h */,
-				9FFC1C3E1869596D005671C4 /* DefPosition.h */,
-				9FFC1C491869B823005671C4 /* DefTags.h */,
-				9FB1A9EF1872E79A006D104A /* Getter.cpp */,
-				9FB1A9F01872E79A006D104A /* Getter.h */,
-				9FB1A9F21873B136006D104A /* JsonGenerator.cpp */,
-				9FB1A9F31873B136006D104A /* JsonGenerator.h */,
-				9F6553ED187CFDDA00B641AA /* Setter.cpp */,
-				9F6553EE187CFDDA00B641AA /* Setter.h */,
+				9F6554231887947000B641AA /* all_in_one.h */,
+				9F655424188795E500B641AA /* DefineHeader */,
+				9F6554251887972900B641AA /* Scene */,
+				9F655426188797F200B641AA /* Network */,
+				9F6554271887984A00B641AA /* Utility */,
+				9F6554291887B09500B641AA /* GUI */,
 			);
 			name = Classes;
 			path = ../classes;
@@ -1774,6 +1787,67 @@
 			path = ../Resources;
 			sourceTree = "<group>";
 		};
+		9F655424188795E500B641AA /* DefineHeader */ = {
+			isa = PBXGroup;
+			children = (
+				9FD8609B185F166000266E1E /* picojson.h */,
+				9FFC1C3E1869596D005671C4 /* DefPosition.h */,
+				9FFC1C491869B823005671C4 /* DefTags.h */,
+				9F6554331887C8F200B641AA /* allScene.h */,
+			);
+			name = DefineHeader;
+			sourceTree = "<group>";
+		};
+		9F6554251887972900B641AA /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				9F6554321887C23000B641AA /* SocialScene.h */,
+				9F6554301887C22700B641AA /* SocialScene.cpp */,
+				9F6554201887836F00B641AA /* FriendsListScene.h */,
+				9F65541F1887836F00B641AA /* FriendsListScene.cpp */,
+				1AFAF8B616D35DE700DB1158 /* FarmScene.h */,
+				1AFAF8B516D35DE700DB1158 /* FarmScene.cpp */,
+			);
+			name = Scene;
+			sourceTree = "<group>";
+		};
+		9F655426188797F200B641AA /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				9FB1A9F31873B136006D104A /* JsonGenerator.h */,
+				9FB1A9F21873B136006D104A /* JsonGenerator.cpp */,
+				9FF7CE631862BF2200C463AD /* Network.h */,
+				9FF7CE621862BF2100C463AD /* Network.cpp */,
+			);
+			name = Network;
+			sourceTree = "<group>";
+		};
+		9F6554271887984A00B641AA /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				9FB1A9F01872E79A006D104A /* Getter.h */,
+				9FB1A9EF1872E79A006D104A /* Getter.cpp */,
+				9F6553EE187CFDDA00B641AA /* Setter.h */,
+				9F6553ED187CFDDA00B641AA /* Setter.cpp */,
+			);
+			name = Utility;
+			sourceTree = "<group>";
+		};
+		9F6554291887B09500B641AA /* GUI */ = {
+			isa = PBXGroup;
+			children = (
+				9F65541C1886AAB500B641AA /* XTLayer.cpp */,
+				9F65541D1886AAB500B641AA /* XTLayer.h */,
+				9F6554191886A84D00B641AA /* SwipeLayer.cpp */,
+				9F65541A1886A84D00B641AA /* SwipeLayer.h */,
+				9F65542A1887B51E00B641AA /* SwipeLayer2.cpp */,
+				9F65542B1887B51E00B641AA /* SwipeLayer2.h */,
+				9F65542D1887BD8800B641AA /* SwipeLayer3.cpp */,
+				9F65542E1887BD8800B641AA /* SwipeLayer3.h */,
+			);
+			name = GUI;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1885,6 +1959,7 @@
 				15A3D9051682F7D5002FB0C5 /* b2DynamicTree.cpp in Sources */,
 				15A3D9061682F7D5002FB0C5 /* b2TimeOfImpact.cpp in Sources */,
 				15A3D9071682F7D5002FB0C5 /* b2ChainShape.cpp in Sources */,
+				9F65541B1886A84D00B641AA /* SwipeLayer.cpp in Sources */,
 				15A3D9081682F7D5002FB0C5 /* b2CircleShape.cpp in Sources */,
 				15A3D9091682F7D5002FB0C5 /* b2EdgeShape.cpp in Sources */,
 				15A3D90A1682F7D5002FB0C5 /* b2PolygonShape.cpp in Sources */,
@@ -1900,6 +1975,7 @@
 				15A3D9141682F7D5002FB0C5 /* b2Island.cpp in Sources */,
 				15A3D9151682F7D5002FB0C5 /* b2World.cpp in Sources */,
 				15A3D9161682F7D5002FB0C5 /* b2WorldCallbacks.cpp in Sources */,
+				9F6554311887C22700B641AA /* SocialScene.cpp in Sources */,
 				15A3D9171682F7D5002FB0C5 /* b2ChainAndCircleContact.cpp in Sources */,
 				9FF7CE641862BF2200C463AD /* Network.cpp in Sources */,
 				15A3D9181682F7D5002FB0C5 /* b2ChainAndPolygonContact.cpp in Sources */,
@@ -1952,6 +2028,7 @@
 				15A3D9AF1682F7F9002FB0C5 /* cpSpaceStep.c in Sources */,
 				15A3D9B01682F7F9002FB0C5 /* cpSpatialIndex.c in Sources */,
 				15A3D9B11682F7F9002FB0C5 /* cpSweep1D.c in Sources */,
+				9F65542F1887BD8800B641AA /* SwipeLayer3.cpp in Sources */,
 				15A3D9B21682F7F9002FB0C5 /* cpVect.c in Sources */,
 				15A3DA311682F826002FB0C5 /* CCBAnimationManager.cpp in Sources */,
 				15A3DA321682F826002FB0C5 /* CCBFileLoader.cpp in Sources */,
@@ -1981,6 +2058,7 @@
 				15A3DA4A1682F826002FB0C5 /* CCControlButton.cpp in Sources */,
 				15A3DA4B1682F826002FB0C5 /* CCControlColourPicker.cpp in Sources */,
 				15A3DA4C1682F826002FB0C5 /* CCControlHuePicker.cpp in Sources */,
+				9F6554211887836F00B641AA /* FriendsListScene.cpp in Sources */,
 				15A3DA4D1682F826002FB0C5 /* CCControlPotentiometer.cpp in Sources */,
 				15A3DA4E1682F826002FB0C5 /* CCControlSaturationBrightnessPicker.cpp in Sources */,
 				15A3DA4F1682F826002FB0C5 /* CCControlSlider.cpp in Sources */,
@@ -1997,6 +2075,7 @@
 				15A3DA5C1682F826002FB0C5 /* CCTableViewCell.cpp in Sources */,
 				15A3DA5D1682F826002FB0C5 /* HttpClient.cpp in Sources */,
 				15A3DA5E1682F826002FB0C5 /* CCPhysicsDebugNode.cpp in Sources */,
+				9F65542C1887B51E00B641AA /* SwipeLayer2.cpp in Sources */,
 				15A3DA5F1682F826002FB0C5 /* CCPhysicsSprite.cpp in Sources */,
 				15A3DAEB1682F8A6002FB0C5 /* CDAudioManager.m in Sources */,
 				15A3DAEC1682F8A6002FB0C5 /* CDOpenALSupport.m in Sources */,
@@ -2082,6 +2161,7 @@
 				379BB9C517F03F3700829B88 /* UILabelBMFont.cpp in Sources */,
 				379BB9C617F03F3700829B88 /* UILoadingBar.cpp in Sources */,
 				379BB9C717F03F3700829B88 /* UISlider.cpp in Sources */,
+				9F65541E1886AAB500B641AA /* XTLayer.cpp in Sources */,
 				379BB9C817F03F3700829B88 /* UISwitch.cpp in Sources */,
 				379BB9C917F03F3700829B88 /* UITextField.cpp in Sources */,
 				379BB9CA17F03F3700829B88 /* CSContentJsonDictionary.cpp in Sources */,

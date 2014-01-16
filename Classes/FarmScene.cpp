@@ -1,32 +1,17 @@
 #include "FarmScene.h"
-#include "cocos2d.h"
-#include "cocos-ext.h"
-#include "spine/Json.h"
-#include "picojson.h"
-#include "DefTags.h"
-#include "Getter.h"
-#include "Setter.h"
-#include "JsonGenerator.h"
-#include <string>
-
-USING_NS_CC;
-USING_NS_CC_EXT;
-
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-#include "JNICalls/InterfaceJNI.h"
-#endif
+#include "FriendsListScene.h"
+#include "all_in_one.h"
 
 // Basically, this app works with messagePlus(/var/mplus).
-
-CCScene* Farm::scene()
+CCScene* FarmScene::scene()
 {
     CCScene *scene = CCScene::create();
-    Farm *layer = Farm::create();
+    FarmScene *layer = FarmScene::create();
     scene->addChild(layer);
     return scene;
 }
 
-bool Farm::init()
+bool FarmScene::init()
 {
     
     if ( CCLayerColor::initWithColor(ccc4(255,255,255,255)) )
@@ -44,7 +29,7 @@ bool Farm::init()
                                                           "CloseNormal.png",
                                                           "CloseSelected.png",
                                                           this,
-                                                          menu_selector(Farm::menuCloseCallback));
+                                                          menu_selector(FarmScene::menuCloseCallback));
     
 	pCloseItem->setPosition(ccp(origin.x + visibleSize.width - pCloseItem->getContentSize().width/2 ,
                                 origin.y + pCloseItem->getContentSize().height/2));
@@ -60,7 +45,7 @@ bool Farm::init()
     ccS9S_on_1->setContentSize(CCSizeMake(200, 120));
     
     // onClick1
-    CCMenuItemSprite * ccMIS_1 = CCMenuItemSprite::create(ccS9S_1, ccS9S_on_1, this, menu_selector(Farm::onClick1));
+    CCMenuItemSprite * ccMIS_1 = CCMenuItemSprite::create(ccS9S_1, ccS9S_on_1, this, menu_selector(FarmScene::onClick1));
     ccMIS_1->setPosition(ccp(visibleSize.width/4,120));
     CCMenu* menu_1 = CCMenu::create(ccMIS_1,NULL);
     menu_1->setPosition(CCPointZero);
@@ -73,7 +58,7 @@ bool Farm::init()
     ccS9S_on_2->setContentSize(CCSizeMake(200, 120));
     
     // onClick2
-    CCMenuItemSprite * ccMIS_2 = CCMenuItemSprite::create(ccS9S_2, ccS9S_on_2, this, menu_selector(Farm::onClick2));
+    CCMenuItemSprite * ccMIS_2 = CCMenuItemSprite::create(ccS9S_2, ccS9S_on_2, this, menu_selector(FarmScene::onClick2));
     ccMIS_2->setPosition(ccp(visibleSize.width/4*3,120));
     CCMenu* menu_2 = CCMenu::create(ccMIS_2,NULL);
     menu_2->setPosition(CCPointZero);
@@ -129,16 +114,10 @@ bool Farm::init()
     this->addChild(pet2);
     
     // Animation
-    CCAnimation * animation2 = CCAnimation::create();
-    animation2->addSpriteFrameWithTexture(batchNode->getTexture(), CCRect(128*0,0,128,128));
-    animation2->addSpriteFrameWithTexture(batchNode->getTexture(), CCRect(128*3,0,128,128));
-    animation2->addSpriteFrameWithTexture(batchNode->getTexture(), CCRect(128*0,0,128,128));
-    animation2->addSpriteFrameWithTexture(batchNode->getTexture(), CCRect(128*4,0,128,128));
-    animation2->setDelayPerUnit(0.8f / 4.0f);
-    animation2->setRestoreOriginalFrame(true);
+    CCAnimation * animation2 = animation;
     CCAnimate * action2 = CCAnimate::create(animation2);
     CCRepeatForever * actionreq2 = CCRepeatForever::create(action2);
-    pet->runAction(actionreq2);
+    pet2->runAction(actionreq2);
     
     // Label Tag 3
     CCLabelTTF * text3 = CCLabelTTF::create("", "arial", 48);
@@ -155,13 +134,17 @@ bool Farm::init()
     this->addChild(text4);
     
     // Schecule
-    this->schedule(schedule_selector(Farm::animationLogic), 1.0/10.0);
-   
+    this->schedule(schedule_selector(FarmScene::animationLogic), 1.0/10.0);
+    
+    // Add swipe layer
+    CCLayer * layer = SwipeLayer::create();
+    this->addChild(layer);
+    
     return true;
 }
 
 
-void Farm::animationLogic()
+void FarmScene::animationLogic()
 {
     
     // Get Size of Device Display
@@ -189,7 +172,7 @@ void Farm::animationLogic()
 }
 
 
-void Farm::menuCloseCallback(CCObject* pSender)
+void FarmScene::menuCloseCallback(CCObject* pSender)
 {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT) || (CC_TARGET_PLATFORM == CC_PLATFORM_WP8)
 	CCMessageBox("You pressed the close button. Windows Store Apps do not implement a close button.","Alert");
@@ -202,7 +185,7 @@ void Farm::menuCloseCallback(CCObject* pSender)
 }
 
 // OnClick Action
-void Farm::onClick1()
+void FarmScene::onClick1()
 {
 	// TODO Debug
 	CCLog("Dev=> %s","onClick1");
@@ -251,7 +234,7 @@ void Farm::onClick1()
     text->setString(uuid);
  
     // Set Key and Value
-    int numberOfPair = 4;
+    int numberOfPair = 10;
     std::pair <const char *, const char *> * pair;
     pair = new std::pair <const char *, const char *> [numberOfPair];
     int num = 0;
@@ -259,6 +242,12 @@ void Farm::onClick1()
     pair[num++] = std::make_pair("fname",monsterAry[randNum]);
     pair[num++] = std::make_pair("message","Hello, I am pikaho");
     pair[num++] = std::make_pair("food","meat");
+    pair[num++] = std::make_pair("test1","test1_value");
+    pair[num++] = std::make_pair("test2","test2_value");
+    pair[num++] = std::make_pair("test3","test3_value");
+    pair[num++] = std::make_pair("test4","test4_value");
+    pair[num++] = std::make_pair("test5","test5_value");
+    pair[num++] = std::make_pair("test6","test6_value");
     
     // Array Initialization
     int count_char = 0;
@@ -293,7 +282,7 @@ void Farm::onClick1()
     cocos2d::extension::CCHttpRequest* request = new cocos2d::extension::CCHttpRequest();
     request->setUrl("http://49.212.139.75:9000/main");
     request->setRequestType(cocos2d::extension::CCHttpRequest::kHttpPost);
-    request->setResponseCallback(this, httpresponse_selector(Farm::onHttpRequestCompleted));
+    request->setResponseCallback(this, httpresponse_selector(FarmScene::onHttpRequestCompleted));
     request->setRequestData(postData, strlen(postData));
     request->setHeaders(headers);
     request->setTag("POST Request");
@@ -307,7 +296,7 @@ void Farm::onClick1()
 }
 
 // Matching users
-void Farm::onClick2()
+void FarmScene::onClick2()
 {
   	// TODO Debug
 	CCLog("Dev=> %s","onClick2");
@@ -367,7 +356,7 @@ void Farm::onClick2()
     cocos2d::extension::CCHttpRequest* request = new cocos2d::extension::CCHttpRequest();
     request->setUrl("http://49.212.139.75:9000/main");
     request->setRequestType(cocos2d::extension::CCHttpRequest::kHttpPost);
-    request->setResponseCallback(this, httpresponse_selector(Farm::onHttpRequestCompleted2));
+    request->setResponseCallback(this, httpresponse_selector(FarmScene::onHttpRequestCompleted2));
     request->setRequestData(postData, strlen(postData));
     request->setHeaders(headers);
     request->setTag("POST Request");
@@ -379,7 +368,7 @@ void Farm::onClick2()
     delete[] jsonData;
 }
 
-void Farm::onHttpRequestCompleted(cocos2d::CCNode *sender, void *data)
+void FarmScene::onHttpRequestCompleted(cocos2d::CCNode *sender, void *data)
 {
     cocos2d::extension::CCHttpResponse *response = (cocos2d::extension::CCHttpResponse*)data;
     
@@ -450,7 +439,7 @@ void Farm::onHttpRequestCompleted(cocos2d::CCNode *sender, void *data)
     
 }
 
-void Farm::onHttpRequestCompleted2(cocos2d::CCNode *sender, void *data)
+void FarmScene::onHttpRequestCompleted2(cocos2d::CCNode *sender, void *data)
 {
     cocos2d::extension::CCHttpResponse *response = (cocos2d::extension::CCHttpResponse*)data;
     
@@ -519,18 +508,33 @@ void Farm::onHttpRequestCompleted2(cocos2d::CCNode *sender, void *data)
     CCSprite * prepet = (CCSprite *)this->getChildByTag(_SPRITE_PET_1_);
     prepet->removeFromParent();
     
-    // Set Random Number
+    // Display pet 1
     CCSpriteBatchNode * batchNode = CCSpriteBatchNode::create(monsters_friend1);
     CCSprite * pet = CCSprite::createWithTexture(batchNode->getTexture(), CCRect(0,0,128,128));
     pet->setPosition(CCPointMake(visibleSize.width/2, visibleSize.height/10 * 8));
     pet->setTag(_SPRITE_PET_1_);
     this->addChild(pet);
+    // Animation
+    CCAnimation * animation = CCAnimation::create();
+    animation->addSpriteFrameWithTexture(batchNode->getTexture(), CCRect(128*0,0,128,128));
+    animation->addSpriteFrameWithTexture(batchNode->getTexture(), CCRect(128*3,0,128,128));
+    animation->addSpriteFrameWithTexture(batchNode->getTexture(), CCRect(128*0,0,128,128));
+    animation->addSpriteFrameWithTexture(batchNode->getTexture(), CCRect(128*4,0,128,128));
+    animation->setDelayPerUnit(0.8f / 4.0f);
+    animation->setRestoreOriginalFrame(true);
+    CCAnimate * action = CCAnimate::create(animation);
+    CCRepeatForever * actionreq = CCRepeatForever::create(action);
+    pet->runAction(actionreq);
     
    
     // Delete the JSON structure
     Json_dispose(json);
-    
 }
 
+void FarmScene::toFriendsListScene()
+{
+    CCScene * scene = FriendsListScene::scene();
+    CCDirector::sharedDirector()->replaceScene(scene);
+}
 
 

@@ -1,26 +1,25 @@
-#ifndef __FARM_SCENE_H__
-#define __FARM_SCENE_H__
+#ifndef _FARM_SCENE_H_
+#define _FARM_SCENE_H_
 
 #include "cocos2d.h"
 
-class Farm : public cocos2d::CCLayerColor
+class FarmScene : public cocos2d::CCLayerColor
 {
 protected:
-    
+   
 private:
-    int randNum;
     const char * monsterAry[4];
     cocos2d::CCSize visibleSize;
+    // Animation
+    int randNum;
     int mLoopCount;
     
 public:
     virtual bool init();
-    
     static cocos2d::CCScene * scene();
-    
     void menuCloseCallback(CCObject * pSender);
     
-    CREATE_FUNC(Farm);
+    CREATE_FUNC(FarmScene);
     
     // This is button that puts monster
     virtual void onClick1();
@@ -32,7 +31,10 @@ public:
     
     // Animation
     virtual void animationLogic();
+    
+    // Change Scene
+    virtual void toFriendsListScene();
    
 };
 
-#endif // __FARM_SCENE_H__
+#endif // _FARM_SCENE_H_
