@@ -10,6 +10,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/AppDelegate.cpp \
                    ../../Classes/JNICalls/InterfaceJNI.cpp \
                    ../../Classes/Network.cpp \
+                   ../../Classes/MyTableViewCell.cpp \
                    ../../Classes/SwipeLayer.cpp \
                    ../../Classes/SwipeLayer2.cpp \
                    ../../Classes/SwipeLayer3.cpp \

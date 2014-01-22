@@ -1,6 +1,6 @@
 obj/local/armeabi/objs/cocos2dcpp_shared/__/__/Classes/FriendsListScene.o: \
  jni/../../Classes/FriendsListScene.cpp \
- jni/../../Classes/FriendsListScene.h \
+ jni/../../Classes/FriendsListScene.h jni/../../Classes/all_in_one.h \
  /Users/ted/cdroid/cocos/projects/MessagePlus/proj.android/../../../cocos2dx/include/cocos2d.h \
  /Users/ted/cdroid/cocos/projects/MessagePlus/proj.android/../../../cocos2dx/include/ccConfig.h \
  /Users/ted/cdroid/cocos/projects/MessagePlus/proj.android/../../../cocos2dx/platform/CCPlatformConfig.h \
@@ -204,7 +204,6 @@ obj/local/armeabi/objs/cocos2dcpp_shared/__/__/Classes/FriendsListScene.o: \
  /Users/ted/cdroid/cocos/projects/MessagePlus/proj.android/../../../cocos2dx/support/data_support/uthash.h \
  /Users/ted/cdroid/cocos/projects/MessagePlus/proj.android/../../../cocos2dx/support/component/CCComponent.h \
  /Users/ted/cdroid/cocos/projects/MessagePlus/proj.android/../../../cocos2dx/support/component/CCComponentContainer.h \
- jni/../../Classes/all_in_one.h \
  /Users/ted/cdroid/cocos/projects/MessagePlus/proj.android/../../../extensions/cocos-ext.h \
  /Users/ted/cdroid/cocos/projects/MessagePlus/proj.android/../../../extensions/ExtensionMacros.h \
  /Users/ted/cdroid/cocos/projects/MessagePlus/proj.android/../../../extensions/CCBReader/CCBFileLoader.h \
@@ -437,9 +436,14 @@ obj/local/armeabi/objs/cocos2dcpp_shared/__/__/Classes/FriendsListScene.o: \
  jni/../../Classes/JNICalls/InterfaceJNI.h jni/../../Classes/Setter.h \
  jni/../../Classes/JsonGenerator.h jni/../../Classes/SwipeLayer.h \
  jni/../../Classes/XTLayer.h jni/../../Classes/SwipeLayer2.h \
- jni/../../Classes/SwipeLayer3.h
+ jni/../../Classes/SwipeLayer3.h jni/../../Classes/lang_ja.h \
+ /Users/ted/cdroid/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/fstream \
+ jni/../../Classes/allScene.h jni/../../Classes/SocialScene.h \
+ jni/../../Classes/FarmScene.h jni/../../Classes/MyTableViewCell.h
 
 jni/../../Classes/FriendsListScene.h:
+
+jni/../../Classes/all_in_one.h:
 
 /Users/ted/cdroid/cocos/projects/MessagePlus/proj.android/../../../cocos2dx/include/cocos2d.h:
 
@@ -846,8 +850,6 @@ jni/../../Classes/FriendsListScene.h:
 /Users/ted/cdroid/cocos/projects/MessagePlus/proj.android/../../../cocos2dx/support/component/CCComponent.h:
 
 /Users/ted/cdroid/cocos/projects/MessagePlus/proj.android/../../../cocos2dx/support/component/CCComponentContainer.h:
-
-jni/../../Classes/all_in_one.h:
 
 /Users/ted/cdroid/cocos/projects/MessagePlus/proj.android/../../../extensions/cocos-ext.h:
 
@@ -1322,3 +1324,15 @@ jni/../../Classes/XTLayer.h:
 jni/../../Classes/SwipeLayer2.h:
 
 jni/../../Classes/SwipeLayer3.h:
+
+jni/../../Classes/lang_ja.h:
+
+/Users/ted/cdroid/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/fstream:
+
+jni/../../Classes/allScene.h:
+
+jni/../../Classes/SocialScene.h:
+
+jni/../../Classes/FarmScene.h:
+
+jni/../../Classes/MyTableViewCell.h:

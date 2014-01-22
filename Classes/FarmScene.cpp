@@ -242,12 +242,12 @@ void FarmScene::onClick1()
     pair[num++] = std::make_pair("fname",monsterAry[randNum]);
     pair[num++] = std::make_pair("message","Hello, I am pikaho");
     pair[num++] = std::make_pair("food","meat");
-    pair[num++] = std::make_pair("test1","test1_value");
-    pair[num++] = std::make_pair("test2","test2_value");
-    pair[num++] = std::make_pair("test3","test3_value");
-    pair[num++] = std::make_pair("test4","test4_value");
-    pair[num++] = std::make_pair("test5","test5_value");
-    pair[num++] = std::make_pair("test6","test6_value");
+    pair[num++] = std::make_pair("a","test1_value");
+    pair[num++] = std::make_pair("b","test2_value");
+    pair[num++] = std::make_pair("c","test3_value");
+    pair[num++] = std::make_pair("d","test4_value");
+    pair[num++] = std::make_pair("e","test5_value");
+    pair[num++] = std::make_pair("f","test6_value");
     
     // Array Initialization
     int count_char = 0;
@@ -536,5 +536,4 @@ void FarmScene::toFriendsListScene()
     CCScene * scene = FriendsListScene::scene();
     CCDirector::sharedDirector()->replaceScene(scene);
 }
-
 
