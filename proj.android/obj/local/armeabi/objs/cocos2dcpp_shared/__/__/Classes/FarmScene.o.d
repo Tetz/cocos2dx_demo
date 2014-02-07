@@ -436,10 +436,11 @@ obj/local/armeabi/objs/cocos2dcpp_shared/__/__/Classes/FarmScene.o: \
  jni/../../Classes/JNICalls/InterfaceJNI.h jni/../../Classes/Setter.h \
  jni/../../Classes/JsonGenerator.h jni/../../Classes/SwipeLayer.h \
  jni/../../Classes/XTLayer.h jni/../../Classes/SwipeLayer2.h \
- jni/../../Classes/SwipeLayer3.h jni/../../Classes/lang_ja.h \
+ jni/../../Classes/SwipeLayer3.h jni/../../Classes/Database.h \
+ jni/../../Classes/sqlite/sqlite3.h jni/../../Classes/lang_ja.h \
  /Users/ted/cdroid/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/fstream \
  jni/../../Classes/allScene.h jni/../../Classes/SocialScene.h \
- jni/../../Classes/MyTableViewCell.h
+ jni/../../Classes/MyTableViewCell.h jni/../../Classes/FSAlertLayer.h
 
 jni/../../Classes/FarmScene.h:
 
@@ -1327,6 +1328,10 @@ jni/../../Classes/SwipeLayer2.h:
 
 jni/../../Classes/SwipeLayer3.h:
 
+jni/../../Classes/Database.h:
+
+jni/../../Classes/sqlite/sqlite3.h:
+
 jni/../../Classes/lang_ja.h:
 
 /Users/ted/cdroid/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/fstream:
@@ -1336,3 +1341,5 @@ jni/../../Classes/allScene.h:
 jni/../../Classes/SocialScene.h:
 
 jni/../../Classes/MyTableViewCell.h:
+
+jni/../../Classes/FSAlertLayer.h:

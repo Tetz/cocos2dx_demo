@@ -10,7 +10,12 @@ class FriendsListScene : public CCLayerColor, public CCTableViewDataSource, publ
 protected:
     
 private:
+    // Container of Cells
     int numberOfCells;
+    int currentCellIndex;
+    string* id;
+    string* name;
+    string* monster_id;
 public:
     virtual bool init();
     static CCScene * scene();
@@ -27,6 +32,13 @@ public:
     // HTTP
     virtual void load();
     virtual void onHttpRequestCompleted(CCNode * sender, void * data);
+    virtual void onHttpRequestEmpty(CCNode * sender, void * data);
+    
+    // Dialog
+    virtual void menuOKCallback();
+    virtual void menuNGCallback();
+    
+    
     
 };
 

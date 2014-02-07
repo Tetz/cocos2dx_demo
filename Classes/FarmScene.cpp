@@ -1,6 +1,7 @@
 #include "FarmScene.h"
 #include "FriendsListScene.h"
 #include "all_in_one.h"
+#include "FSAlertLayer.h"
 
 // Basically, this app works with messagePlus(/var/mplus).
 CCScene* FarmScene::scene()
@@ -184,11 +185,25 @@ void FarmScene::menuCloseCallback(CCObject* pSender)
 #endif
 }
 
+void FarmScene::menuOKCallback()
+{
+    
+}
+
+void FarmScene::menuNGCallback()
+{
+    
+}
+
 // OnClick Action
 void FarmScene::onClick1()
 {
-	// TODO Debug
+	// Debug
 	CCLog("Dev=> %s","onClick1");
+    
+    // call from Scene, Layer, etc
+    FSAlertLayer *alertLayer = FSAlertLayer::create("XXX", this, callfuncN_selector(FarmScene::menuOKCallback), callfuncN_selector(FarmScene::menuNGCallback));
+    this->addChild(alertLayer, 100001);
 
     // Get Size of Device Display
     CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
@@ -239,7 +254,7 @@ void FarmScene::onClick1()
     pair = new std::pair <const char *, const char *> [numberOfPair];
     int num = 0;
     pair[num++] = std::make_pair("uuid", uuid);
-    pair[num++] = std::make_pair("fname",monsterAry[randNum]);
+    pair[num++] = std::make_pair("name",monsterAry[randNum]);
     pair[num++] = std::make_pair("message","Hello, I am pikaho");
     pair[num++] = std::make_pair("food","meat");
     pair[num++] = std::make_pair("a","test1_value");
@@ -319,7 +334,7 @@ void FarmScene::onClick2()
     pair = new std::pair <const char *, const char *> [numberOfPair];
     int num = 0;
     pair[num++] = std::make_pair("uuid", uuid);
-    pair[num++] = std::make_pair("fname","Pikaho");
+    pair[num++] = std::make_pair("name","Pikaho");
     pair[num++] = std::make_pair("message","Hello, I am pikaho");
     pair[num++] = std::make_pair("food","meat");
     

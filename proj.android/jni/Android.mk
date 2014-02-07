@@ -14,11 +14,14 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/SwipeLayer.cpp \
                    ../../Classes/SwipeLayer2.cpp \
                    ../../Classes/SwipeLayer3.cpp \
+                   ../../Classes/sqlite/sqlite3.c \
+                   ../../Classes/Database.cpp \
                    ../../Classes/XTLayer.cpp \
                    ../../Classes/Getter.cpp \
                    ../../Classes/Setter.cpp \
                    ../../Classes/JsonGenerator.cpp \
                    ../../Classes/FriendsListScene.cpp \
+                   ../../Classes/FSAlertLayer.cpp \
                    ../../Classes/SocialScene.cpp \
                    ../../Classes/FarmScene.cpp
 

@@ -34,6 +34,10 @@ public:
     
     // Change Scene
     virtual void toFriendsListScene();
+    
+    // Popup
+    virtual void menuOKCallback();
+    virtual void menuNGCallback();
    
 };
 

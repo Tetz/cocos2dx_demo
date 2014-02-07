@@ -1,5 +1,6 @@
 #include "FriendsListScene.h"
 #include "all_in_one.h"
+#include "FSAlertLayer.h"
 
 
 CCScene * FriendsListScene::scene()
@@ -34,18 +35,28 @@ bool FriendsListScene::init()
 
 void FriendsListScene::main()
 {
-    CCLog("FriendsListScene::main ======>", "");
+    CCLog("FriendsListScene::main ======> %s", "");
     this->load();
-    
 }
 
 void FriendsListScene::tableCellTouched(CCTableView* table, CCTableViewCell* cell)
 {
-    CCLOG("cell touched at index: %i", cell->getIdx());
-    if (cell->getIdx() >= 0)
+    int idx = cell->getIdx();
+    currentCellIndex = idx;
+    CCLOG("cell touched at idx: %i", idx);
+    if (idx >= 0)
     {
         CCNotificationCenter::sharedNotificationCenter()->postNotification("cell0", NULL);
     }
+    const char * text = name[idx].c_str();
+    CCString* message = CCString::create("");
+    message->initWithFormat("Remove?  %s",text);
+    //message->initWithFormat(_FRIENDS_,cell->getIdx());
+    
+    // call from Scene, Layer, etc
+    FSAlertLayer *alertLayer = FSAlertLayer::create(message->getCString(), this, callfuncN_selector(FriendsListScene::menuOKCallback), callfuncN_selector(FriendsListScene::menuNGCallback));
+    this->addChild(alertLayer, 100001);
+    
  
 }
 
@@ -63,11 +74,11 @@ CCTableViewCell* FriendsListScene::tableCellAtIndex(CCTableView* table, unsigned
         cell = MyTableViewCell::create();
     }
     CCString* text = CCString::createWithFormat("%d", idx + 1);
-    CCString* detail = CCString::createWithFormat(_FRIENDS_, idx + 1);
+    const char * content_name = name[idx].c_str();
+    CCString* detail = CCString::createWithFormat("%s", content_name);
     cell->setTextString(text->getCString());
     cell->setDetailString(detail->getCString());
    
-    // TODO Create Loop
     string strMonster0 = "Send.png";
     CCString* path = CCString::create(strMonster0);
     cell->setImagePath(path->getCString());
@@ -79,14 +90,90 @@ CCTableViewCell* FriendsListScene::tableCellAtIndex(CCTableView* table, unsigned
 
 unsigned int FriendsListScene::numberOfCellsInTableView(CCTableView* table)
 {
-    //numberOfCells = 0;
     return numberOfCells;
+}
+
+void FriendsListScene::menuOKCallback()
+{
+    CCLog("FriendsListScene::removeFriend ======> %s", "");
+    // Set parameters
+    string uuid_str = Getter::getUUID();
+    const char * uuid = uuid_str.c_str();
+    CCLog("Getter::getUUID : %s", uuid);
+    
+    // Set Key and Value
+    int numberOfPair = 10;
+    pair <const char *, const char *> * pairs;
+    pairs = new pair <const char *, const char *> [numberOfPair];
+    int num = 0;
+    const char* friend_id = id[currentCellIndex].c_str();
+    pairs[num++] = make_pair("uuid", uuid);
+    pairs[num++] = make_pair("friend_id",friend_id);
+    pairs[num++] = make_pair("food","meat");
+    pairs[num++] = make_pair("a","test1_value");
+    pairs[num++] = make_pair("b","test2_value");
+    pairs[num++] = make_pair("c","test3_value");
+    pairs[num++] = make_pair("d","test4_value");
+    pairs[num++] = make_pair("e","test5_value");
+    pairs[num++] = make_pair("f","test6_value");
+    
+    // Array Initialization
+    int count_char = 0;
+    
+    // Calculate Memory Size
+    for (int cnt = 0; cnt < num; cnt++)
+    {
+        count_char += strlen(pairs[cnt].first);
+        count_char += strlen(pairs[cnt].second);
+    }
+    int jsonDataSize = count_char + 6*numberOfPair + 2 + 100;
+    
+    // Allocate memory
+    char * jsonData;
+    jsonData = new char [jsonDataSize];
+    
+    // NULL-terminated character sequence
+    *jsonData = '\0';
+    
+    // Set jsonData
+    JsonGenerator * jsonGenerator = new JsonGenerator();
+    jsonGenerator->generate(num, jsonData, pairs);
+    jsonGenerator->DisposeObject();
+    
+    // Create Json Object
+    const char * postData = jsonData;
+    CCLog("Debug jsonGenerator : %s", postData);
+    
+    // HTTP Client
+    vector<string> headers;
+    headers.push_back("Content-Type: application/json; charset=utf-8");
+    CCHttpRequest* request = new CCHttpRequest();
+    request->setUrl("http://49.212.139.75:9000/removeFriend");
+    request->setRequestType(CCHttpRequest::kHttpPost);
+    request->setResponseCallback(this, httpresponse_selector(FriendsListScene::onHttpRequestEmpty));
+    request->setRequestData(postData, strlen(postData));
+    request->setHeaders(headers);
+    request->setTag("POST Request");
+    CCHttpClient::getInstance()->send(request);
+    
+    // Release memory
+    request->release();
+    delete[] pairs;
+    delete[] jsonData;
+    
+    // TODO reload scene
+    CCDirector::sharedDirector()->replaceScene( FriendsListScene::scene());
+}
+
+void FriendsListScene::menuNGCallback()
+{
+    
 }
 
 void FriendsListScene::load()
 {
     
-    CCLog("FriendsListScene::load ======>", "");
+    CCLog("FriendsListScene::load ======> %s", "");
     // Set parameters
     string uuid_str = Getter::getUUID();
     const char * uuid = uuid_str.c_str();
@@ -153,11 +240,14 @@ void FriendsListScene::load()
     
 }
 
+void FriendsListScene::onHttpRequestEmpty(CCNode *sender, void *data){
+    
+}
+
 void FriendsListScene::onHttpRequestCompleted(CCNode *sender, void *data)
 {
     
-    CCLog("FriendsListScene::onHttpRequestCompleted ======>", "");
-    
+    CCLog("FriendsListScene::onHttpRequestCompleted ======> %s", "");
     CCHttpResponse *response = (CCHttpResponse*)data;
     
     if (!response)
@@ -187,15 +277,36 @@ void FriendsListScene::onHttpRequestCompleted(CCNode *sender, void *data)
     CCLog("=====> JSON =====> : %s",concatenated);
     
     // JSON Parser
-    Json * json = Json_create(concatenated);
-    const char * friends_count = Json_getString(json, "friends_count", "default");
-    const char * info = Json_getString(json, "info", "default");
-    CCLog("HTTP_Response_info : %s", info);
+    string picoError;
+    picojson::value picoValue;
+    picojson::parse(picoValue,concatenated,concatenated+strlen(concatenated),&picoError);
+    string friends_count;
+    if(picoError.empty()) {
+        picojson::object& o = picoValue.get<picojson::object>();
+        friends_count = o["friends_count"].get<string>();
+        string& info = o["info"].get<string>();
+        picojson::array& picoArray = o["friends"].get<picojson::array>();
+        int picoArraySize = picoArray.size();
+        id = new string[picoArraySize];
+        name = new string[picoArraySize];
+        monster_id = new string[picoArraySize];
+        int cnt = 0;
+        for(picojson::array::iterator i = picoArray.begin(); i != picoArray.end(); i++){
+            picojson::object& friendObject = i->get<picojson::object>();
+            id[cnt] = friendObject["id"].get<string>();
+            name[cnt] = friendObject["name"].get<string>();
+            monster_id[cnt] = friendObject["monster_id"].get<string>();
+            CCLog("pico id : %s", id[cnt].c_str());
+            CCLog("pico name : %s", name[cnt].c_str());
+            CCLog("pico monster_id : %s", monster_id[cnt].c_str());
+            cnt++;
+        }
+       
+        // Set number of cells in the TableView
+        numberOfCells = cnt;
+    }
     
-    // Set number of cells in the TableView
-    stringstream strValue;
-    strValue << friends_count;
-    strValue >> numberOfCells;
+    // Exception
     if(numberOfCells < 0){ numberOfCells = 0; };
     
     //CCTableView
@@ -209,6 +320,4 @@ void FriendsListScene::onHttpRequestCompleted(CCNode *sender, void *data)
     addChild(tableView,1);
     tableView->reloadData();
    
-    // Delete the JSON structure
-    Json_dispose(json);
 }

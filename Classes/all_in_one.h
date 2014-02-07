@@ -9,6 +9,7 @@
 #include "SwipeLayer.h"
 #include "SwipeLayer2.h"
 #include "SwipeLayer3.h"
+#include "Database.h"
 
 //Langage
 #include "lang_ja.h"

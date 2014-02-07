@@ -246,6 +246,13 @@
 		9FB1A9F41873B136006D104A /* JsonGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9FB1A9F21873B136006D104A /* JsonGenerator.cpp */; };
 		9FD8609E185F179C00266E1E /* Send.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FD8609C185F179C00266E1E /* Send.png */; };
 		9FD8609F185F179C00266E1E /* SendHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FD8609D185F179C00266E1E /* SendHighlighted.png */; };
+		9FDFC01C189A53B1009CE01A /* FSAlertLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9FDFC01A189A53B1009CE01A /* FSAlertLayer.cpp */; };
+		9FDFC020189A77B3009CE01A /* button_ok.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FDFC01F189A77B3009CE01A /* button_ok.png */; };
+		9FDFC024189A825B009CE01A /* button_no_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FDFC021189A825B009CE01A /* button_no_2.png */; };
+		9FDFC025189A825B009CE01A /* button_no.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FDFC022189A825B009CE01A /* button_no.png */; };
+		9FDFC026189A825B009CE01A /* button_ok_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FDFC023189A825B009CE01A /* button_ok_dark.png */; };
+		9FDFC02A18A22AC9009CE01A /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = 9FDFC02818A22AC9009CE01A /* sqlite3.c */; };
+		9FDFC02D18A22EA2009CE01A /* Database.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9FDFC02B18A22EA2009CE01A /* Database.cpp */; };
 		9FF7CE641862BF2200C463AD /* Network.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9FF7CE621862BF2100C463AD /* Network.cpp */; };
 		9FFC1C4818698DD1005671C4 /* kopute.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FFC1C4718698DD1005671C4 /* kopute.png */; };
 		9FFC1C4E186ADB52005671C4 /* baby.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FFC1C4A186ADB52005671C4 /* baby.png */; };
@@ -772,6 +779,16 @@
 		9FD8609B185F166000266E1E /* picojson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = picojson.h; path = ../Classes/picojson.h; sourceTree = "<group>"; };
 		9FD8609C185F179C00266E1E /* Send.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Send.png; sourceTree = "<group>"; };
 		9FD8609D185F179C00266E1E /* SendHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SendHighlighted.png; sourceTree = "<group>"; };
+		9FDFC01A189A53B1009CE01A /* FSAlertLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FSAlertLayer.cpp; path = ../Classes/FSAlertLayer.cpp; sourceTree = "<group>"; };
+		9FDFC01B189A53B1009CE01A /* FSAlertLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSAlertLayer.h; path = ../Classes/FSAlertLayer.h; sourceTree = "<group>"; };
+		9FDFC01F189A77B3009CE01A /* button_ok.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_ok.png; sourceTree = "<group>"; };
+		9FDFC021189A825B009CE01A /* button_no_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_no_2.png; sourceTree = "<group>"; };
+		9FDFC022189A825B009CE01A /* button_no.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_no.png; sourceTree = "<group>"; };
+		9FDFC023189A825B009CE01A /* button_ok_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_ok_dark.png; sourceTree = "<group>"; };
+		9FDFC02818A22AC9009CE01A /* sqlite3.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sqlite3.c; sourceTree = "<group>"; };
+		9FDFC02918A22AC9009CE01A /* sqlite3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sqlite3.h; sourceTree = "<group>"; };
+		9FDFC02B18A22EA2009CE01A /* Database.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Database.cpp; path = ../Classes/Database.cpp; sourceTree = "<group>"; };
+		9FDFC02C18A22EA2009CE01A /* Database.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Database.h; path = ../Classes/Database.h; sourceTree = "<group>"; };
 		9FF7CE621862BF2100C463AD /* Network.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Network.cpp; path = ../Classes/Network.cpp; sourceTree = "<group>"; };
 		9FF7CE631862BF2200C463AD /* Network.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Network.h; path = ../Classes/Network.h; sourceTree = "<group>"; };
 		9FFC1C3E1869596D005671C4 /* DefPosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DefPosition.h; path = ../Classes/DefPosition.h; sourceTree = "<group>"; };
@@ -1316,6 +1333,7 @@
 		15AA9C4015B7EC450033D6C2 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				9FDFC02718A22AC9009CE01A /* sqlite */,
 				1AFAF8B316D35DE700DB1158 /* AppDelegate.cpp */,
 				1AFAF8B416D35DE700DB1158 /* AppDelegate.h */,
 				9FFCF815188F85A100B8D2F0 /* Language */,
@@ -1770,6 +1788,10 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9FDFC021189A825B009CE01A /* button_no_2.png */,
+				9FDFC022189A825B009CE01A /* button_no.png */,
+				9FDFC023189A825B009CE01A /* button_ok_dark.png */,
+				9FDFC01F189A77B3009CE01A /* button_ok.png */,
 				9F655417187E48CB00B641AA /* normalGrass.png */,
 				9FFC1C4A186ADB52005671C4 /* baby.png */,
 				9FFC1C4B186ADB52005671C4 /* giga.png */,
@@ -1832,6 +1854,8 @@
 			isa = PBXGroup;
 			children = (
 				9FB1A9F01872E79A006D104A /* Getter.h */,
+				9FDFC02C18A22EA2009CE01A /* Database.h */,
+				9FDFC02B18A22EA2009CE01A /* Database.cpp */,
 				9FB1A9EF1872E79A006D104A /* Getter.cpp */,
 				9F6553EE187CFDDA00B641AA /* Setter.h */,
 				9F6553ED187CFDDA00B641AA /* Setter.cpp */,
@@ -1850,6 +1874,8 @@
 				9F65542B1887B51E00B641AA /* SwipeLayer2.h */,
 				9F65542D1887BD8800B641AA /* SwipeLayer3.cpp */,
 				9F65542E1887BD8800B641AA /* SwipeLayer3.h */,
+				9FDFC01A189A53B1009CE01A /* FSAlertLayer.cpp */,
+				9FDFC01B189A53B1009CE01A /* FSAlertLayer.h */,
 			);
 			name = Layer;
 			sourceTree = "<group>";
@@ -1861,6 +1887,16 @@
 				9F6554361887DA4B00B641AA /* MyTableViewCell.h */,
 			);
 			name = GUI;
+			sourceTree = "<group>";
+		};
+		9FDFC02718A22AC9009CE01A /* sqlite */ = {
+			isa = PBXGroup;
+			children = (
+				9FDFC02818A22AC9009CE01A /* sqlite3.c */,
+				9FDFC02918A22AC9009CE01A /* sqlite3.h */,
+			);
+			name = sqlite;
+			path = ../Classes/sqlite;
 			sourceTree = "<group>";
 		};
 		9FFCF815188F85A100B8D2F0 /* Language */ = {
@@ -1948,17 +1984,21 @@
 				D4EF94A015BD2D9800D803EB /* Icon-144.png in Resources */,
 				9FD8609E185F179C00266E1E /* Send.png in Resources */,
 				9FD8609F185F179C00266E1E /* SendHighlighted.png in Resources */,
+				9FDFC025189A825B009CE01A /* button_no.png in Resources */,
 				D41A0AD1160F154A004552AE /* Default-568h@2x.png in Resources */,
 				D446FD6E16102124000ADA7B /* Default@2x.png in Resources */,
 				15A3D9961682F7F9002FB0C5 /* CMakeLists.txt in Resources */,
 				9FFC1C51186ADB52005671C4 /* meca.png in Resources */,
 				9FFC1C4F186ADB52005671C4 /* giga.png in Resources */,
+				9FDFC020189A77B3009CE01A /* button_ok.png in Resources */,
 				1AFAF8BC16D35E4900DB1158 /* CloseNormal.png in Resources */,
+				9FDFC026189A825B009CE01A /* button_ok_dark.png in Resources */,
 				9FFC1C4E186ADB52005671C4 /* baby.png in Resources */,
 				9F655418187E48CB00B641AA /* normalGrass.png in Resources */,
 				1AFAF8BD16D35E4900DB1158 /* CloseSelected.png in Resources */,
 				9FFC1C50186ADB52005671C4 /* kodora.png in Resources */,
 				1AFAF8BE16D35E4900DB1158 /* HelloWorld.png in Resources */,
+				9FDFC024189A825B009CE01A /* button_no_2.png in Resources */,
 				379BB9CC17F03F3700829B88 /* json_internalarray.inl in Resources */,
 				379BB9CD17F03F3700829B88 /* json_internalmap.inl in Resources */,
 				379BB9D017F03F3700829B88 /* json_valueiterator.inl in Resources */,
@@ -2061,6 +2101,7 @@
 				9F6554371887DA4B00B641AA /* MyTableViewCell.cpp in Sources */,
 				15A3DA361682F826002FB0C5 /* CCBSequenceProperty.cpp in Sources */,
 				15A3DA371682F826002FB0C5 /* CCBValue.cpp in Sources */,
+				9FDFC02D18A22EA2009CE01A /* Database.cpp in Sources */,
 				15A3DA381682F826002FB0C5 /* CCControlButtonLoader.cpp in Sources */,
 				15A3DA391682F826002FB0C5 /* CCControlLoader.cpp in Sources */,
 				15A3DA3A1682F826002FB0C5 /* CCData.cpp in Sources */,
@@ -2082,6 +2123,7 @@
 				15A3DA4A1682F826002FB0C5 /* CCControlButton.cpp in Sources */,
 				15A3DA4B1682F826002FB0C5 /* CCControlColourPicker.cpp in Sources */,
 				15A3DA4C1682F826002FB0C5 /* CCControlHuePicker.cpp in Sources */,
+				9FDFC02A18A22AC9009CE01A /* sqlite3.c in Sources */,
 				9F6554211887836F00B641AA /* FriendsListScene.cpp in Sources */,
 				15A3DA4D1682F826002FB0C5 /* CCControlPotentiometer.cpp in Sources */,
 				15A3DA4E1682F826002FB0C5 /* CCControlSaturationBrightnessPicker.cpp in Sources */,
@@ -2102,6 +2144,7 @@
 				9F65542C1887B51E00B641AA /* SwipeLayer2.cpp in Sources */,
 				15A3DA5F1682F826002FB0C5 /* CCPhysicsSprite.cpp in Sources */,
 				15A3DAEB1682F8A6002FB0C5 /* CDAudioManager.m in Sources */,
+				9FDFC01C189A53B1009CE01A /* FSAlertLayer.cpp in Sources */,
 				15A3DAEC1682F8A6002FB0C5 /* CDOpenALSupport.m in Sources */,
 				15A3DAED1682F8A6002FB0C5 /* CocosDenshion.m in Sources */,
 				15A3DAEE1682F8A6002FB0C5 /* SimpleAudioEngine.mm in Sources */,
