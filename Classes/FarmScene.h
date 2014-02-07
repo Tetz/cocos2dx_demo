@@ -2,8 +2,9 @@
 #define _FARM_SCENE_H_
 
 #include "cocos2d.h"
+#include "all_in_one.h"
 
-class FarmScene : public cocos2d::CCLayerColor
+class FarmScene : public cocos2d::CCLayerColor, public CCEditBoxDelegate
 {
 protected:
    
@@ -13,11 +14,15 @@ private:
     // Animation
     int randNum;
     int mLoopCount;
+    // EditBox
+    virtual void editBoxEditingDidBegin(CCEditBox* editBox);
+    virtual void editBoxEditingDidEnd(CCEditBox* editBox);
+    virtual void editBoxTextChanged(CCEditBox* editBox, const std::string& text);
+    virtual void editBoxReturn(CCEditBox* editBox);
     
 public:
     virtual bool init();
     static cocos2d::CCScene * scene();
-    void menuCloseCallback(CCObject * pSender);
     
     CREATE_FUNC(FarmScene);
     
@@ -27,17 +32,14 @@ public:
     
     // HTTP
     virtual void onHttpRequestCompleted(cocos2d::CCNode *sender, void *data);
-    virtual void onHttpRequestCompleted2(cocos2d::CCNode *sender, void *data);
     
     // Animation
     virtual void animationLogic();
     
-    // Change Scene
-    virtual void toFriendsListScene();
-    
     // Popup
     virtual void menuOKCallback();
     virtual void menuNGCallback();
+    
    
 };
 

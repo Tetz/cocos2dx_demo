@@ -7,7 +7,7 @@ USING_NS_CC;
 
 const float kMyTableViewCellHeight = 130.f;
 
-MyTableViewCell::MyTableViewCell() : m_textLabel(NULL), m_detailLabel(NULL), m_imageSprite(NULL)
+MyTableViewCell::MyTableViewCell() : m_textLabel(NULL), m_detailLabel(NULL), m_imageSprite(NULL), m_scale9Sprite(NULL)
 {
     
 }
@@ -17,9 +17,11 @@ MyTableViewCell::~MyTableViewCell()
     removeChild(m_textLabel);
     removeChild(m_detailLabel);
     removeChild(m_imageSprite);
+    removeChild(m_scale9Sprite);
     CC_SAFE_RELEASE(m_textLabel);
     CC_SAFE_RELEASE(m_detailLabel);
     CC_SAFE_RELEASE(m_imageSprite);
+    CC_SAFE_RELEASE(m_scale9Sprite);
 }
 
 bool MyTableViewCell::init()
@@ -30,10 +32,13 @@ bool MyTableViewCell::init()
     CCLabelTTF * detail = CCLabelTTF::create("", "Helvetica", 50);
     label->setColor(ccc3(70,70,70));
     detail->setColor(ccc3(70,70,70));
-    return this->initWithLabel(label, detail, image);
+    // text
+    CCScale9Sprite * scale9Sprite = CCScale9Sprite::create("editbox.png");
+    
+    return this->initWithLabel(label, detail, image, scale9Sprite);
 }
 
-bool MyTableViewCell::initWithLabel(CCLabelTTF* textLabel, CCLabelTTF* detailLabel, CCSprite* imageSprite)
+bool MyTableViewCell::initWithLabel(CCLabelTTF* textLabel, CCLabelTTF* detailLabel, CCSprite* imageSprite, CCScale9Sprite* scale9Sprite)
 {
     if (!CCTableViewCell::init())
     {
@@ -42,6 +47,8 @@ bool MyTableViewCell::initWithLabel(CCLabelTTF* textLabel, CCLabelTTF* detailLab
     this->setimageSprite(imageSprite);
     this->setTextLabel(textLabel);
     this->setDetailLabel(detailLabel);
+    this->setBackground(scale9Sprite);
+    this->addChild(scale9Sprite);
     this->addChild(imageSprite);
     this->addChild(textLabel);
     this->addChild(detailLabel);
@@ -49,10 +56,10 @@ bool MyTableViewCell::initWithLabel(CCLabelTTF* textLabel, CCLabelTTF* detailLab
     return true;
 }
 
-MyTableViewCell* MyTableViewCell::create(CCLabelTTF* textLabel, CCLabelTTF* detailLabel, CCSprite* imageSprite)
+MyTableViewCell* MyTableViewCell::create(CCLabelTTF* textLabel, CCLabelTTF* detailLabel, CCSprite* imageSprite, CCScale9Sprite* scale9Sprite)
 {
     MyTableViewCell* pRet = new MyTableViewCell();
-    if (pRet && pRet->initWithLabel(textLabel, detailLabel, imageSprite))
+    if (pRet && pRet->initWithLabel(textLabel, detailLabel, imageSprite, scale9Sprite))
     {
         pRet->autorelease();
     }else{
@@ -74,7 +81,8 @@ MyTableViewCell* MyTableViewCell::create(const char* text, const char* fontName,
     {
         image = CCSprite::create();
     }
-    return create(label, detail, image);
+    CCScale9Sprite* scale9Sprite = CCScale9Sprite::create();;
+    return create(label, detail, image, scale9Sprite);
 }
 
 CCSize MyTableViewCell::cellSize()
@@ -88,6 +96,7 @@ void MyTableViewCell::needsLayout()
     float x = 0.f, y = 0.f;
     CCSize size = MyTableViewCell::cellSize();
     
+   
     // Image
     CCSize imageSize = m_imageSprite->getContentSize();
     y = (size.height-imageSize.height)/2;
@@ -140,20 +149,29 @@ void MyTableViewCell::setImagePath(const char* path)
     needsLayout();
 }
 
+void MyTableViewCell::setBackground(CCScale9Sprite* scale9Sprite){
+    CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
+    scale9Sprite->setContentSize(CCSizeMake(visibleSize.width -20 ,  kMyTableViewCellHeight-10));
+    scale9Sprite->setPosition(CCPointMake(visibleSize.width/2, kMyTableViewCellHeight/2));
+    needsLayout();
+}
+
+
+
 void MyTableViewCell::draw()
 {
-    CCPoint pos = getPosition();
-    CCLog("in MyTableViewCell::draw x = %f", pos.x);
-    CCLog("in MyTableViewCell::draw y = %f", pos.y);
-    CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
-    CCSize size = CCSizeMake(visibleSize.width, kMyTableViewCellHeight);
-    float fixdraw = 0;
-    CCPoint vertices[4]={
-        ccp(pos.x, pos.y+1 - fixdraw),
-        ccp(pos.x+size.width, pos.y+1 - fixdraw),
-        ccp(pos.x+size.width, pos.y+size.height-1 - fixdraw),
-        ccp(pos.x, pos.y+size.height-1 - fixdraw),
-    };
-    ccDrawColor4B(127, 140, 141, 255);
-    ccDrawPoly(vertices, 4, true);
+//    CCPoint pos = getPosition();
+//    CCLog("in MyTableViewCell::draw x = %f", pos.x);
+//    CCLog("in MyTableViewCell::draw y = %f", pos.y);
+//    CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
+//    CCSize size = CCSizeMake(visibleSize.width, kMyTableViewCellHeight);
+//    float fixdraw = 0;
+//    CCPoint vertices[4]={
+//        ccp(pos.x, pos.y+1 - fixdraw),
+//        ccp(pos.x+size.width, pos.y+1 - fixdraw),
+//        ccp(pos.x+size.width, pos.y+size.height-1 - fixdraw),
+//        ccp(pos.x, pos.y+size.height-1 - fixdraw),
+//    };
+//    ccDrawColor4B(127, 140, 141, 255);
+//    ccDrawPoly(vertices, 4, true);
 }

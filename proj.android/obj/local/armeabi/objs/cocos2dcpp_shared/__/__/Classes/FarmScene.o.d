@@ -203,7 +203,7 @@ obj/local/armeabi/objs/cocos2dcpp_shared/__/__/Classes/FarmScene.o: \
  /Users/ted/cdroid/cocos/projects/MessagePlus/proj.android/../../../cocos2dx/support/data_support/uthash.h \
  /Users/ted/cdroid/cocos/projects/MessagePlus/proj.android/../../../cocos2dx/support/component/CCComponent.h \
  /Users/ted/cdroid/cocos/projects/MessagePlus/proj.android/../../../cocos2dx/support/component/CCComponentContainer.h \
- jni/../../Classes/FriendsListScene.h jni/../../Classes/all_in_one.h \
+ jni/../../Classes/all_in_one.h \
  /Users/ted/cdroid/cocos/projects/MessagePlus/proj.android/../../../extensions/cocos-ext.h \
  /Users/ted/cdroid/cocos/projects/MessagePlus/proj.android/../../../extensions/ExtensionMacros.h \
  /Users/ted/cdroid/cocos/projects/MessagePlus/proj.android/../../../extensions/CCBReader/CCBFileLoader.h \
@@ -439,8 +439,9 @@ obj/local/armeabi/objs/cocos2dcpp_shared/__/__/Classes/FarmScene.o: \
  jni/../../Classes/SwipeLayer3.h jni/../../Classes/Database.h \
  jni/../../Classes/sqlite/sqlite3.h jni/../../Classes/lang_ja.h \
  /Users/ted/cdroid/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/fstream \
- jni/../../Classes/allScene.h jni/../../Classes/SocialScene.h \
- jni/../../Classes/MyTableViewCell.h jni/../../Classes/FSAlertLayer.h
+ jni/../../Classes/FriendsListScene.h jni/../../Classes/allScene.h \
+ jni/../../Classes/SocialScene.h jni/../../Classes/MyTableViewCell.h \
+ jni/../../Classes/FSAlertLayer.h
 
 jni/../../Classes/FarmScene.h:
 
@@ -849,8 +850,6 @@ jni/../../Classes/FarmScene.h:
 /Users/ted/cdroid/cocos/projects/MessagePlus/proj.android/../../../cocos2dx/support/component/CCComponent.h:
 
 /Users/ted/cdroid/cocos/projects/MessagePlus/proj.android/../../../cocos2dx/support/component/CCComponentContainer.h:
-
-jni/../../Classes/FriendsListScene.h:
 
 jni/../../Classes/all_in_one.h:
 
@@ -1335,6 +1334,8 @@ jni/../../Classes/sqlite/sqlite3.h:
 jni/../../Classes/lang_ja.h:
 
 /Users/ted/cdroid/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/fstream:
+
+jni/../../Classes/FriendsListScene.h:
 
 jni/../../Classes/allScene.h:
 

@@ -3,7 +3,6 @@
 #include "all_in_one.h"
 #include "FSAlertLayer.h"
 
-// Basically, this app works with messagePlus(/var/mplus).
 CCScene* FarmScene::scene()
 {
     CCScene *scene = CCScene::create();
@@ -14,176 +13,96 @@ CCScene* FarmScene::scene()
 
 bool FarmScene::init()
 {
-    
-    if ( CCLayerColor::initWithColor(ccc4(255,255,255,255)) )
-    {
-    }
+    if ( CCLayerColor::initWithColor(ccc4(255,255,255,255))) {}
     
     CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
-    
-    // Set background
-    Setter::setBackground(this);
-    
-    CCPoint origin = CCDirector::sharedDirector()->getVisibleOrigin();
-    
-    CCMenuItemImage * pCloseItem = CCMenuItemImage::create(
-                                                          "CloseNormal.png",
-                                                          "CloseSelected.png",
-                                                          this,
-                                                          menu_selector(FarmScene::menuCloseCallback));
-    
-	pCloseItem->setPosition(ccp(origin.x + visibleSize.width - pCloseItem->getContentSize().width/2 ,
-                                origin.y + pCloseItem->getContentSize().height/2));
-    
-    CCMenu * pMenu = CCMenu::create(pCloseItem, NULL);
-    pMenu->setPosition(CCPointZero);
-    this->addChild(pMenu, 1);
-    
-    // button1
-    CCScale9Sprite * ccS9S_1 = CCScale9Sprite::create("Send.png");
-    ccS9S_1->setContentSize(CCSizeMake(200, 120));
-    CCScale9Sprite * ccS9S_on_1 = CCScale9Sprite::create("SendHighlighted.png");
-    ccS9S_on_1->setContentSize(CCSizeMake(200, 120));
-    
-    // onClick1
-    CCMenuItemSprite * ccMIS_1 = CCMenuItemSprite::create(ccS9S_1, ccS9S_on_1, this, menu_selector(FarmScene::onClick1));
-    ccMIS_1->setPosition(ccp(visibleSize.width/4,120));
-    CCMenu* menu_1 = CCMenu::create(ccMIS_1,NULL);
-    menu_1->setPosition(CCPointZero);
-    this->addChild(menu_1,1);
 
-    // button2
-    CCScale9Sprite * ccS9S_2 = CCScale9Sprite::create("Send.png");
-    ccS9S_2->setContentSize(CCSizeMake(200, 120));
-    CCScale9Sprite * ccS9S_on_2 = CCScale9Sprite::create("SendHighlighted.png");
-    ccS9S_on_2->setContentSize(CCSizeMake(200, 120));
-    
-    // onClick2
-    CCMenuItemSprite * ccMIS_2 = CCMenuItemSprite::create(ccS9S_2, ccS9S_on_2, this, menu_selector(FarmScene::onClick2));
-    ccMIS_2->setPosition(ccp(visibleSize.width/4*3,120));
-    CCMenu* menu_2 = CCMenu::create(ccMIS_2,NULL);
-    menu_2->setPosition(CCPointZero);
-    this->addChild(menu_2,1);
-    
-    // Monsters List
-    int num = 0;
-    monsterAry[num++] = "baby.png";
-    monsterAry[num++] = "giga.png";
-    monsterAry[num++] = "kodora.png";
-    monsterAry[num++] = "meca.png";
-    monsterAry[num++] = "kopute.png";
-    
-    // Label Tag 1
-    CCLabelTTF * text = CCLabelTTF::create("", "arial", 48);
-    text->setColor(ccc3(25, 25, 25));
-    text->setPosition(CCPointMake(visibleSize.width/2, visibleSize.height/10 * 3));
-    text->setTag(_LABEL_MY_MONSTERID_);
-    this->addChild(text);
-    
-    // Label Tag 2
-    CCLabelTTF * text2 = CCLabelTTF::create("", "arial", 36);
-    text2->setColor(ccc3(25, 25, 25));
-    text2->setPosition(CCPointMake(visibleSize.width/2, visibleSize.height/10 * 2));
-    text2->setTag(_LABEL_MY_UUID_);
-    this->addChild(text2);
-    
-    // My Pet
-    randNum = 4;
-    CCSpriteBatchNode * batchNode = CCSpriteBatchNode::create(monsterAry[randNum]);
-    CCSprite * pet = CCSprite::createWithTexture(batchNode->getTexture(), CCRect(0,0,128,128));
-    pet->setPosition(CCPointMake(visibleSize.width/2, visibleSize.height/10 * 3));
-    pet->setTag(_SPRITE_MY_PET_);
-    this->addChild(pet);
-   
-    // Animation
-    CCAnimation * animation = CCAnimation::create();
-    animation->addSpriteFrameWithTexture(batchNode->getTexture(), CCRect(128*0,0,128,128));
-    animation->addSpriteFrameWithTexture(batchNode->getTexture(), CCRect(128*3,0,128,128));
-    animation->addSpriteFrameWithTexture(batchNode->getTexture(), CCRect(128*0,0,128,128));
-    animation->addSpriteFrameWithTexture(batchNode->getTexture(), CCRect(128*4,0,128,128));
-    animation->setDelayPerUnit(0.8f / 4.0f);
-    animation->setRestoreOriginalFrame(true);
-    CCAnimate * action = CCAnimate::create(animation);
-    CCRepeatForever * actionreq = CCRepeatForever::create(action);
-    pet->runAction(actionreq);
-    
-    // Other Pets
-    CCSpriteBatchNode * batchNode2 = CCSpriteBatchNode::create(monsterAry[randNum]);
-    CCSprite * pet2 = CCSprite::createWithTexture(batchNode2->getTexture(), CCRect(0,0,128,128));
-    pet2->setPosition(CCPointMake(visibleSize.width/2, visibleSize.height/10 * 8));
-    pet2->setTag(_SPRITE_PET_1_);
-    this->addChild(pet2);
-    
-    // Animation
-    CCAnimation * animation2 = animation;
-    CCAnimate * action2 = CCAnimate::create(animation2);
-    CCRepeatForever * actionreq2 = CCRepeatForever::create(action2);
-    pet2->runAction(actionreq2);
-    
-    // Label Tag 3
-    CCLabelTTF * text3 = CCLabelTTF::create("", "arial", 48);
-    text3->setColor(ccc3(25, 25, 25));
-    text3->setPosition(CCPointMake(visibleSize.width/2, visibleSize.height/10 * 3));
-    text3->setTag(_LABEL_MONSTERID_1_);
-    this->addChild(text3);
-    
-    // Label Tag 4
-    CCLabelTTF * text4 = CCLabelTTF::create("", "arial", 36);
-    text4->setColor(ccc3(25, 25, 25));
-    text4->setPosition(CCPointMake(visibleSize.width/2, visibleSize.height/10 * 2));
-    text4->setTag(_LABEL_UUID_1_);
-    this->addChild(text4);
-    
-    // Schecule
-    this->schedule(schedule_selector(FarmScene::animationLogic), 1.0/10.0);
+    Setter::setBackground(this);
     
     // Add swipe layer
     CCLayer * layer = SwipeLayer::create();
     this->addChild(layer);
     
+    // Position
+    float firstPos = visibleSize.height * 17/20;
+    float secondPos = visibleSize.height * 11/20;
+    float thirdPos = visibleSize.height * 5/20;
+    float editBoxPosX = visibleSize.width * 7/20;
+    float editBoxPosY = visibleSize.height * 1/20;
+    
+    // Height of Text Box
+    float heightOfBox = visibleSize.height *2/10;
+    float editBoxWidth = visibleSize.width *5/10;
+    float editBoxHeight = visibleSize.height *1/20;
+    
+    // text
+    CCScale9Sprite * s9s = CCScale9Sprite::create("dialog_dark.png");
+    s9s->setContentSize(CCSizeMake(visibleSize.width *8/10,  heightOfBox));
+    s9s->setPosition(CCPointMake(visibleSize.width/2, firstPos));
+    addChild(s9s);
+    const char* mes_str = "hoghoghohgoehgoehgoehgoehgoheooehogheogheohgoehgoehgoehogheogheoghoehgoehgoehgoehogheogheoghoehgoehgoehgoheogheohgoehs";
+    CCLabelTTF* mes_label = CCLabelTTF::create(mes_str, "arial", 48);
+    mes_label->setColor(ccc3(255, 0, 127));
+    mes_label->setDimensions(CCSize(visibleSize.width * 7/10,  heightOfBox));
+    mes_label->setPosition(CCPointMake(visibleSize.width/2, firstPos));
+    addChild(mes_label);
+   
+    // text
+    CCScale9Sprite * s9s_2 = CCScale9Sprite::create("dialog_dark.png");
+    s9s_2->setContentSize(CCSizeMake(visibleSize.width *8/10,  heightOfBox));
+    s9s_2->setPosition(CCPointMake(visibleSize.width/2, secondPos));
+    addChild(s9s_2);
+    const char* mes_str_2 = "hoghoghohgoehgoehgoehgoehgoheooehogheogheohgoehgoehgoehogheogheoghoehgoehgoehgoehogheogheoghoehgoehgoehgoheogheohgoehs";
+    CCLabelTTF* mes_label_2 = CCLabelTTF::create(mes_str_2, "arial", 48);
+    mes_label_2->setColor(ccc3(255, 0, 127));
+    mes_label_2->setDimensions(CCSize(visibleSize.width * 7/10,  heightOfBox));
+    mes_label_2->setPosition(CCPointMake(visibleSize.width/2, secondPos));
+    addChild(mes_label_2);
+    
+    // text
+    CCScale9Sprite * s9s_3 = CCScale9Sprite::create("dialog_dark.png");
+    s9s_3->setContentSize(CCSizeMake(visibleSize.width *8/10,  heightOfBox));
+    s9s_3->setPosition(CCPointMake(visibleSize.width/2, thirdPos));
+    addChild(s9s_3);
+    const char* mes_str_3 = "hoghoghohgoehgoehgoehgoehgoheooehogheogheohgoehgoehgoehogheogheoghoehgoehgoehgoehogheogheoghoehgoehgoehgoheogheohgoehs";
+    CCLabelTTF* mes_label_3 = CCLabelTTF::create(mes_str_3, "arial", 48);
+    mes_label_3->setColor(ccc3(255, 0, 127));
+    mes_label_3->setDimensions(CCSize(visibleSize.width * 7/10,  heightOfBox));
+    mes_label_3->setPosition(CCPointMake(visibleSize.width/2, thirdPos));
+    addChild(mes_label_3);
+    
+    // EditBox
+    CCEditBox* editBox;
+    CCSize editBoxSize = CCSizeMake(editBoxWidth, editBoxHeight);
+    editBox = CCEditBox::create(editBoxSize, CCScale9Sprite::create("editbox.png"));
+    editBox->setPosition(ccp(editBoxPosX, editBoxPosY));
+    editBox->setFontColor(ccBLUE);
+    editBox->setPlaceHolder("Input");
+    editBox->setMaxLength(100);
+    editBox->setReturnType(kKeyboardReturnTypeDone);
+    editBox->setFontSize(24);
+    editBox->setDelegate(this);
+    this->addChild(editBox);
+    
+    
+    
+    // === End ===
     return true;
 }
+
+void FarmScene::editBoxEditingDidBegin(CCEditBox* editBox){}
+void FarmScene::editBoxEditingDidEnd(CCEditBox* editBox){}
+void FarmScene::editBoxTextChanged(CCEditBox* editBox, const std::string& text){}
+void FarmScene::editBoxReturn(CCEditBox* editBox){}
 
 
 void FarmScene::animationLogic()
 {
-    
-    // Get Size of Device Display
     CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
     
-    // moving
-    float x = 0;
-    const float PI = 3.1415f;
-    int max_cnt = 60 * 1;
-    float cos_val = cosf(PI * (float)this->mLoopCount++ /(float)max_cnt);
-    x = (float)visibleSize.width/3 * cos_val;
-    if( this->mLoopCount > (max_cnt * 2))
-    {
-        this->mLoopCount = 0;
-    }
-   
-    CCSprite * pet = (CCSprite *)this->getChildByTag(_SPRITE_MY_PET_);
-    pet->setPosition(CCPointMake(x + visibleSize.width/2, visibleSize.height/10 * 3));
-    pet->setTag(_SPRITE_MY_PET_);
-    
-    CCSprite * pet2 = (CCSprite *)this->getChildByTag(_SPRITE_PET_1_);
-    pet2->setPosition(CCPointMake(x + visibleSize.width/2, visibleSize.height/10 * 8));
-    pet2->setTag(_SPRITE_PET_1_);
-    
 }
 
 
-void FarmScene::menuCloseCallback(CCObject* pSender)
-{
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT) || (CC_TARGET_PLATFORM == CC_PLATFORM_WP8)
-	CCMessageBox("You pressed the close button. Windows Store Apps do not implement a close button.","Alert");
-#else
-    CCDirector::sharedDirector()->end();
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    exit(0);
-#endif
-#endif
-}
 
 void FarmScene::menuOKCallback()
 {
@@ -195,360 +114,71 @@ void FarmScene::menuNGCallback()
     
 }
 
-// OnClick Action
 void FarmScene::onClick1()
 {
-	// Debug
+	//TODO Debug
 	CCLog("Dev=> %s","onClick1");
-    
-    // call from Scene, Layer, etc
-    FSAlertLayer *alertLayer = FSAlertLayer::create("XXX", this, callfuncN_selector(FarmScene::menuOKCallback), callfuncN_selector(FarmScene::menuNGCallback));
-    this->addChild(alertLayer, 100001);
 
-    // Get Size of Device Display
-    CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
-    
-    // Remove the sprite
-    CCSprite * prepet = (CCSprite *)this->getChildByTag(_SPRITE_MY_PET_);
-    prepet->removeFromParent();
-    
-    // Set Random Number
-    randNum = rand() % 5;
-    CCSpriteBatchNode * batchNode = CCSpriteBatchNode::create(monsterAry[randNum]);
-    CCSprite * pet = CCSprite::createWithTexture(batchNode->getTexture(), CCRect(0,0,128,128));
-    pet->setPosition(CCPointMake(visibleSize.width/2, visibleSize.height/10 * 3));
-    pet->setTag(_SPRITE_MY_PET_);
-    this->addChild(pet);
-    
-    // Animation
-    CCAnimation * animation = CCAnimation::create();
-    animation->addSpriteFrameWithTexture(batchNode->getTexture(), CCRect(128*0,0,128,128));
-    animation->addSpriteFrameWithTexture(batchNode->getTexture(), CCRect(128*3,0,128,128));
-    animation->addSpriteFrameWithTexture(batchNode->getTexture(), CCRect(128*0,0,128,128));
-    animation->addSpriteFrameWithTexture(batchNode->getTexture(), CCRect(128*4,0,128,128));
-    animation->setDelayPerUnit(0.8f / 4.0f);
-    animation->setRestoreOriginalFrame(true);
-    CCAnimate * action = CCAnimate::create(animation);
-    CCRepeatForever * actionreq = CCRepeatForever::create(action);
-    pet->runAction(actionreq);
-    // TODO
-    CCLabelTTF * label_monsters_host = (CCLabelTTF*)this->getChildByTag(_LABEL_MY_MONSTERID_);
-    label_monsters_host->setColor(ccc3(25, 25, 25));
-    label_monsters_host->setPosition(CCPointMake(visibleSize.width/2, visibleSize.height/10 * 4));
-    label_monsters_host->setString(monsterAry[randNum]);
-    
-    // Set parameters
-    std::string uuid_str = Getter::getUUID();
-    const char * uuid = uuid_str.c_str();
-    CCLog("Getter::getUUID : %s", uuid);
-    
-    // Show UUID
-    CCLabelTTF * text = (CCLabelTTF*)this->getChildByTag(_LABEL_MY_UUID_);
-    text->setColor(ccc3(25, 25, 25));
-    text->setPosition(CCPointMake(visibleSize.width/2, visibleSize.height/10 * 2));
-    text->setString(uuid);
- 
-    // Set Key and Value
-    int numberOfPair = 10;
-    std::pair <const char *, const char *> * pair;
-    pair = new std::pair <const char *, const char *> [numberOfPair];
-    int num = 0;
-    pair[num++] = std::make_pair("uuid", uuid);
-    pair[num++] = std::make_pair("name",monsterAry[randNum]);
-    pair[num++] = std::make_pair("message","Hello, I am pikaho");
-    pair[num++] = std::make_pair("food","meat");
-    pair[num++] = std::make_pair("a","test1_value");
-    pair[num++] = std::make_pair("b","test2_value");
-    pair[num++] = std::make_pair("c","test3_value");
-    pair[num++] = std::make_pair("d","test4_value");
-    pair[num++] = std::make_pair("e","test5_value");
-    pair[num++] = std::make_pair("f","test6_value");
-    
-    // Array Initialization
-    int count_char = 0;
-    
-    // Calculate Memory Size
-    for (int cnt = 0; cnt < num; cnt++)
-    {
-        count_char += strlen(pair[cnt].first);
-        count_char += strlen(pair[cnt].second);
-    }
-    int jsonDataSize = count_char + 6*numberOfPair + 2 + 100;
-    
-    // Allocate memory
-    char * jsonData;
-    jsonData = new char [jsonDataSize];
-    
-    // NULL-terminated character sequence
-    *jsonData = '\0';
-    
-    // Set jsonData
-    JsonGenerator * jsonGenerator = new JsonGenerator();
-    jsonGenerator->generate(num, jsonData, pair);
-    jsonGenerator->DisposeObject();
-    
-    // Create Json Object
-    const char * postData = jsonData;
-    CCLog("Debug jsonGenerator : %s", postData);
-    
-    // HTTP Client
-    std::vector<std::string> headers;
-    headers.push_back("Content-Type: application/json; charset=utf-8");
-    cocos2d::extension::CCHttpRequest* request = new cocos2d::extension::CCHttpRequest();
-    request->setUrl("http://49.212.139.75:9000/main");
-    request->setRequestType(cocos2d::extension::CCHttpRequest::kHttpPost);
-    request->setResponseCallback(this, httpresponse_selector(FarmScene::onHttpRequestCompleted));
-    request->setRequestData(postData, strlen(postData));
-    request->setHeaders(headers);
-    request->setTag("POST Request");
-    //cocos2d::extension::CCHttpClient::getInstance()->send(request);
-    
-    // Release memory
-    request->release();
-    delete[] pair;
-    delete[] jsonData;
-   
 }
 
-// Matching users
 void FarmScene::onClick2()
 {
-  	// TODO Debug
+  	//TODO Debug
 	CCLog("Dev=> %s","onClick2");
-    
-    // Set parameters
-    std::string uuid_str = Getter::getUUID();
-    const char * uuid = uuid_str.c_str();
-    CCLog("Getter::getUUID : %s", uuid);
-    
-    // Show UUID
-    CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
-    CCLabelTTF * text = (CCLabelTTF*)this->getChildByTag(_LABEL_MY_UUID_);
-    text->setColor(ccc3(25, 25, 25));
-    text->setPosition(CCPointMake(visibleSize.width/2, visibleSize.height/10 * 2));
-    text->setString(uuid);
-    
-    // Set Key and Value
-    int numberOfPair = 4;
-    std::pair <const char *, const char *> * pair;
-    pair = new std::pair <const char *, const char *> [numberOfPair];
-    int num = 0;
-    pair[num++] = std::make_pair("uuid", uuid);
-    pair[num++] = std::make_pair("name","Pikaho");
-    pair[num++] = std::make_pair("message","Hello, I am pikaho");
-    pair[num++] = std::make_pair("food","meat");
-    
-    // Array Initialization
-    int count_char = 0;
-    
-    // Calculate Memory Size
-    for (int cnt = 0; cnt < numberOfPair; cnt++)
-    {
-        count_char += strlen(pair[cnt].first);
-        count_char += strlen(pair[cnt].second);
-    }
-    int jsonDataSize = count_char + 6*numberOfPair + 2 + 100;
-    
-    // Allocate memory
-    char * jsonData;
-    jsonData = new char [jsonDataSize];
-    
-    // NULL-terminated character sequence
-    *jsonData = '\0';
-    
-    // Set jsonData
-    JsonGenerator * jsonGenerator = new JsonGenerator();
-    jsonGenerator->generate(num, jsonData, pair);
-    jsonGenerator->DisposeObject();
-    
-    // Create Json Object
-    const char * postData = jsonData;
-    CCLog("Debug jsonGenerator : %s", postData);
-    
-    // HTTP Client
-    std::vector<std::string> headers;
-    headers.push_back("Content-Type: application/json; charset=utf-8");
-    cocos2d::extension::CCHttpRequest* request = new cocos2d::extension::CCHttpRequest();
-    request->setUrl("http://49.212.139.75:9000/main");
-    request->setRequestType(cocos2d::extension::CCHttpRequest::kHttpPost);
-    request->setResponseCallback(this, httpresponse_selector(FarmScene::onHttpRequestCompleted2));
-    request->setRequestData(postData, strlen(postData));
-    request->setHeaders(headers);
-    request->setTag("POST Request");
-    cocos2d::extension::CCHttpClient::getInstance()->send(request);
-    
-    // Release memory
-    request->release();
-    delete[] pair;
-    delete[] jsonData;
+
 }
 
 void FarmScene::onHttpRequestCompleted(cocos2d::CCNode *sender, void *data)
 {
     cocos2d::extension::CCHttpResponse *response = (cocos2d::extension::CCHttpResponse*)data;
-    
     if (!response)
     {
         return;
     }
-    
     if (0 != strlen(response->getHttpRequest()->getTag()))
     {
         CCLog("%s completed", response->getHttpRequest()->getTag());
     }
-    
     int statusCode = response->getResponseCode();
     char statusString[64] = {};
     sprintf(statusString, "HTTP Status Code: %d, tag = %s", statusCode, response->getHttpRequest()->getTag());
     CCLog("response code: %d", statusCode);
-    
     if (!response->isSucceed())
     {
         CCLog("response failed");
         CCLog("error buffer: %s", response->getErrorBuffer());
         return;
     }
-    
-    // store data
     std::vector<char> * buffer = response->getResponseData();
     char * concatenated = (char *) malloc(buffer->size() + 1);
     std::string s2(buffer->begin(), buffer->end());
-    
     strcpy(concatenated, s2.c_str());
-    
     CCLog("JSON : %s",concatenated);
     CCLog("===");
     
     // JSON Parser
-    Json * json = Json_create(concatenated);
-    const char * host = Json_getString(json, "host", "default");
-    const char * friend1 = Json_getString(json, "friend1", "default");
-    const char * friend2 = Json_getString(json, "friend2", "default");
-    const char * friend3 = Json_getString(json, "friend3", "default");
-    const char * friend4 = Json_getString(json, "friend4", "default");
-    const char * monsters_host = Json_getString(json, "monsters_host", "default");
-    const char * monsters_friend1 = Json_getString(json, "monsters_friend1", "default");
-    const char * monsters_friend2 = Json_getString(json, "monsters_friend2", "default");
-    const char * monsters_friend3 = Json_getString(json, "monsters_friend3", "default");
-    const char * monsters_friend4 = Json_getString(json, "monsters_friend4", "default");
-    const char * info = Json_getString(json, "info", "default");
-    
-    // Show JSON data
-    CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
-   
-    // Show Friend MONSTER ID
-    CCLabelTTF * text2 = (CCLabelTTF*)this->getChildByTag(_LABEL_MONSTERID_1_);
-    text2->setColor(ccc3(25, 25, 25));
-    text2->setPosition(CCPointMake(visibleSize.width/2, visibleSize.height/10 * 9));
-    text2->setString(monsters_friend1);
-    
-    // Show Friend UUID
-    CCLabelTTF * text3 = (CCLabelTTF*)this->getChildByTag(_LABEL_UUID_1_);
-    text3->setColor(ccc3(25, 25, 25));
-    text3->setPosition(CCPointMake(visibleSize.width/2, visibleSize.height/10 * 7));
-    text3->setString(friend1);
-    
-    
-    // Delete the JSON structure
-    Json_dispose(json);
+    string picoError;
+    picojson::value picoValue;
+    picojson::parse(picoValue,concatenated,concatenated+strlen(concatenated),&picoError);
+    string key;
+    if(picoError.empty()) {
+        picojson::object& o = picoValue.get<picojson::object>();
+        key = o["key"].get<string>();
+        string& info = o["info"].get<string>();
+        picojson::array& picoArray = o["friends"].get<picojson::array>();
+        int picoArraySize = picoArray.size();
+        //id = new string[picoArraySize];
+        int cnt = 0;
+        for(picojson::array::iterator i = picoArray.begin(); i != picoArray.end(); i++){
+            picojson::object& friendObject = i->get<picojson::object>();
+            //id[cnt] = friendObject["id"].get<string>();
+            //CCLog("pico id : %s", id[cnt].c_str());
+            cnt++;
+        }
+    }
+
     
 }
 
-void FarmScene::onHttpRequestCompleted2(cocos2d::CCNode *sender, void *data)
-{
-    cocos2d::extension::CCHttpResponse *response = (cocos2d::extension::CCHttpResponse*)data;
-    
-    if (!response)
-    {
-        return;
-    }
-    
-    if (0 != strlen(response->getHttpRequest()->getTag()))
-    {
-        CCLog("%s completed", response->getHttpRequest()->getTag());
-    }
-    
-    int statusCode = response->getResponseCode();
-    char statusString[64] = {};
-    sprintf(statusString, "HTTP Status Code: %d, tag = %s", statusCode, response->getHttpRequest()->getTag());
-    CCLog("response code: %d", statusCode);
-    
-    if (!response->isSucceed())
-    {
-        CCLog("response failed");
-        CCLog("error buffer: %s", response->getErrorBuffer());
-        return;
-    }
-    
-    // store data
-    std::vector<char> * buffer = response->getResponseData();
-    char * concatenated = (char *) malloc(buffer->size() + 1);
-    std::string s2(buffer->begin(), buffer->end());
-    
-    strcpy(concatenated, s2.c_str());
-    
-    CCLog("JSON : %s",concatenated);
-    CCLog("===");
-    
-    // JSON Parser
-    Json * json = Json_create(concatenated);
-    const char * host = Json_getString(json, "host", "default");
-    const char * friend1 = Json_getString(json, "friend1", "default");
-    const char * friend2 = Json_getString(json, "friend2", "default");
-    const char * friend3 = Json_getString(json, "friend3", "default");
-    const char * friend4 = Json_getString(json, "friend4", "default");
-    const char * monsters_host = Json_getString(json, "monsters_host", "default");
-    const char * monsters_friend1 = Json_getString(json, "monsters_friend1", "default");
-    const char * monsters_friend2 = Json_getString(json, "monsters_friend2", "default");
-    const char * monsters_friend3 = Json_getString(json, "monsters_friend3", "default");
-    const char * monsters_friend4 = Json_getString(json, "monsters_friend4", "default");
-    const char * info = Json_getString(json, "info", "default");
-    
-    // Show JSON data
-    CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
-   
-    // Show Friend MONSTER ID
-    CCLabelTTF * text2 = (CCLabelTTF*)this->getChildByTag(_LABEL_MONSTERID_1_);
-    text2->setColor(ccc3(25, 25, 25));
-    text2->setPosition(CCPointMake(visibleSize.width/2, visibleSize.height/10 * 9));
-    text2->setString(monsters_friend1);
-    
-    // Show Friend UUID
-    CCLabelTTF * text3 = (CCLabelTTF*)this->getChildByTag(_LABEL_UUID_1_);
-    text3->setColor(ccc3(25, 25, 25));
-    text3->setPosition(CCPointMake(visibleSize.width/2, visibleSize.height/10 * 7));
-    text3->setString(friend1);
-    
-    // Remove the sprite
-    CCSprite * prepet = (CCSprite *)this->getChildByTag(_SPRITE_PET_1_);
-    prepet->removeFromParent();
-    
-    // Display pet 1
-    CCSpriteBatchNode * batchNode = CCSpriteBatchNode::create(monsters_friend1);
-    CCSprite * pet = CCSprite::createWithTexture(batchNode->getTexture(), CCRect(0,0,128,128));
-    pet->setPosition(CCPointMake(visibleSize.width/2, visibleSize.height/10 * 8));
-    pet->setTag(_SPRITE_PET_1_);
-    this->addChild(pet);
-    // Animation
-    CCAnimation * animation = CCAnimation::create();
-    animation->addSpriteFrameWithTexture(batchNode->getTexture(), CCRect(128*0,0,128,128));
-    animation->addSpriteFrameWithTexture(batchNode->getTexture(), CCRect(128*3,0,128,128));
-    animation->addSpriteFrameWithTexture(batchNode->getTexture(), CCRect(128*0,0,128,128));
-    animation->addSpriteFrameWithTexture(batchNode->getTexture(), CCRect(128*4,0,128,128));
-    animation->setDelayPerUnit(0.8f / 4.0f);
-    animation->setRestoreOriginalFrame(true);
-    CCAnimate * action = CCAnimate::create(animation);
-    CCRepeatForever * actionreq = CCRepeatForever::create(action);
-    pet->runAction(actionreq);
-    
-   
-    // Delete the JSON structure
-    Json_dispose(json);
-}
 
-void FarmScene::toFriendsListScene()
-{
-    CCScene * scene = FriendsListScene::scene();
-    CCDirector::sharedDirector()->replaceScene(scene);
-}
 

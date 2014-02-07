@@ -13,6 +13,7 @@ protected:
     CC_SYNTHESIZE_RETAIN(CCLabelTTF*, m_textLabel, TextLabel);
     CC_SYNTHESIZE_RETAIN(CCLabelTTF*, m_detailLabel, DetailLabel);
     CC_SYNTHESIZE_RETAIN(CCSprite*, m_imageSprite, imageSprite);
+    CC_SYNTHESIZE_RETAIN(CCScale9Sprite*, m_scale9Sprite, scale9Sprite);
     virtual void needsLayout();
     
 public:
@@ -20,8 +21,8 @@ public:
     virtual ~MyTableViewCell();
     
     virtual bool init();
-    virtual bool initWithLabel(CCLabelTTF* textLabel, CCLabelTTF* detailLabel, CCSprite* imageSprite);
-    static MyTableViewCell* create(CCLabelTTF* textLabel, CCLabelTTF* detailLabel, CCSprite* imageSprite);
+    virtual bool initWithLabel(CCLabelTTF* textLabel, CCLabelTTF* detailLabel, CCSprite* imageSprite, CCScale9Sprite* scale9Sprite);
+    static MyTableViewCell* create(CCLabelTTF* textLabel, CCLabelTTF* detailLabel, CCSprite* imageSprite, CCScale9Sprite* scale9Sprite);
     static MyTableViewCell* create(const char* text, const char* fontName, float fontSize, const char* detail, float detailFontSize, const char* imagePath=NULL);
     CREATE_FUNC(MyTableViewCell);
     
@@ -33,6 +34,11 @@ public:
     
     // draw
     virtual void draw();
+    
+    // backgoround
+    void setBackground(CCScale9Sprite* scale9Sprite);
+    
+    
 };
 
 #endif /* __MYTABLEVIEWCELL_H__ */

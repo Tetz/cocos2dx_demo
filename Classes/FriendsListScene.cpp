@@ -19,7 +19,7 @@ bool FriendsListScene::init()
     }
     
     // Set background
-    //Setter::setBackground(this);
+    Setter::setBackground(this);
     
     // Add swipe layer
     CCLayer * layer = SwipeLayer2::create();
@@ -51,7 +51,6 @@ void FriendsListScene::tableCellTouched(CCTableView* table, CCTableViewCell* cel
     const char * text = name[idx].c_str();
     CCString* message = CCString::create("");
     message->initWithFormat("Remove?  %s",text);
-    //message->initWithFormat(_FRIENDS_,cell->getIdx());
     
     // call from Scene, Layer, etc
     FSAlertLayer *alertLayer = FSAlertLayer::create(message->getCString(), this, callfuncN_selector(FriendsListScene::menuOKCallback), callfuncN_selector(FriendsListScene::menuNGCallback));
@@ -73,6 +72,8 @@ CCTableViewCell* FriendsListScene::tableCellAtIndex(CCTableView* table, unsigned
     {
         cell = MyTableViewCell::create();
     }
+    
+    // Content
     CCString* text = CCString::createWithFormat("%d", idx + 1);
     const char * content_name = name[idx].c_str();
     CCString* detail = CCString::createWithFormat("%s", content_name);
@@ -82,8 +83,8 @@ CCTableViewCell* FriendsListScene::tableCellAtIndex(CCTableView* table, unsigned
     string strMonster0 = "Send.png";
     CCString* path = CCString::create(strMonster0);
     cell->setImagePath(path->getCString());
-    return cell;
     
+    return cell;
     return 0;
 }
 
