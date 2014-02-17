@@ -35,40 +35,43 @@ bool FarmScene::init()
     float editBoxWidth = visibleSize.width *5/10;
     float editBoxHeight = visibleSize.height *1/20;
     
-    // text
+    // first text
     CCScale9Sprite * s9s = CCScale9Sprite::create("dialog_dark.png");
     s9s->setContentSize(CCSizeMake(visibleSize.width *8/10,  heightOfBox));
     s9s->setPosition(CCPointMake(visibleSize.width/2, firstPos));
     addChild(s9s);
-    const char* mes_str = "hoghoghohgoehgoehgoehgoehgoheooehogheogheohgoehgoehgoehogheogheoghoehgoehgoehgoehogheogheoghoehgoehgoehgoheogheohgoehs";
+    const char* mes_str = "";
     CCLabelTTF* mes_label = CCLabelTTF::create(mes_str, "arial", 48);
     mes_label->setColor(ccc3(255, 0, 127));
     mes_label->setDimensions(CCSize(visibleSize.width * 7/10,  heightOfBox));
     mes_label->setPosition(CCPointMake(visibleSize.width/2, firstPos));
+    mes_label->setTag(_LABEL_MESSAGEBOX_FIRST_);
     addChild(mes_label);
    
-    // text
+    // second text
     CCScale9Sprite * s9s_2 = CCScale9Sprite::create("dialog_dark.png");
     s9s_2->setContentSize(CCSizeMake(visibleSize.width *8/10,  heightOfBox));
     s9s_2->setPosition(CCPointMake(visibleSize.width/2, secondPos));
     addChild(s9s_2);
-    const char* mes_str_2 = "hoghoghohgoehgoehgoehgoehgoheooehogheogheohgoehgoehgoehogheogheoghoehgoehgoehgoehogheogheoghoehgoehgoehgoheogheohgoehs";
+    const char* mes_str_2 = "";
     CCLabelTTF* mes_label_2 = CCLabelTTF::create(mes_str_2, "arial", 48);
     mes_label_2->setColor(ccc3(255, 0, 127));
     mes_label_2->setDimensions(CCSize(visibleSize.width * 7/10,  heightOfBox));
     mes_label_2->setPosition(CCPointMake(visibleSize.width/2, secondPos));
+    mes_label_2->setTag(_LABEL_MESSAGEBOX_SECOND_);
     addChild(mes_label_2);
     
-    // text
+    // third text
     CCScale9Sprite * s9s_3 = CCScale9Sprite::create("dialog_dark.png");
     s9s_3->setContentSize(CCSizeMake(visibleSize.width *8/10,  heightOfBox));
     s9s_3->setPosition(CCPointMake(visibleSize.width/2, thirdPos));
     addChild(s9s_3);
-    const char* mes_str_3 = "hoghoghohgoehgoehgoehgoehgoheooehogheogheohgoehgoehgoehogheogheoghoehgoehgoehgoehogheogheoghoehgoehgoehgoheogheohgoehs";
+    const char* mes_str_3 = "";
     CCLabelTTF* mes_label_3 = CCLabelTTF::create(mes_str_3, "arial", 48);
     mes_label_3->setColor(ccc3(255, 0, 127));
     mes_label_3->setDimensions(CCSize(visibleSize.width * 7/10,  heightOfBox));
     mes_label_3->setPosition(CCPointMake(visibleSize.width/2, thirdPos));
+    mes_label_3->setTag(_LABEL_MESSAGEBOX_THIRD_);
     addChild(mes_label_3);
     
     // EditBox
@@ -82,27 +85,169 @@ bool FarmScene::init()
     editBox->setReturnType(kKeyboardReturnTypeDone);
     editBox->setFontSize(24);
     editBox->setDelegate(this);
+    editBox->setTag(_EDITBOX_);
     this->addChild(editBox);
     
+    // button1
+    CCScale9Sprite * ccS9S_1 = CCScale9Sprite::create("Send.png");
+    ccS9S_1->setContentSize(CCSizeMake(200, 120));
+    CCScale9Sprite * ccS9S_on_1 = CCScale9Sprite::create("SendHighlighted.png");
+    ccS9S_on_1->setContentSize(CCSizeMake(200, 120));
     
+    // onClick1
+    CCMenuItemSprite * ccMIS_1 = CCMenuItemSprite::create(ccS9S_1, ccS9S_on_1, this, menu_selector(FarmScene::onClick1));
+    ccMIS_1->setPosition(ccp(visibleSize.width/4*3,visibleSize.height/20));
+    CCMenu* menu_1 = CCMenu::create(ccMIS_1,NULL);
+    menu_1->setPosition(CCPointZero);
+    this->addChild(menu_1);
+    
+    // Initial private variable
+    mLoopCount = 0;
+    mNumberOfMessages = 50;
+    inputText = "default";
+    
+    // call main logic
+    this->animationLogic();
+    this->schedule(schedule_selector(FarmScene::updateMessages), 5.0f);
+    
+    // TODO load
+    this->load();
     
     // === End ===
     return true;
 }
 
-void FarmScene::editBoxEditingDidBegin(CCEditBox* editBox){}
-void FarmScene::editBoxEditingDidEnd(CCEditBox* editBox){}
-void FarmScene::editBoxTextChanged(CCEditBox* editBox, const std::string& text){}
-void FarmScene::editBoxReturn(CCEditBox* editBox){}
-
-
-void FarmScene::animationLogic()
+void FarmScene::load()
 {
-    CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
+    
+    CCLog("FarmScene::load ======> %s", "");
+    // Set parameters
+    string uuid_str = Getter::getUUID();
+    const char * uuid = uuid_str.c_str();
+    CCLog("Getter::getUUID : %s", uuid);
+    
+    // Set Key and Value
+    int numberOfPair = 10;
+    pair <const char *, const char *> * pairs;
+    pairs = new pair <const char *, const char *> [numberOfPair];
+    int num = 0;
+    pairs[num++] = make_pair("uuid", uuid);
+    pairs[num++] = make_pair("message","Hello, I am pikaho");
+    pairs[num++] = make_pair("info","FarmScene::load");
+    pairs[num++] = make_pair("a","test1_value");
+    pairs[num++] = make_pair("b","test2_value");
+    pairs[num++] = make_pair("c","test3_value");
+    pairs[num++] = make_pair("d","test4_value");
+    pairs[num++] = make_pair("e","test5_value");
+    pairs[num++] = make_pair("f","test6_value");
+    
+    // Array Initialization
+    int count_char = 0;
+    
+    // Calculate Memory Size
+    for (int cnt = 0; cnt < num; cnt++)
+    {
+        count_char += strlen(pairs[cnt].first);
+        count_char += strlen(pairs[cnt].second);
+    }
+    int jsonDataSize = count_char + 6*numberOfPair + 2 + 100;
+    
+    // Allocate memory
+    char * jsonData;
+    jsonData = new char [jsonDataSize];
+    
+    // NULL-terminated character sequence
+    *jsonData = '\0';
+    
+    // Set jsonData
+    JsonGenerator * jsonGenerator = new JsonGenerator();
+    jsonGenerator->generate(num, jsonData, pairs);
+    jsonGenerator->DisposeObject();
+    
+    // Create Json Object
+    const char * postData = jsonData;
+    CCLog("Debug jsonGenerator : %s", postData);
+    
+    // HTTP Client
+    vector<string> headers;
+    headers.push_back("Content-Type: application/json; charset=utf-8");
+    CCHttpRequest* request = new CCHttpRequest();
+    request->setUrl("http://49.212.139.75:9000/loadFarmScene");
+    request->setRequestType(CCHttpRequest::kHttpPost);
+    request->setResponseCallback(this, httpresponse_selector(FarmScene::onHttpRequestCompleted));
+    request->setRequestData(postData, strlen(postData));
+    request->setHeaders(headers);
+    request->setTag("POST Request");
+    CCHttpClient::getInstance()->send(request);
+    
+    // Release memory
+    request->release();
+    delete[] pairs;
+    delete[] jsonData;
     
 }
 
+void FarmScene::updateMessages()
+{
+    // update
+    switch(mLoopCount%3){
+        case 0:
+        {
+            CCLabelTTF* mes_label = (CCLabelTTF*)this->getChildByTag(_LABEL_MESSAGEBOX_FIRST_);
+            mes_label->setString(messages[mLoopCount].c_str());
+            CCActionInterval* pFadeOutAction = CCFadeOut::create(10.0f);
+            mes_label->runAction(pFadeOutAction);
+            break;
+        }
+        case 1:
+        {
+            CCLabelTTF* mes_label_2 = (CCLabelTTF*)this->getChildByTag(_LABEL_MESSAGEBOX_SECOND_);
+            mes_label_2->setString(messages[mLoopCount].c_str());
+            CCActionInterval* pFadeOutAction = CCFadeOut::create(10.0f);
+            mes_label_2->runAction(pFadeOutAction);
+            break;
+        }
+        case 2:
+        {
+            CCLabelTTF* mes_label_3 = (CCLabelTTF*)this->getChildByTag(_LABEL_MESSAGEBOX_THIRD_);
+            mes_label_3->setString(messages[mLoopCount].c_str());
+            CCActionInterval* pFadeOutAction = CCFadeOut::create(10.0f);
+            mes_label_3->runAction(pFadeOutAction);
+            break;
+        }
+        default:
+            break;
+    }
+    
+    mLoopCount++;
+    if(mLoopCount >= 50){mLoopCount=0;}
+}
 
+// TODO test
+void FarmScene::animationLogic()
+{
+    messages = new string[mNumberOfMessages];
+    for(int i=0; i < mNumberOfMessages; i++){
+        ostringstream ostr;
+        ostr << "hogehfaefasdfkadfalskdjfhogehfaefasdfkadfalskdjfmessage" << i;
+        messages[i] = ostr.str();
+    }
+    
+}
+
+void FarmScene::update(float delta)
+{
+    // Get time
+    struct cc_timeval now;
+    CCTime::gettimeofdayCocos2d(&now,NULL);
+    struct tm *tm;
+    time_t timep = now.tv_sec;
+    tm = localtime(&timep);
+    int second = tm->tm_sec;
+    ostringstream ostr;
+    ostr << second;
+    
+}
 
 void FarmScene::menuOKCallback()
 {
@@ -118,7 +263,77 @@ void FarmScene::onClick1()
 {
 	//TODO Debug
 	CCLog("Dev=> %s","onClick1");
-
+    CCLog("FarmScene::load ======> %s", "");
+    
+    if (strlen(inputText)){
+        // Set parameters
+        string uuid_str = Getter::getUUID();
+        const char * uuid = uuid_str.c_str();
+        CCLog("Getter::getUUID : %s", uuid);
+        
+        // Set Key and Value
+        int numberOfPair = 10;
+        pair <const char *, const char *> * pairs;
+        pairs = new pair <const char *, const char *> [numberOfPair];
+        int num = 0;
+        pairs[num++] = make_pair("uuid", uuid);
+        pairs[num++] = make_pair("message",inputText);
+        pairs[num++] = make_pair("info","FarmScene::onClick");
+        pairs[num++] = make_pair("a","test1_value");
+        pairs[num++] = make_pair("b","test2_value");
+        pairs[num++] = make_pair("c","test3_value");
+        pairs[num++] = make_pair("d","test4_value");
+        pairs[num++] = make_pair("e","test5_value");
+        pairs[num++] = make_pair("f","test6_value");
+        
+        // Array Initialization
+        int count_char = 0;
+        
+        // Calculate Memory Size
+        for (int cnt = 0; cnt < num; cnt++)
+        {
+            count_char += strlen(pairs[cnt].first);
+            count_char += strlen(pairs[cnt].second);
+        }
+        int jsonDataSize = count_char + 6*numberOfPair + 2 + 100;
+        
+        // Allocate memory
+        char * jsonData;
+        jsonData = new char [jsonDataSize];
+        
+        // NULL-terminated character sequence
+        *jsonData = '\0';
+        
+        // Set jsonData
+        JsonGenerator * jsonGenerator = new JsonGenerator();
+        jsonGenerator->generate(num, jsonData, pairs);
+        jsonGenerator->DisposeObject();
+        
+        // Create Json Object
+        const char * postData = jsonData;
+        CCLog("Debug jsonGenerator : %s", postData);
+        
+        // HTTP Client
+        vector<string> headers;
+        headers.push_back("Content-Type: application/json; charset=utf-8");
+        CCHttpRequest* request = new CCHttpRequest();
+        request->setUrl("http://49.212.139.75:9000/saveMessage");
+        request->setRequestType(CCHttpRequest::kHttpPost);
+        request->setResponseCallback(this, httpresponse_selector(FarmScene::onHttpRequestCompleted));
+        request->setRequestData(postData, strlen(postData));
+        request->setHeaders(headers);
+        request->setTag("POST Request");
+        CCHttpClient::getInstance()->send(request);
+        
+        // Reset EditBox
+        CCEditBox* editbox = (CCEditBox*)this->getChildByTag(_EDITBOX_);
+        editbox->setText("");
+        
+        // Release memory
+        request->release();
+        delete[] pairs;
+        delete[] jsonData;
+    }
 }
 
 void FarmScene::onClick2()
@@ -130,6 +345,8 @@ void FarmScene::onClick2()
 
 void FarmScene::onHttpRequestCompleted(cocos2d::CCNode *sender, void *data)
 {
+   
+    CCLog("FarmScene::onHttpRequestCompleted %s","onHttpRequestCmpleted");
     cocos2d::extension::CCHttpResponse *response = (cocos2d::extension::CCHttpResponse*)data;
     if (!response)
     {
@@ -157,28 +374,33 @@ void FarmScene::onHttpRequestCompleted(cocos2d::CCNode *sender, void *data)
     CCLog("===");
     
     // JSON Parser
-    string picoError;
-    picojson::value picoValue;
-    picojson::parse(picoValue,concatenated,concatenated+strlen(concatenated),&picoError);
-    string key;
-    if(picoError.empty()) {
-        picojson::object& o = picoValue.get<picojson::object>();
-        key = o["key"].get<string>();
-        string& info = o["info"].get<string>();
-        picojson::array& picoArray = o["friends"].get<picojson::array>();
-        int picoArraySize = picoArray.size();
-        //id = new string[picoArraySize];
-        int cnt = 0;
-        for(picojson::array::iterator i = picoArray.begin(); i != picoArray.end(); i++){
-            picojson::object& friendObject = i->get<picojson::object>();
-            //id[cnt] = friendObject["id"].get<string>();
-            //CCLog("pico id : %s", id[cnt].c_str());
-            cnt++;
-        }
-    }
-
-    
+//    string picoError;
+//    picojson::value picoValue;
+//    picojson::parse(picoValue,concatenated,concatenated+strlen(concatenated),&picoError);
+//    if(picoError.empty()) {
+//        picojson::object& o = picoValue.get<picojson::object>();
+//        string& info = o["info"].get<string>();
+//        picojson::array& picoArray = o["messages"].get<picojson::array>();
+//        int picoArraySize = picoArray.size();
+//        messageAry = new string[picoArraySize];
+//        int cnt = 0;
+//        for(picojson::array::iterator i = picoArray.begin(); i != picoArray.end(); i++){
+//            picojson::object& messageObject = i->get<picojson::object>();
+//            userAry[cnt] = messageObject["user_id"].get<string>();
+//            messageAry[cnt] = messageObject["message"].get<string>();
+//            CCLog("pico user_id : %s", userAry[cnt].c_str());
+//            CCLog("pico message : %s", messageAry[cnt].c_str());
+//            cnt++;
+//        }
+//    }
+    CCLog("FarmScene::onHttpRequestCompleted %s","");
+   
 }
 
-
+void FarmScene::editBoxEditingDidBegin(CCEditBox* editBox){}
+void FarmScene::editBoxEditingDidEnd(CCEditBox* editBox){}
+void FarmScene::editBoxTextChanged(CCEditBox* editBox, const std::string& text){}
+void FarmScene::editBoxReturn(CCEditBox* editBox){
+     inputText = editBox->getText();
+}
 

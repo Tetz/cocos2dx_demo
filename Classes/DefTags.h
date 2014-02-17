@@ -30,5 +30,13 @@
 #define _LABEL_MONSTERID_3_ 14
 #define _LABEL_MONSTERID_4_ 15
 
+// Message Box ID
+#define _LABEL_MESSAGEBOX_FIRST_ 16
+#define _LABEL_MESSAGEBOX_SECOND_ 17
+#define _LABEL_MESSAGEBOX_THIRD_ 18
+
+// EditBox
+#define _EDITBOX_ 19
+
 
 #endif

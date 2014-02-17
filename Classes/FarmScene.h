@@ -13,12 +13,21 @@ private:
     cocos2d::CCSize visibleSize;
     // Animation
     int randNum;
-    int mLoopCount;
     // EditBox
     virtual void editBoxEditingDidBegin(CCEditBox* editBox);
     virtual void editBoxEditingDidEnd(CCEditBox* editBox);
     virtual void editBoxTextChanged(CCEditBox* editBox, const std::string& text);
     virtual void editBoxReturn(CCEditBox* editBox);
+    const char* inputText;
+    CCEditBox* stateEditBox;
+    // Messages
+    string* messages;
+    int mLoopCount;
+    int mNumberOfMessages;
+    virtual void load();
+    //JSON parser
+    string* messageAry;
+    string* userAry;
     
 public:
     virtual bool init();
@@ -39,6 +48,10 @@ public:
     // Popup
     virtual void menuOKCallback();
     virtual void menuNGCallback();
+    
+    //Schedule Update
+    virtual void update(float delta);
+    virtual void updateMessages();
     
    
 };

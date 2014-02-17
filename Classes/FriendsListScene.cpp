@@ -80,7 +80,7 @@ CCTableViewCell* FriendsListScene::tableCellAtIndex(CCTableView* table, unsigned
     cell->setTextString(text->getCString());
     cell->setDetailString(detail->getCString());
    
-    string strMonster0 = "Send.png";
+    string strMonster0 = "gero_front.png";
     CCString* path = CCString::create(strMonster0);
     cell->setImagePath(path->getCString());
     

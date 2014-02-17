@@ -5,7 +5,7 @@ using namespace std;
 USING_NS_CC_EXT;
 USING_NS_CC;
 
-const float kMyTableViewCellHeight = 130.f;
+const float kMyTableViewCellHeight = 140.f;
 
 MyTableViewCell::MyTableViewCell() : m_textLabel(NULL), m_detailLabel(NULL), m_imageSprite(NULL), m_scale9Sprite(NULL)
 {
@@ -100,7 +100,7 @@ void MyTableViewCell::needsLayout()
     // Image
     CCSize imageSize = m_imageSprite->getContentSize();
     y = (size.height-imageSize.height)/2;
-    m_imageSprite->setPosition(ccp(size.width/20 * 1, y));
+    m_imageSprite->setPosition(ccp(size.width/20 * 1, y +5));
     m_imageSprite->setAnchorPoint(CCPointZero);
     x += imageSize.width;
     
@@ -108,13 +108,13 @@ void MyTableViewCell::needsLayout()
     CCSize textSize = m_textLabel->getContentSize();
     y = (size.height-textSize.height)/2;
     m_textLabel->setAnchorPoint(CCPointZero);
-    m_textLabel->setPosition(ccp(size.width/20 * 3, y));
+    m_textLabel->setPosition(ccp(size.width/20 * 5, y));
     
     x += MAX(size.width/2, x+textSize.width);
     CCSize detailSize = m_detailLabel->getContentSize();
     y = (size.height-detailSize.height)/2;
     m_detailLabel->setAnchorPoint(CCPointZero);
-    m_detailLabel->setPosition(ccp(size.width/20 * 6, y));
+    m_detailLabel->setPosition(ccp(size.width/20 * 8, y));
     
 }
 
@@ -151,7 +151,7 @@ void MyTableViewCell::setImagePath(const char* path)
 
 void MyTableViewCell::setBackground(CCScale9Sprite* scale9Sprite){
     CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
-    scale9Sprite->setContentSize(CCSizeMake(visibleSize.width -20 ,  kMyTableViewCellHeight-10));
+    scale9Sprite->setContentSize(CCSizeMake(visibleSize.width -40 ,  kMyTableViewCellHeight-10));
     scale9Sprite->setPosition(CCPointMake(visibleSize.width/2, kMyTableViewCellHeight/2));
     needsLayout();
 }

@@ -31,7 +31,7 @@ bool FSAlertLayer::init()
     CCSize vsize = pDirector->getVisibleSize();
     
     // bg
-    CCSprite* frame = CCSprite::create("dialog.png");
+    CCSprite* frame = CCSprite::create("dialog_yellow.png");
     frame->setTag(FSAlertLayerTagFrame);
     frame->setPosition(ccp(vsize.width / 2, vsize.height / 2));
     this->addChild(frame);
