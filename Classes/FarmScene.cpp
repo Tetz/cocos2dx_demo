@@ -35,11 +35,15 @@ bool FarmScene::init()
     float editBoxWidth = visibleSize.width *5/10;
     float editBoxHeight = visibleSize.height *1/20;
     
-    // first text
+    // first text and onclick event
     CCScale9Sprite * s9s = CCScale9Sprite::create("dialog_dark.png");
     s9s->setContentSize(CCSizeMake(visibleSize.width *8/10,  heightOfBox));
-    s9s->setPosition(CCPointMake(visibleSize.width/2, firstPos));
-    addChild(s9s);
+    CCMenuItemSprite * ccMIS_first = CCMenuItemSprite::create(s9s, s9s, this, menu_selector(FarmScene::onTouchLabel_1));
+    ccMIS_first->setPosition(ccp(visibleSize.width/2,firstPos));
+    CCMenu* menu_first = CCMenu::create(ccMIS_first,NULL);
+    menu_first->setPosition(CCPointZero);
+    this->addChild(menu_first);
+    // Text label
     const char* mes_str = "";
     CCLabelTTF* mes_label = CCLabelTTF::create(mes_str, "arial", 48);
     mes_label->setColor(ccc3(255, 0, 127));
@@ -51,8 +55,12 @@ bool FarmScene::init()
     // second text
     CCScale9Sprite * s9s_2 = CCScale9Sprite::create("dialog_dark.png");
     s9s_2->setContentSize(CCSizeMake(visibleSize.width *8/10,  heightOfBox));
-    s9s_2->setPosition(CCPointMake(visibleSize.width/2, secondPos));
-    addChild(s9s_2);
+    CCMenuItemSprite * ccMIS_second = CCMenuItemSprite::create(s9s, s9s, this, menu_selector(FarmScene::onTouchLabel_2));
+    ccMIS_second->setPosition(ccp(visibleSize.width/2,secondPos));
+    CCMenu* menu_second = CCMenu::create(ccMIS_second,NULL);
+    menu_second->setPosition(CCPointZero);
+    this->addChild(menu_second);
+    // Text label
     const char* mes_str_2 = "";
     CCLabelTTF* mes_label_2 = CCLabelTTF::create(mes_str_2, "arial", 48);
     mes_label_2->setColor(ccc3(255, 0, 127));
@@ -64,8 +72,12 @@ bool FarmScene::init()
     // third text
     CCScale9Sprite * s9s_3 = CCScale9Sprite::create("dialog_dark.png");
     s9s_3->setContentSize(CCSizeMake(visibleSize.width *8/10,  heightOfBox));
-    s9s_3->setPosition(CCPointMake(visibleSize.width/2, thirdPos));
-    addChild(s9s_3);
+    CCMenuItemSprite * ccMIS_third = CCMenuItemSprite::create(s9s, s9s, this, menu_selector(FarmScene::onTouchLabel_3));
+    ccMIS_third->setPosition(ccp(visibleSize.width/2,thirdPos));
+    CCMenu* menu_third = CCMenu::create(ccMIS_third,NULL);
+    menu_third->setPosition(CCPointZero);
+    this->addChild(menu_third);
+    // Text label
     const char* mes_str_3 = "";
     CCLabelTTF* mes_label_3 = CCLabelTTF::create(mes_str_3, "arial", 48);
     mes_label_3->setColor(ccc3(255, 0, 127));
@@ -102,12 +114,11 @@ bool FarmScene::init()
     this->addChild(menu_1);
     
     // Initial private variable
-    mLoopCount = 0;
-    mNumberOfMessages = 50;
+    mLoopCount = -1; // Wait for the scheule
+    mNumberOfMessages = 0;
     inputText = "default";
     
     // call main logic
-    this->animationLogic();
     this->schedule(schedule_selector(FarmScene::updateMessages), 5.0f);
     
     // TODO load
@@ -189,49 +200,74 @@ void FarmScene::load()
 
 void FarmScene::updateMessages()
 {
+    // Init
+    if(mLoopCount<0){mLoopCount=0;}
     // update
-    switch(mLoopCount%3){
-        case 0:
-        {
-            CCLabelTTF* mes_label = (CCLabelTTF*)this->getChildByTag(_LABEL_MESSAGEBOX_FIRST_);
-            mes_label->setString(messages[mLoopCount].c_str());
-            CCActionInterval* pFadeOutAction = CCFadeOut::create(10.0f);
-            mes_label->runAction(pFadeOutAction);
-            break;
+    if(mNumberOfMessages  > 0){
+        switch(mLoopCount%3){
+            case 0:
+            {
+                CCLabelTTF* mes_label = (CCLabelTTF*)this->getChildByTag(_LABEL_MESSAGEBOX_FIRST_);
+                mes_label->setString(messageAry[mLoopCount].c_str());
+                CCActionInterval* pFadeOutAction = CCFadeOut::create(10.0f);
+                mes_label->runAction(pFadeOutAction);
+               break;
+            }
+            case 1:
+            {
+                CCLabelTTF* mes_label_2 = (CCLabelTTF*)this->getChildByTag(_LABEL_MESSAGEBOX_SECOND_);
+                mes_label_2->setString(messageAry[mLoopCount].c_str());
+                CCActionInterval* pFadeOutAction = CCFadeOut::create(10.0f);
+                mes_label_2->runAction(pFadeOutAction);
+                break;
+            }
+            case 2:
+            {
+                CCLabelTTF* mes_label_3 = (CCLabelTTF*)this->getChildByTag(_LABEL_MESSAGEBOX_THIRD_);
+                mes_label_3->setString(messageAry[mLoopCount].c_str());
+                CCActionInterval* pFadeOutAction = CCFadeOut::create(10.0f);
+                mes_label_3->runAction(pFadeOutAction);
+                break;
+            }
+            default:
+                break;
         }
-        case 1:
-        {
-            CCLabelTTF* mes_label_2 = (CCLabelTTF*)this->getChildByTag(_LABEL_MESSAGEBOX_SECOND_);
-            mes_label_2->setString(messages[mLoopCount].c_str());
-            CCActionInterval* pFadeOutAction = CCFadeOut::create(10.0f);
-            mes_label_2->runAction(pFadeOutAction);
-            break;
+        
+        // Messages
+        mLoopCount++;
+        if(mLoopCount >= mNumberOfMessages){
+            mLoopCount = -1;
+            this->load();
         }
-        case 2:
-        {
-            CCLabelTTF* mes_label_3 = (CCLabelTTF*)this->getChildByTag(_LABEL_MESSAGEBOX_THIRD_);
-            mes_label_3->setString(messages[mLoopCount].c_str());
-            CCActionInterval* pFadeOutAction = CCFadeOut::create(10.0f);
-            mes_label_3->runAction(pFadeOutAction);
-            break;
-        }
-        default:
-            break;
     }
-    
-    mLoopCount++;
-    if(mLoopCount >= 50){mLoopCount=0;}
 }
 
-// TODO test
+void FarmScene::onTouchLabel_1()
+{
+    int onTouch = (mLoopCount-1)%3;
+    if(onTouch == 0 || onTouch == -2){
+       	CCLog("onTouchLabel=> %s","Label_first");
+    }
+}
+
+void FarmScene::onTouchLabel_2()
+{
+    int onTouch = (mLoopCount-1)%3;
+    if(onTouch == 1 || onTouch == -2){
+        CCLog("onTouchLabel=> %s","Lable_second");
+    }
+}
+
+void FarmScene::onTouchLabel_3()
+{
+    int onTouch = (mLoopCount-1)%3;
+    if(onTouch == 2 || onTouch == -2){
+        CCLog("onTouchLabel=> %s","Label_third");
+    }
+}
+
 void FarmScene::animationLogic()
 {
-    messages = new string[mNumberOfMessages];
-    for(int i=0; i < mNumberOfMessages; i++){
-        ostringstream ostr;
-        ostr << "hogehfaefasdfkadfalskdjfhogehfaefasdfkadfalskdjfmessage" << i;
-        messages[i] = ostr.str();
-    }
     
 }
 
@@ -319,7 +355,7 @@ void FarmScene::onClick1()
         CCHttpRequest* request = new CCHttpRequest();
         request->setUrl("http://49.212.139.75:9000/saveMessage");
         request->setRequestType(CCHttpRequest::kHttpPost);
-        request->setResponseCallback(this, httpresponse_selector(FarmScene::onHttpRequestCompleted));
+        request->setResponseCallback(this, httpresponse_selector(FarmScene::onHttpRequestCompleted2));
         request->setRequestData(postData, strlen(postData));
         request->setHeaders(headers);
         request->setTag("POST Request");
@@ -343,10 +379,11 @@ void FarmScene::onClick2()
 
 }
 
+void FarmScene::onHttpRequestCompleted2(cocos2d::CCNode *sender, void *data){}
+
 void FarmScene::onHttpRequestCompleted(cocos2d::CCNode *sender, void *data)
 {
    
-    CCLog("FarmScene::onHttpRequestCompleted %s","onHttpRequestCmpleted");
     cocos2d::extension::CCHttpResponse *response = (cocos2d::extension::CCHttpResponse*)data;
     if (!response)
     {
@@ -374,26 +411,28 @@ void FarmScene::onHttpRequestCompleted(cocos2d::CCNode *sender, void *data)
     CCLog("===");
     
     // JSON Parser
-//    string picoError;
-//    picojson::value picoValue;
-//    picojson::parse(picoValue,concatenated,concatenated+strlen(concatenated),&picoError);
-//    if(picoError.empty()) {
-//        picojson::object& o = picoValue.get<picojson::object>();
-//        string& info = o["info"].get<string>();
-//        picojson::array& picoArray = o["messages"].get<picojson::array>();
-//        int picoArraySize = picoArray.size();
-//        messageAry = new string[picoArraySize];
-//        int cnt = 0;
-//        for(picojson::array::iterator i = picoArray.begin(); i != picoArray.end(); i++){
-//            picojson::object& messageObject = i->get<picojson::object>();
-//            userAry[cnt] = messageObject["user_id"].get<string>();
-//            messageAry[cnt] = messageObject["message"].get<string>();
-//            CCLog("pico user_id : %s", userAry[cnt].c_str());
-//            CCLog("pico message : %s", messageAry[cnt].c_str());
-//            cnt++;
-//        }
-//    }
-    CCLog("FarmScene::onHttpRequestCompleted %s","");
+    string picoError;
+    picojson::value picoValue;
+    picojson::parse(picoValue,concatenated,concatenated+strlen(concatenated),&picoError);
+    if(picoError.empty()) {
+        picojson::object& o = picoValue.get<picojson::object>();
+        string& info = o["info"].get<string>();
+        picojson::array& picoArray = o["messages"].get<picojson::array>();
+        int picoArraySize = picoArray.size();
+        mNumberOfMessages = picoArraySize;
+        userAry = new string[picoArraySize];
+        messageAry = new string[picoArraySize];
+        int cnt = 0;
+        for(picojson::array::iterator i = picoArray.begin(); i != picoArray.end(); i++){
+            picojson::object& messageObject = i->get<picojson::object>();
+            userAry[cnt] = messageObject["user_id"].get<string>();
+            messageAry[cnt] = messageObject["message"].get<string>();
+            CCLog("pico user_id : %s", userAry[cnt].c_str());
+            CCLog("pico message : %s", messageAry[cnt].c_str());
+            cnt++;
+        }
+    }
+    
    
 }
 

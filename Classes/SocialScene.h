@@ -4,7 +4,7 @@
 #include "cocos2d.h"
 #include "all_in_one.h"
 
-class SocialScene : public cocos2d::CCLayerColor
+class SocialScene : public cocos2d::CCLayerColor, public CCEditBoxDelegate
 {
 protected:
     
@@ -18,9 +18,19 @@ public:
     
     // HTTP
     virtual void load();
-    virtual void addFriend();
-    virtual void removeFriend();
     virtual void onHttpRequestCompleted(CCNode *sender, void *data);
+    
+    // button
+    virtual void onClick1();
+    virtual void onClick2();
+    
+    // EditBox
+    virtual void editBoxEditingDidBegin(CCEditBox* editBox);
+    virtual void editBoxEditingDidEnd(CCEditBox* editBox);
+    virtual void editBoxTextChanged(CCEditBox* editBox, const std::string& text);
+    virtual void editBoxReturn(CCEditBox* editBox);
+    const char* inputText;
+
 
     
 };

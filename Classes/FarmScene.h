@@ -21,10 +21,15 @@ private:
     const char* inputText;
     CCEditBox* stateEditBox;
     // Messages
-    string* messages;
     int mLoopCount;
     int mNumberOfMessages;
     virtual void load();
+    // Reply
+    virtual void onTouchLabel_1();
+    virtual void onTouchLabel_2();
+    virtual void onTouchLabel_3();
+    
+    
     //JSON parser
     string* messageAry;
     string* userAry;
@@ -41,6 +46,7 @@ public:
     
     // HTTP
     virtual void onHttpRequestCompleted(cocos2d::CCNode *sender, void *data);
+    virtual void onHttpRequestCompleted2(cocos2d::CCNode *sender, void *data);
     
     // Animation
     virtual void animationLogic();
