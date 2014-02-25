@@ -11,6 +11,7 @@ class MenuBarLayer : public CCLayer
 public:
     virtual bool init();
     void menuCloseCallback(CCObject* pSender);
+    virtual void goBackScene();
     virtual bool ccTouchBegan(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent);
     CREATE_FUNC(MenuBarLayer);
 };

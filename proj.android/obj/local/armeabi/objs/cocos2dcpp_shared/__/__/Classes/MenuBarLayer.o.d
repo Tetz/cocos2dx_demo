@@ -424,7 +424,24 @@ obj/local/armeabi/objs/cocos2dcpp_shared/__/__/Classes/MenuBarLayer.o: \
  /Users/ted/cdroid/cocos/projects/MessagePlus/proj.android/../../../extensions/spine/Skeleton.h \
  /Users/ted/cdroid/cocos/projects/MessagePlus/proj.android/../../../extensions/spine/SkeletonJson.h \
  /Users/ted/cdroid/cocos/projects/MessagePlus/proj.android/../../../extensions/spine/CCSkeleton.h \
- /Users/ted/cdroid/cocos/projects/MessagePlus/proj.android/../../../extensions/spine/CCSkeletonAnimation.h
+ /Users/ted/cdroid/cocos/projects/MessagePlus/proj.android/../../../extensions/spine/CCSkeletonAnimation.h \
+ jni/../../Classes/FarmScene.h jni/../../Classes/all_in_one.h \
+ /Users/ted/cdroid/cocos/projects/MessagePlus/proj.android/../../../extensions/spine/Json.h \
+ jni/../../Classes/picojson.h \
+ /Users/ted/cdroid/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/algorithm \
+ /Users/ted/cdroid/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/cassert \
+ /Users/ted/cdroid/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/cmath \
+ /Users/ted/cdroid/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/iterator \
+ jni/../../Classes/DefTags.h jni/../../Classes/Getter.h \
+ jni/../../Classes/JNICalls/InterfaceJNI.h jni/../../Classes/Setter.h \
+ jni/../../Classes/JsonGenerator.h jni/../../Classes/SwipeLayer.h \
+ jni/../../Classes/XTLayer.h jni/../../Classes/SwipeLayer2.h \
+ jni/../../Classes/SwipeLayer3.h jni/../../Classes/Database.h \
+ jni/../../Classes/sqlite/sqlite3.h jni/../../Classes/allScene.h \
+ jni/../../Classes/SocialScene.h jni/../../Classes/lang_ja.h \
+ /Users/ted/cdroid/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/fstream \
+ jni/../../Classes/FriendsListScene.h jni/../../Classes/MyTableViewCell.h \
+ jni/../../Classes/SendScene.h
 
 jni/../../Classes/MenuBarLayer.h:
 
@@ -1277,3 +1294,55 @@ jni/../../Classes/MenuBarLayer.h:
 /Users/ted/cdroid/cocos/projects/MessagePlus/proj.android/../../../extensions/spine/CCSkeleton.h:
 
 /Users/ted/cdroid/cocos/projects/MessagePlus/proj.android/../../../extensions/spine/CCSkeletonAnimation.h:
+
+jni/../../Classes/FarmScene.h:
+
+jni/../../Classes/all_in_one.h:
+
+/Users/ted/cdroid/cocos/projects/MessagePlus/proj.android/../../../extensions/spine/Json.h:
+
+jni/../../Classes/picojson.h:
+
+/Users/ted/cdroid/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/algorithm:
+
+/Users/ted/cdroid/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/cassert:
+
+/Users/ted/cdroid/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/cmath:
+
+/Users/ted/cdroid/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/iterator:
+
+jni/../../Classes/DefTags.h:
+
+jni/../../Classes/Getter.h:
+
+jni/../../Classes/JNICalls/InterfaceJNI.h:
+
+jni/../../Classes/Setter.h:
+
+jni/../../Classes/JsonGenerator.h:
+
+jni/../../Classes/SwipeLayer.h:
+
+jni/../../Classes/XTLayer.h:
+
+jni/../../Classes/SwipeLayer2.h:
+
+jni/../../Classes/SwipeLayer3.h:
+
+jni/../../Classes/Database.h:
+
+jni/../../Classes/sqlite/sqlite3.h:
+
+jni/../../Classes/allScene.h:
+
+jni/../../Classes/SocialScene.h:
+
+jni/../../Classes/lang_ja.h:
+
+/Users/ted/cdroid/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/fstream:
+
+jni/../../Classes/FriendsListScene.h:
+
+jni/../../Classes/MyTableViewCell.h:
+
+jni/../../Classes/SendScene.h:
