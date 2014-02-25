@@ -4,5 +4,5 @@
 #include "SocialScene.h"
 #include "FarmScene.h"
 #include "FriendsListScene.h"
-
+#include "SendScene.h"
 #endif

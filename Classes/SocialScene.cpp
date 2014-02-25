@@ -175,10 +175,11 @@ void SocialScene::load()
 
 void SocialScene::onHttpRequestCompleted(CCNode *sender, void *data)
 {
-
 }
 
-void SocialScene::editBoxEditingDidBegin(CCEditBox* editBox){}
+void SocialScene::editBoxEditingDidBegin(CCEditBox* editBox){
+    CCDirector::sharedDirector()->replaceScene(CCTransitionMoveInB::create(2.0f,SendScene::scene()));
+}
 void SocialScene::editBoxEditingDidEnd(CCEditBox* editBox){}
 void SocialScene::editBoxTextChanged(CCEditBox* editBox, const std::string& text){}
 void SocialScene::editBoxReturn(CCEditBox* editBox){

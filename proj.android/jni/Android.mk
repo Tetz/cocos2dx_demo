@@ -14,6 +14,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/SwipeLayer.cpp \
                    ../../Classes/SwipeLayer2.cpp \
                    ../../Classes/SwipeLayer3.cpp \
+                   ../../Classes/MenuBarLayer.cpp \
                    ../../Classes/sqlite/sqlite3.c \
                    ../../Classes/Database.cpp \
                    ../../Classes/XTLayer.cpp \
@@ -23,6 +24,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/FriendsListScene.cpp \
                    ../../Classes/FSAlertLayer.cpp \
                    ../../Classes/SocialScene.cpp \
+                   ../../Classes/SendScene.cpp \
                    ../../Classes/FarmScene.cpp
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes

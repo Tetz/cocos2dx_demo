@@ -242,11 +242,13 @@ void FarmScene::updateMessages()
     }
 }
 
+
 void FarmScene::onTouchLabel_1()
 {
     int onTouch = (mLoopCount-1)%3;
     if(onTouch == 0 || onTouch == -2){
        	CCLog("onTouchLabel=> %s","Label_first");
+        CCDirector::sharedDirector()->replaceScene(CCTransitionMoveInR::create(2.0f,SendScene::scene()));
     }
 }
 
@@ -255,6 +257,7 @@ void FarmScene::onTouchLabel_2()
     int onTouch = (mLoopCount-1)%3;
     if(onTouch == 1 || onTouch == -2){
         CCLog("onTouchLabel=> %s","Lable_second");
+        CCDirector::sharedDirector()->replaceScene(CCTransitionMoveInR::create(2.0f,SendScene::scene()));
     }
 }
 
@@ -263,6 +266,7 @@ void FarmScene::onTouchLabel_3()
     int onTouch = (mLoopCount-1)%3;
     if(onTouch == 2 || onTouch == -2){
         CCLog("onTouchLabel=> %s","Label_third");
+        CCDirector::sharedDirector()->replaceScene(CCTransitionMoveInR::create(2.0f,SendScene::scene()));
     }
 }
 
@@ -374,7 +378,7 @@ void FarmScene::onClick1()
 
 void FarmScene::onClick2()
 {
-  	//TODO Debug
+  	// Debug
 	CCLog("Dev=> %s","onClick2");
 
 }
@@ -436,7 +440,9 @@ void FarmScene::onHttpRequestCompleted(cocos2d::CCNode *sender, void *data)
    
 }
 
-void FarmScene::editBoxEditingDidBegin(CCEditBox* editBox){}
+void FarmScene::editBoxEditingDidBegin(CCEditBox* editBox){
+   CCDirector::sharedDirector()->replaceScene(CCTransitionMoveInB::create(2.0f,SendScene::scene()));
+}
 void FarmScene::editBoxEditingDidEnd(CCEditBox* editBox){}
 void FarmScene::editBoxTextChanged(CCEditBox* editBox, const std::string& text){}
 void FarmScene::editBoxReturn(CCEditBox* editBox){

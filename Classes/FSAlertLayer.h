@@ -2,6 +2,7 @@
 #define _FSAlertLayer_
 
 #include "cocos2d.h"
+USING_NS_CC;
 
 #define FSAlertLayerTagMenu     101
 #define FSAlertLayerTagOK       102
@@ -9,15 +10,15 @@
 #define FSAlertLayerTagFrame    110
 
 
-class FSAlertLayer : public cocos2d::CCLayerColor
+class FSAlertLayer : public CCLayerColor
 {
 public:
-    static FSAlertLayer* create(const char* message, CCObject* target, cocos2d::SEL_CallFuncN okSelector, cocos2d::SEL_CallFuncN ngSelector);
-    static FSAlertLayer* create(const char* message, CCObject* target, cocos2d::SEL_CallFuncN okSelector);
+    static FSAlertLayer* create(const char* message, CCObject* target, SEL_CallFuncN okSelector, SEL_CallFuncN ngSelector);
+    static FSAlertLayer* create(const char* message, CCObject* target, SEL_CallFuncN okSelector);
     
     virtual bool init();
-    void setStyle(const char* message, CCObject* target, cocos2d::SEL_CallFuncN okSelector, cocos2d::SEL_CallFuncN ngSelector);
-    virtual bool ccTouchBegan(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent);
+    void setStyle(const char* message, CCObject* target, SEL_CallFuncN okSelector, SEL_CallFuncN ngSelector);
+    virtual bool ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent);
     
     void menuAlertOK(CCObject* pSender);
     void menuAlertClose(CCObject* pSender);
@@ -25,9 +26,9 @@ public:
     CREATE_FUNC(FSAlertLayer);
     
 private:
-    cocos2d::CCObject* target;
-    cocos2d::SEL_CallFuncN okSelector;
-    cocos2d::SEL_CallFuncN ngSelector;
+    CCObject* target;
+    SEL_CallFuncN okSelector;
+    SEL_CallFuncN ngSelector;
 };
 
 #endif /* defined(_FSAlertLayer_) */

@@ -1,8 +1,7 @@
 #include "FSAlertLayer.h"
-
 USING_NS_CC;
 
-// ceate with 2 buttons
+// create with 2 buttons
 FSAlertLayer* FSAlertLayer::create(const char* message, CCObject *target, SEL_CallFuncN okSelector, SEL_CallFuncN ngSelector)
 {
     FSAlertLayer* layer = FSAlertLayer::create();
@@ -12,7 +11,7 @@ FSAlertLayer* FSAlertLayer::create(const char* message, CCObject *target, SEL_Ca
 
 
 // create with only 1 button
-FSAlertLayer* FSAlertLayer::create(const char *message, cocos2d::CCObject *target, cocos2d::SEL_CallFuncN okSelector)
+FSAlertLayer* FSAlertLayer::create(const char* message, CCObject *target, SEL_CallFuncN okSelector)
 {
     return FSAlertLayer::create(message, target, okSelector, NULL);
 }
@@ -40,7 +39,7 @@ bool FSAlertLayer::init()
 }
 
 
-void FSAlertLayer::setStyle(const char* message, cocos2d::CCObject *target, cocos2d::SEL_CallFuncN okSelector, cocos2d::SEL_CallFuncN ngSelector)
+void FSAlertLayer::setStyle(const char* message, CCObject *target, SEL_CallFuncN okSelector, SEL_CallFuncN ngSelector)
 {
     this->target        = target;
     this->okSelector    = okSelector;
@@ -99,7 +98,7 @@ void FSAlertLayer::menuAlertOK(CCObject* pSender)
 }
 
 
-void FSAlertLayer::menuAlertClose(cocos2d::CCObject *pSender)
+void FSAlertLayer::menuAlertClose(CCObject *pSender)
 {
     this->removeFromParentAndCleanup(true);
     

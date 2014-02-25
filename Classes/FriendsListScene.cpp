@@ -19,7 +19,7 @@ bool FriendsListScene::init()
     }
     
     // Set background
-    Setter::setBackground(this);
+    Setter::setBackground_list(this);
     
     // Add swipe layer
     CCLayer * layer = SwipeLayer2::create();
@@ -80,7 +80,7 @@ CCTableViewCell* FriendsListScene::tableCellAtIndex(CCTableView* table, unsigned
     cell->setTextString(text->getCString());
     cell->setDetailString(detail->getCString());
    
-    string strMonster0 = "gero_front.png";
+    string strMonster0 = "img_b.png";
     CCString* path = CCString::create(strMonster0);
     cell->setImagePath(path->getCString());
     

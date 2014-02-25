@@ -33,7 +33,7 @@ bool MyTableViewCell::init()
     label->setColor(ccc3(70,70,70));
     detail->setColor(ccc3(70,70,70));
     // text
-    CCScale9Sprite * scale9Sprite = CCScale9Sprite::create("editbox.png");
+    CCScale9Sprite * scale9Sprite = CCScale9Sprite::create("frame_b.png");
     
     return this->initWithLabel(label, detail, image, scale9Sprite);
 }
