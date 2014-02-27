@@ -87,18 +87,21 @@ bool FarmScene::init()
     addChild(mes_label_3);
     
     // EditBox
+    CCScale9Sprite * editbox9 = CCScale9Sprite::create("frame_b.png");
     CCEditBox* editBox;
     CCSize editBoxSize = CCSizeMake(editBoxWidth, editBoxHeight);
     editBox = CCEditBox::create(editBoxSize, CCScale9Sprite::create("editbox.png"));
     editBox->setPosition(ccp(editBoxPosX, editBoxPosY));
     editBox->setFontColor(ccBLUE);
-    editBox->setPlaceHolder("Input");
+    editBox->setPlaceHolder("Input a message");
     editBox->setMaxLength(100);
-    editBox->setReturnType(kKeyboardReturnTypeDone);
+    //editBox->setReturnType(kKeyboardReturnTypeSend);
     editBox->setFontSize(24);
     editBox->setDelegate(this);
     editBox->setTag(_EDITBOX_);
+    editBox->setInputMode(kEditBoxInputModeAny);
     this->addChild(editBox);
+    
     
     // button1
     CCScale9Sprite * ccS9S_1 = CCScale9Sprite::create("Send.png");
@@ -441,7 +444,7 @@ void FarmScene::onHttpRequestCompleted(cocos2d::CCNode *sender, void *data)
 }
 
 void FarmScene::editBoxEditingDidBegin(CCEditBox* editBox){
-   CCDirector::sharedDirector()->replaceScene(CCTransitionMoveInB::create(2.0f,SendScene::scene()));
+   //CCDirector::sharedDirector()->replaceScene(CCTransitionMoveInB::create(2.0f,SendScene::scene()));
 }
 void FarmScene::editBoxEditingDidEnd(CCEditBox* editBox){}
 void FarmScene::editBoxTextChanged(CCEditBox* editBox, const std::string& text){}
