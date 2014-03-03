@@ -1,5 +1,6 @@
 #include "FarmScene.h"
-#include "FriendsListScene.h"
+#include "FarmScene.h"
+#include "MainMenuBarLayer.h"
 #include "all_in_one.h"
 #include "FSAlertLayer.h"
 
@@ -7,26 +8,25 @@ CCScene* FarmScene::scene()
 {
     CCScene *scene = CCScene::create();
     FarmScene *layer = FarmScene::create();
-    scene->addChild(layer);
+    scene->addChild(layer,1);
+    
     return scene;
 }
 
 bool FarmScene::init()
 {
+    
     if ( CCLayerColor::initWithColor(ccc4(255,255,255,255))) {}
     
     CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
 
     Setter::setBackground(this);
     
-    // Add swipe layer
-    CCLayer * layer = SwipeLayer::create();
-    this->addChild(layer);
     
     // Position
-    float firstPos = visibleSize.height * 17/20;
-    float secondPos = visibleSize.height * 11/20;
-    float thirdPos = visibleSize.height * 5/20;
+    float firstPos = visibleSize.height * 15/20;
+    float secondPos = visibleSize.height * 9/20;
+    float thirdPos = visibleSize.height * 3/20;
     float editBoxPosX = visibleSize.width * 7/20;
     float editBoxPosY = visibleSize.height * 1/20;
     
@@ -86,38 +86,43 @@ bool FarmScene::init()
     mes_label_3->setTag(_LABEL_MESSAGEBOX_THIRD_);
     addChild(mes_label_3);
     
+   
+    // Mail Box
+    CCMenuItemImage* menuBackItem = CCMenuItemImage::create("frame_g.png","frame_p.png",this,menu_selector(FarmScene::moveToMailBox));
+    menuBackItem->setPosition(ccp(menuBackItem->getContentSize().width/2, visibleSize.height - menuBackItem->getContentSize().height/2));
+    CCMenu* menuBack = CCMenu::create(menuBackItem, NULL);
+    menuBack->setPosition(CCPointZero);
+    this->addChild(menuBack,7);
+    
     // EditBox
-    CCScale9Sprite * editbox9 = CCScale9Sprite::create("frame_b.png");
+    CCMenuItemImage* sendItemImg = CCMenuItemImage::create("frame_g.png","frame_p.png",this,menu_selector(MainMenuBarLayer::goBackScene));
     CCEditBox* editBox;
-    CCSize editBoxSize = CCSizeMake(editBoxWidth, editBoxHeight);
-    editBox = CCEditBox::create(editBoxSize, CCScale9Sprite::create("editbox.png"));
-    editBox->setPosition(ccp(editBoxPosX, editBoxPosY));
+    CCSize editBoxSize = CCSizeMake(100, 100);
+    editBox = CCEditBox::create(editBoxSize, CCScale9Sprite::create("frame_g.png"));
+    editBox->setPosition(ccp(visibleSize.width - sendItemImg->getContentSize().width/2, visibleSize.height - sendItemImg->getContentSize().height/2));
     editBox->setFontColor(ccBLUE);
-    editBox->setPlaceHolder("Input a message");
+    editBox->setPlaceHolder("");
     editBox->setMaxLength(100);
-    //editBox->setReturnType(kKeyboardReturnTypeSend);
     editBox->setFontSize(24);
     editBox->setDelegate(this);
     editBox->setTag(_EDITBOX_);
     editBox->setInputMode(kEditBoxInputModeAny);
-    this->addChild(editBox);
+    editBox->setReturnType(kKeyboardReturnTypeSend);
+    this->addChild(editBox,7);
     
-    
-    // button1
-    CCScale9Sprite * ccS9S_1 = CCScale9Sprite::create("Send.png");
-    ccS9S_1->setContentSize(CCSizeMake(200, 120));
-    CCScale9Sprite * ccS9S_on_1 = CCScale9Sprite::create("SendHighlighted.png");
-    ccS9S_on_1->setContentSize(CCSizeMake(200, 120));
-    
-    // onClick1
-    CCMenuItemSprite * ccMIS_1 = CCMenuItemSprite::create(ccS9S_1, ccS9S_on_1, this, menu_selector(FarmScene::onClick1));
-    ccMIS_1->setPosition(ccp(visibleSize.width/4*3,visibleSize.height/20));
-    CCMenu* menu_1 = CCMenu::create(ccMIS_1,NULL);
-    menu_1->setPosition(CCPointZero);
-    this->addChild(menu_1);
+    // Add Menu bar
+    // Background Image for menu bar
+    CCScale9Sprite* scale9Sprite = CCScale9Sprite::create("frame_v.png");
+    scale9Sprite->setContentSize(ccp(visibleSize.width,visibleSize.height/10));
+    scale9Sprite->setPosition(ccp(visibleSize.width/2,visibleSize.height - scale9Sprite->getContentSize().height/2));
+    this->addChild(scale9Sprite,5);
+    // Add swipe layer
+    CCLayer * swipelayer = SwipeLayer::create();
+    this->addChild(swipelayer,99999);
+   
     
     // Initial private variable
-    mLoopCount = -1; // Wait for the scheule
+    mLoopCount = -1; // Wait for the schedule
     mNumberOfMessages = 0;
     inputText = "default";
     
@@ -126,6 +131,7 @@ bool FarmScene::init()
     
     // TODO load
     this->load();
+
     
     // === End ===
     return true;
@@ -251,7 +257,9 @@ void FarmScene::onTouchLabel_1()
     int onTouch = (mLoopCount-1)%3;
     if(onTouch == 0 || onTouch == -2){
        	CCLog("onTouchLabel=> %s","Label_first");
-        CCDirector::sharedDirector()->replaceScene(CCTransitionMoveInR::create(2.0f,SendScene::scene()));
+        CCScene* scene = SocialScene::scene();
+        CCTransitionMoveInR* tran = CCTransitionMoveInR::create(0.5, scene);
+        CCDirector::sharedDirector()->pushScene(tran);
     }
 }
 
@@ -260,7 +268,9 @@ void FarmScene::onTouchLabel_2()
     int onTouch = (mLoopCount-1)%3;
     if(onTouch == 1 || onTouch == -2){
         CCLog("onTouchLabel=> %s","Lable_second");
-        CCDirector::sharedDirector()->replaceScene(CCTransitionMoveInR::create(2.0f,SendScene::scene()));
+        CCScene* scene = SocialScene::scene();
+        CCTransitionMoveInR* tran = CCTransitionMoveInR::create(0.5, scene);
+        CCDirector::sharedDirector()->pushScene(tran);
     }
 }
 
@@ -269,7 +279,9 @@ void FarmScene::onTouchLabel_3()
     int onTouch = (mLoopCount-1)%3;
     if(onTouch == 2 || onTouch == -2){
         CCLog("onTouchLabel=> %s","Label_third");
-        CCDirector::sharedDirector()->replaceScene(CCTransitionMoveInR::create(2.0f,SendScene::scene()));
+        CCScene* scene = SocialScene::scene();
+        CCTransitionMoveInR* tran = CCTransitionMoveInR::create(0.5, scene);
+        CCDirector::sharedDirector()->pushScene(tran);
     }
 }
 
@@ -292,7 +304,7 @@ void FarmScene::update(float delta)
     
 }
 
-void FarmScene::menuOKCallback()
+void FarmScene::onClick1()
 {
     
 }
@@ -302,7 +314,7 @@ void FarmScene::menuNGCallback()
     
 }
 
-void FarmScene::onClick1()
+void FarmScene::menuOKCallback()
 {
 	//TODO Debug
 	CCLog("Dev=> %s","onClick1");
@@ -379,11 +391,13 @@ void FarmScene::onClick1()
     }
 }
 
-void FarmScene::onClick2()
+void FarmScene::moveToMailBox()
 {
   	// Debug
-	CCLog("Dev=> %s","onClick2");
-
+	CCLog("Dev=> %s","moveToMailBox");
+    CCScene* scene = SocialScene::scene();
+    CCTransitionMoveInR* tran = CCTransitionMoveInR::create(0.5, scene);
+    CCDirector::sharedDirector()->pushScene(tran);
 }
 
 void FarmScene::onHttpRequestCompleted2(cocos2d::CCNode *sender, void *data){}
@@ -443,6 +457,7 @@ void FarmScene::onHttpRequestCompleted(cocos2d::CCNode *sender, void *data)
    
 }
 
+
 void FarmScene::editBoxEditingDidBegin(CCEditBox* editBox){
    //CCDirector::sharedDirector()->replaceScene(CCTransitionMoveInB::create(2.0f,SendScene::scene()));
 }
@@ -450,5 +465,8 @@ void FarmScene::editBoxEditingDidEnd(CCEditBox* editBox){}
 void FarmScene::editBoxTextChanged(CCEditBox* editBox, const std::string& text){}
 void FarmScene::editBoxReturn(CCEditBox* editBox){
      inputText = editBox->getText();
+    // call from Scene, Layer, etc
+    FSAlertLayer *alertLayer = FSAlertLayer::create("CONFIRM SEND", this, callfuncN_selector(FarmScene::menuOKCallback), callfuncN_selector(FarmScene::menuNGCallback));
+    this->addChild(alertLayer, 100001);
 }
 

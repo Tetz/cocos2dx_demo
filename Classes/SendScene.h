@@ -23,6 +23,7 @@ public:
     // button
     virtual void onClick1();
     virtual void onClick2();
+    virtual void goBackScene();
     
     // EditBox
     virtual void editBoxEditingDidBegin(CCEditBox* editBox);

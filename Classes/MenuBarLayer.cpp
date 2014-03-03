@@ -50,11 +50,16 @@ void MenuBarLayer::menuCloseCallback(CCObject* pSender)
     this->removeFromParentAndCleanup(true);
     CCDirector* pDirector = CCDirector::sharedDirector();
     pDirector->getTouchDispatcher()->removeDelegate(this);
+    
 }
 
 
 void MenuBarLayer::goBackScene()
 {
     CCLog("MenuBarLayer::goBackScene() => %s","running");
-    CCDirector::sharedDirector()->replaceScene(CCTransitionMoveInL::create(2.0f,FarmScene::scene()));
+    //CCDirector::sharedDirector()->replaceScene(CCTransitionMoveInL::create(2.0f,FarmScene::scene()));
+    // TODO
+    CCScene* scene = FarmScene::scene();
+    CCTransitionMoveInL* tran = CCTransitionMoveInL::create(0.5, scene);
+    CCDirector::sharedDirector()->pushScene(tran);
 }

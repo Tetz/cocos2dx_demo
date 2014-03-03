@@ -442,7 +442,8 @@ obj/local/armeabi/objs/cocos2dcpp_shared/__/__/Classes/FarmScene.o: \
  jni/../../Classes/lang_ja.h \
  /Users/ted/cdroid/ndk/sources/cxx-stl/gnu-libstdc++/4.6/include/fstream \
  jni/../../Classes/FriendsListScene.h jni/../../Classes/MyTableViewCell.h \
- jni/../../Classes/SendScene.h jni/../../Classes/FSAlertLayer.h
+ jni/../../Classes/SendScene.h jni/../../Classes/MainMenuBarLayer.h \
+ jni/../../Classes/FSAlertLayer.h
 
 jni/../../Classes/FarmScene.h:
 
@@ -1347,5 +1348,7 @@ jni/../../Classes/FriendsListScene.h:
 jni/../../Classes/MyTableViewCell.h:
 
 jni/../../Classes/SendScene.h:
+
+jni/../../Classes/MainMenuBarLayer.h:
 
 jni/../../Classes/FSAlertLayer.h:

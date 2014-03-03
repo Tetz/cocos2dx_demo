@@ -1,4 +1,5 @@
 #include "SendScene.h"
+#include "FarmScene.h"
 
 CCScene * SendScene::scene()
 {
@@ -15,8 +16,34 @@ bool SendScene::init()
     {
     }
     // Add Menu bar
-    CCLayer * menuBar = MenuBarLayer::create();
-    this->addChild(menuBar,6000);
+    //CCLayer * menuBar = MenuBarLayer::create();
+    //this->addChild(menuBar);
+    
+    CCDirector* pDirector = CCDirector::sharedDirector();
+    pDirector->getTouchDispatcher()->addTargetedDelegate(this, kCCMenuHandlerPriority, true);
+    
+    // Display Size
+    CCSize visibleSize = pDirector->getVisibleSize();
+    
+    // Background Image for menu bar
+    CCScale9Sprite* scale9Sprite = CCScale9Sprite::create("frame_v.png");
+    scale9Sprite->setContentSize(ccp(visibleSize.width,visibleSize.height/10));
+    scale9Sprite->setPosition(ccp(visibleSize.width/2,visibleSize.height - scale9Sprite->getContentSize().height/2));
+    this->addChild(scale9Sprite);
+    
+    // Go back to privious scene
+    CCMenuItemImage* menuBackItem = CCMenuItemImage::create("frame_g.png","frame_p.png",this,menu_selector(SendScene::goBackScene));
+    menuBackItem->setPosition(ccp(menuBackItem->getContentSize().width/2, visibleSize.height - menuBackItem->getContentSize().height/2));
+    CCMenu* menuBack = CCMenu::create(menuBackItem, NULL);
+    menuBack->setPosition(CCPointZero);
+    this->addChild(menuBack);
+    
+    // Send a message
+    CCMenuItemImage* sendItemImg = CCMenuItemImage::create("frame_g.png","frame_p.png",this,menu_selector(SendScene::goBackScene));
+    sendItemImg->setPosition(ccp(visibleSize.width - sendItemImg->getContentSize().width/2, visibleSize.height - sendItemImg->getContentSize().height/2));
+    CCMenu* menuSend = CCMenu::create(sendItemImg, NULL);
+    menuSend->setPosition(CCPointZero);
+    this->addChild(menuSend);
     
     // Main Logic
     this->main();
@@ -42,6 +69,16 @@ void SendScene::onClick2()
 void SendScene::load()
 {
    
+}
+
+
+void SendScene::goBackScene()
+{
+    CCLog("MenuBarLayer::goBackScene() => %s","running");
+    // TODO
+    CCScene* scene = FarmScene::scene();
+    CCTransitionMoveInL* tran = CCTransitionMoveInL::create(0.5, scene);
+    CCDirector::sharedDirector()->pushScene(tran);
 }
 
 void SendScene::onHttpRequestCompleted(CCNode *sender, void *data)

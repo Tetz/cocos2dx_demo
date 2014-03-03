@@ -15,6 +15,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/SwipeLayer2.cpp \
                    ../../Classes/SwipeLayer3.cpp \
                    ../../Classes/MenuBarLayer.cpp \
+                   ../../Classes/MainMenuBarLayer.cpp \
                    ../../Classes/sqlite/sqlite3.c \
                    ../../Classes/Database.cpp \
                    ../../Classes/XTLayer.cpp \

@@ -8,6 +8,10 @@ CCScene * FriendsListScene::scene()
     CCScene * scene = CCScene::create();
     FriendsListScene * layer = FriendsListScene::create();
     scene->addChild(layer);
+    // Add swipe layer
+    CCLayer * swipelayer = SwipeLayer2::create();
+    scene->addChild(swipelayer);
+    
     return scene;
 }
 
@@ -19,11 +23,44 @@ bool FriendsListScene::init()
     }
     
     // Set background
-    Setter::setBackground_list(this);
+    //Setter::setBackground_list(this);
+    CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
+    CCSpriteBatchNode* node = CCSpriteBatchNode::create("bg.jpg");
+    CCSize bgsize = node->getContentSize();
+    this->addChild(node);
+    int bgWidth = 390;
+    int bgHeight = 390;
+    int repeatX = visibleSize.width/bgWidth + 1;
+    int repeatY = visibleSize.height/bgHeight + 1;
+    CCSprite* spr[repeatX][repeatY];
+    // Repeat a image
+    for(int y=0; y<=repeatY; y++){
+        for(int x=0; x<=repeatX; x++){
+            spr[x][y] = CCSprite::create("bg.jpg");
+            spr[x][y]->setPosition(ccp(bgWidth * x, bgHeight * y));
+            node->addChild(spr[x][y]);
+        }
+    }
     
-    // Add swipe layer
-    CCLayer * layer = SwipeLayer2::create();
-    this->addChild(layer);
+    // Background Image for menu bar
+    CCScale9Sprite* scale9Sprite = CCScale9Sprite::create("frame_v.png");
+    scale9Sprite->setContentSize(ccp(visibleSize.width,visibleSize.height/10));
+    scale9Sprite->setPosition(ccp(visibleSize.width/2,visibleSize.height - scale9Sprite->getContentSize().height/2));
+    this->addChild(scale9Sprite,500);
+    
+    // Go back to privious scene
+    CCMenuItemImage* menuBackItem = CCMenuItemImage::create("frame_g.png","frame_p.png",this,menu_selector(SendScene::goBackScene));
+    menuBackItem->setPosition(ccp(menuBackItem->getContentSize().width/2, visibleSize.height - menuBackItem->getContentSize().height/2));
+    CCMenu* menuBack = CCMenu::create(menuBackItem, NULL);
+    menuBack->setPosition(CCPointZero);
+    this->addChild(menuBack,501);
+    
+    // Send a message
+    CCMenuItemImage* sendItemImg = CCMenuItemImage::create("frame_g.png","frame_p.png",this,menu_selector(SendScene::goBackScene));
+    sendItemImg->setPosition(ccp(visibleSize.width - sendItemImg->getContentSize().width/2, visibleSize.height - sendItemImg->getContentSize().height/2));
+    CCMenu* menuSend = CCMenu::create(sendItemImg, NULL);
+    menuSend->setPosition(CCPointZero);
+    this->addChild(menuSend,501);
     
     // number of cells
     numberOfCells = 0;
@@ -313,7 +350,7 @@ void FriendsListScene::onHttpRequestCompleted(CCNode *sender, void *data)
     //CCTableView
     CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
     CCPoint origin = CCDirector::sharedDirector()->getVisibleOrigin();
-    CCTableView * tableView = CCTableView::create(this, CCSizeMake(visibleSize.width, visibleSize.height));
+    CCTableView * tableView = CCTableView::create(this, CCSizeMake(visibleSize.width, visibleSize.height/10 *9));
     tableView->setDirection(kCCScrollViewDirectionVertical);
     tableView->setVerticalFillOrder(kCCTableViewFillTopDown);
     tableView->setPosition(ccp(origin.x, origin.y));

@@ -28,7 +28,10 @@ private:
     virtual void onTouchLabel_1();
     virtual void onTouchLabel_2();
     virtual void onTouchLabel_3();
-    
+    // Dialog
+    virtual void menuOKCallback();
+    virtual void menuNGCallback();
+
     
     //JSON parser
     string* messageAry;
@@ -42,7 +45,7 @@ public:
     
     // This is button that puts monster
     virtual void onClick1();
-    virtual void onClick2();
+    virtual void moveToMailBox();
     
     // HTTP
     virtual void onHttpRequestCompleted(cocos2d::CCNode *sender, void *data);
@@ -51,10 +54,7 @@ public:
     // Animation
     virtual void animationLogic();
     
-    // Popup
-    virtual void menuOKCallback();
-    virtual void menuNGCallback();
-    
+   
     //Schedule Update
     virtual void update(float delta);
     virtual void updateMessages();

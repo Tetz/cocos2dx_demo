@@ -7,13 +7,17 @@ CCScene * SocialScene::scene()
     CCScene * scene = CCScene::create();
     SocialScene * layer = SocialScene::create();
     scene->addChild(layer);
+    // Add swipe layer
+    CCLayer * swipelayer = SwipeLayer3::create();
+    scene->addChild(swipelayer);
+    
     return scene;
 }
 
 bool SocialScene::init()
 {
     
-    if ( CCLayerColor::initWithColor(ccc4(255,255,255,255)) )
+    if ( CCLayerColor::initWithColor(ccc4(200,255,255,255)) )
     {
     }
     
@@ -30,52 +34,26 @@ bool SocialScene::init()
     float editBoxWidth = visibleSize.width *5/10;
     float editBoxHeight = visibleSize.height *1/20;
     
-    // button1
-    CCScale9Sprite * ccS9S_1 = CCScale9Sprite::create("Send.png");
-    ccS9S_1->setContentSize(CCSizeMake(200, 120));
-    CCScale9Sprite * ccS9S_on_1 = CCScale9Sprite::create("SendHighlighted.png");
-    ccS9S_on_1->setContentSize(CCSizeMake(200, 120));
     
-    // onClick1
-    CCMenuItemSprite * ccMIS_1 = CCMenuItemSprite::create(ccS9S_1, ccS9S_on_1, this, menu_selector(SocialScene::onClick1));
-    ccMIS_1->setPosition(ccp(buttonPosX,buttonPosY));
-    CCMenu* menu_1 = CCMenu::create(ccMIS_1,NULL);
-    menu_1->setPosition(CCPointZero);
-    this->addChild(menu_1,1);
+    // Background Image for menu bar
+    CCScale9Sprite* scale9Sprite = CCScale9Sprite::create("frame_v.png");
+    scale9Sprite->setContentSize(ccp(visibleSize.width,visibleSize.height/10));
+    scale9Sprite->setPosition(ccp(visibleSize.width/2,visibleSize.height - scale9Sprite->getContentSize().height/2));
+    this->addChild(scale9Sprite);
     
-    // EditBox
-    CCEditBox* editBox;
-    CCSize editBoxSize = CCSizeMake(editBoxWidth, editBoxHeight);
-    editBox = CCEditBox::create(editBoxSize, CCScale9Sprite::create("editbox.png"));
-    editBox->setPosition(ccp(editBoxPosX, editBoxPosY));
-    editBox->setFontColor(ccBLUE);
-    editBox->setPlaceHolder("Input");
-    editBox->setMaxLength(100);
-    editBox->setReturnType(kKeyboardReturnTypeDone);
-    editBox->setFontSize(24);
-    editBox->setDelegate(this);
-    editBox->setTag(_EDITBOX_);
-    this->addChild(editBox);
-   
-    // TextBox
-    CCScale9Sprite * s9s = CCScale9Sprite::create("dialog_dark.png");
-    s9s->setContentSize(CCSizeMake(visibleSize.width *8/10,  heightOfBox));
-    s9s->setPosition(CCPointMake(visibleSize.width/2, firstPos));
-    const char* mes_str = "afafejaioeafiasdfjkjoiasdfjoiasdfjoiasefjoiasdjfo;iajdfifjadisfj;iajsdf;jadsifj;ajifjiajidfitjaijfiajdljadjfakdjfadjfadfj;;jfhia";
-    CCLabelTTF* mes_label = CCLabelTTF::create(mes_str, "arial", 48);
-    mes_label->setColor(ccc3(255, 0, 127));
-    mes_label->setDimensions(CCSize(visibleSize.width * 7/10,  heightOfBox));
-    mes_label->setPosition(CCPointMake(visibleSize.width/2, firstPos));
-    mes_label->setTag(_LABEL_MESSAGEBOX_FIRST_);
-    //  Scroll View
-    CCSize scrollSize = CCSizeMake(600, 800);
-    CCScrollView *scrollView = CCScrollView::create(scrollSize);
-    scrollView->setPosition(0,320);
-    this->addChild(scrollView,2);
-    scrollView->setContainer(mes_label);
-    scrollView->setContentOffset(ccp(0,-800));
-    scrollView->setContentSize(mes_label->getContentSize());
-    scrollView->setDirection(kCCScrollViewDirectionVertical);
+    // Go back to privious scene
+    CCMenuItemImage* menuBackItem = CCMenuItemImage::create("frame_g.png","frame_p.png",this,menu_selector(SendScene::goBackScene));
+    menuBackItem->setPosition(ccp(menuBackItem->getContentSize().width/2, visibleSize.height - menuBackItem->getContentSize().height/2));
+    CCMenu* menuBack = CCMenu::create(menuBackItem, NULL);
+    menuBack->setPosition(CCPointZero);
+    this->addChild(menuBack);
+    
+    // Send a message
+    CCMenuItemImage* sendItemImg = CCMenuItemImage::create("frame_g.png","frame_p.png",this,menu_selector(SendScene::goBackScene));
+    sendItemImg->setPosition(ccp(visibleSize.width - sendItemImg->getContentSize().width/2, visibleSize.height - sendItemImg->getContentSize().height/2));
+    CCMenu* menuSend = CCMenu::create(sendItemImg, NULL);
+    menuSend->setPosition(CCPointZero);
+    this->addChild(menuSend);
    
     // Main Logic
     SocialScene::load();
@@ -86,9 +64,7 @@ bool SocialScene::init()
 
 void SocialScene::main()
 {
-    // Add swipe layer
-    CCLayer * layer = SwipeLayer3::create();
-    this->addChild(layer);
+
 }
 
 void SocialScene::onClick1()
@@ -178,7 +154,7 @@ void SocialScene::onHttpRequestCompleted(CCNode *sender, void *data)
 }
 
 void SocialScene::editBoxEditingDidBegin(CCEditBox* editBox){
-    CCDirector::sharedDirector()->replaceScene(CCTransitionMoveInB::create(2.0f,SendScene::scene()));
+    //CCDirector::sharedDirector()->replaceScene(CCTransitionMoveInB::create(2.0f,SendScene::scene()));
 }
 void SocialScene::editBoxEditingDidEnd(CCEditBox* editBox){}
 void SocialScene::editBoxTextChanged(CCEditBox* editBox, const std::string& text){}
