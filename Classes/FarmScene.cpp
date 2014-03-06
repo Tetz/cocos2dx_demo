@@ -19,9 +19,26 @@ bool FarmScene::init()
     if ( CCLayerColor::initWithColor(ccc4(255,255,255,255))) {}
     
     CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
-
-    Setter::setBackground(this);
     
+    //Setter::setBackground(this);
+    
+    // Background Set tiled image
+    CCSpriteBatchNode* node = CCSpriteBatchNode::create("message_bg1.jpg");
+    CCSprite* bgspr = CCSprite::createWithTexture(node->getTexture());
+    CCSize bgsize = bgspr->getContentSize();
+    this->addChild(node);
+    int bgWidth = bgsize.width;
+    int bgHeight = bgsize.height;
+    int repeatX = visibleSize.width/bgWidth + 1;
+    int repeatY = visibleSize.height/bgHeight + 1;
+    CCSprite* spr[repeatX][repeatY];
+    for(int y=0; y<=repeatY; y++){
+        for(int x=0; x<=repeatX; x++){
+            spr[x][y] = CCSprite::createWithTexture(node->getTexture());
+            spr[x][y]->setPosition(ccp(bgWidth * x, bgHeight * y));
+            node->addChild(spr[x][y]);
+        }
+    }
     
     // Position
     float firstPos = visibleSize.height * 15/20;
@@ -34,15 +51,19 @@ bool FarmScene::init()
     float heightOfBox = visibleSize.height *2/10;
     float editBoxWidth = visibleSize.width *5/10;
     float editBoxHeight = visibleSize.height *1/20;
+    float menuBarHeight = visibleSize.height/10;
     
     // first text and onclick event
-    CCScale9Sprite * s9s = CCScale9Sprite::create("dialog_dark.png");
+    CCScale9Sprite * s9s = CCScale9Sprite::create("message_frame_100.png");
     s9s->setContentSize(CCSizeMake(visibleSize.width *8/10,  heightOfBox));
     CCMenuItemSprite * ccMIS_first = CCMenuItemSprite::create(s9s, s9s, this, menu_selector(FarmScene::onTouchLabel_1));
     ccMIS_first->setPosition(ccp(visibleSize.width/2,firstPos));
     CCMenu* menu_first = CCMenu::create(ccMIS_first,NULL);
     menu_first->setPosition(CCPointZero);
+    menu_first->setTag(_MESSAGEBOX_FIRST_);
+    menu_first->setVisible(false);
     this->addChild(menu_first);
+    
     // Text label
     const char* mes_str = "";
     CCLabelTTF* mes_label = CCLabelTTF::create(mes_str, "arial", 48);
@@ -51,14 +72,16 @@ bool FarmScene::init()
     mes_label->setPosition(CCPointMake(visibleSize.width/2, firstPos));
     mes_label->setTag(_LABEL_MESSAGEBOX_FIRST_);
     addChild(mes_label);
-   
+    
     // second text
-    CCScale9Sprite * s9s_2 = CCScale9Sprite::create("dialog_dark.png");
+    CCScale9Sprite * s9s_2 = CCScale9Sprite::create("message_frame_100.png");
     s9s_2->setContentSize(CCSizeMake(visibleSize.width *8/10,  heightOfBox));
-    CCMenuItemSprite * ccMIS_second = CCMenuItemSprite::create(s9s, s9s, this, menu_selector(FarmScene::onTouchLabel_2));
+    CCMenuItemSprite * ccMIS_second = CCMenuItemSprite::create(s9s_2, s9s_2 , this, menu_selector(FarmScene::onTouchLabel_2));
     ccMIS_second->setPosition(ccp(visibleSize.width/2,secondPos));
     CCMenu* menu_second = CCMenu::create(ccMIS_second,NULL);
     menu_second->setPosition(CCPointZero);
+    menu_second->setTag(_MESSAGEBOX_SECOND_);
+    menu_second->setVisible(false);
     this->addChild(menu_second);
     // Text label
     const char* mes_str_2 = "";
@@ -70,12 +93,14 @@ bool FarmScene::init()
     addChild(mes_label_2);
     
     // third text
-    CCScale9Sprite * s9s_3 = CCScale9Sprite::create("dialog_dark.png");
+    CCScale9Sprite * s9s_3 = CCScale9Sprite::create("message_frame_100.png");
     s9s_3->setContentSize(CCSizeMake(visibleSize.width *8/10,  heightOfBox));
-    CCMenuItemSprite * ccMIS_third = CCMenuItemSprite::create(s9s, s9s, this, menu_selector(FarmScene::onTouchLabel_3));
+    CCMenuItemSprite * ccMIS_third = CCMenuItemSprite::create(s9s_3, s9s_3, this, menu_selector(FarmScene::onTouchLabel_3));
     ccMIS_third->setPosition(ccp(visibleSize.width/2,thirdPos));
     CCMenu* menu_third = CCMenu::create(ccMIS_third,NULL);
     menu_third->setPosition(CCPointZero);
+    menu_third->setTag(_MESSAGEBOX_THIRD_);
+    menu_third->setVisible(false);
     this->addChild(menu_third);
     // Text label
     const char* mes_str_3 = "";
@@ -86,20 +111,42 @@ bool FarmScene::init()
     mes_label_3->setTag(_LABEL_MESSAGEBOX_THIRD_);
     addChild(mes_label_3);
     
-   
+    // Add Menu bar
+    // Background Image for menu bar
+    CCScale9Sprite* scale9Sprite = CCScale9Sprite::create("menu_bg.png");
+    scale9Sprite->setContentSize(ccp(visibleSize.width,menuBarHeight));
+    scale9Sprite->setPosition(ccp(visibleSize.width/2,visibleSize.height - scale9Sprite->getContentSize().height/2));
+    this->addChild(scale9Sprite,5);
+    
+    // Watched
+    CCSprite* watch = CCSprite::create("visitor_152x108.png");
+    float watchHeight = visibleSize.height - watch->getContentSize().height/2 - (menuBarHeight - watch->getContentSize().height)/2;
+    watch->setPosition(ccp(visibleSize.width/2,watchHeight));
+    this->addChild(watch,7);
+    
     // Mail Box
-    CCMenuItemImage* menuBackItem = CCMenuItemImage::create("frame_g.png","frame_p.png",this,menu_selector(FarmScene::moveToMailBox));
-    menuBackItem->setPosition(ccp(menuBackItem->getContentSize().width/2, visibleSize.height - menuBackItem->getContentSize().height/2));
+    CCMenuItemImage* menuBackItem = CCMenuItemImage::create("post_126x108.png","post.png",this,menu_selector(FarmScene::moveToMailBox));
+    float menuBackPosWidth = menuBackItem->getContentSize().width/2 + (menuBarHeight - menuBackItem->getContentSize().height)/2;
+    float menuBackPosHeight = visibleSize.height - menuBackItem->getContentSize().height/2 - (menuBarHeight - menuBackItem->getContentSize().height)/2;
+    menuBackItem->setPosition(ccp(menuBackPosWidth,menuBackPosHeight));
     CCMenu* menuBack = CCMenu::create(menuBackItem, NULL);
     menuBack->setPosition(CCPointZero);
     this->addChild(menuBack,7);
     
     // EditBox
-    CCMenuItemImage* sendItemImg = CCMenuItemImage::create("frame_g.png","frame_p.png",this,menu_selector(MainMenuBarLayer::goBackScene));
+    CCMenuItemImage* menuItemEdit = CCMenuItemImage::create("write_132x108.png","write.png",this,menu_selector(FarmScene::onClick1));
+    float menuEditPosWidth = visibleSize.width - menuItemEdit->getContentSize().width/2 - (menuBarHeight - menuItemEdit->getContentSize().height)/2;
+    float menuEditPosHeight = visibleSize.height - menuItemEdit->getContentSize().height/2 - (menuBarHeight - menuItemEdit->getContentSize().height)/2;
+    menuItemEdit->setPosition(ccp(menuEditPosWidth, menuEditPosHeight));
+    CCMenu* menuEdit = CCMenu::create(menuItemEdit, NULL);
+    menuEdit->setPosition(CCPointZero);
+    this->addChild(menuEdit,7);
+    
+    // Hide
     CCEditBox* editBox;
-    CCSize editBoxSize = CCSizeMake(100, 100);
+    CCSize editBoxSize = CCSizeMake(0,0);
     editBox = CCEditBox::create(editBoxSize, CCScale9Sprite::create("frame_g.png"));
-    editBox->setPosition(ccp(visibleSize.width - sendItemImg->getContentSize().width/2, visibleSize.height - sendItemImg->getContentSize().height/2));
+    editBox->setPosition(ccp(-100,-100));
     editBox->setFontColor(ccBLUE);
     editBox->setPlaceHolder("");
     editBox->setMaxLength(100);
@@ -108,18 +155,13 @@ bool FarmScene::init()
     editBox->setTag(_EDITBOX_);
     editBox->setInputMode(kEditBoxInputModeAny);
     editBox->setReturnType(kKeyboardReturnTypeSend);
-    this->addChild(editBox,7);
+    this->addChild(editBox,0);
     
-    // Add Menu bar
-    // Background Image for menu bar
-    CCScale9Sprite* scale9Sprite = CCScale9Sprite::create("frame_v.png");
-    scale9Sprite->setContentSize(ccp(visibleSize.width,visibleSize.height/10));
-    scale9Sprite->setPosition(ccp(visibleSize.width/2,visibleSize.height - scale9Sprite->getContentSize().height/2));
-    this->addChild(scale9Sprite,5);
+
+
     // Add swipe layer
     CCLayer * swipelayer = SwipeLayer::create();
-    this->addChild(swipelayer,99999);
-   
+    this->addChild(swipelayer, 99999);
     
     // Initial private variable
     mLoopCount = -1; // Wait for the schedule
@@ -131,7 +173,7 @@ bool FarmScene::init()
     
     // TODO load
     this->load();
-
+    
     
     // === End ===
     return true;
@@ -220,7 +262,12 @@ void FarmScene::updateMessages()
                 mes_label->setString(messageAry[mLoopCount].c_str());
                 CCActionInterval* pFadeOutAction = CCFadeOut::create(10.0f);
                 mes_label->runAction(pFadeOutAction);
-               break;
+                // TODO
+                CCActionInterval* pFadeOutFrame = CCFadeOut::create(10.0f);
+                CCMenu* menu_first = (CCMenu*)this->getChildByTag(_MESSAGEBOX_FIRST_);
+                menu_first->runAction(pFadeOutFrame);
+                menu_first->setVisible(true);
+                break;
             }
             case 1:
             {
@@ -228,6 +275,11 @@ void FarmScene::updateMessages()
                 mes_label_2->setString(messageAry[mLoopCount].c_str());
                 CCActionInterval* pFadeOutAction = CCFadeOut::create(10.0f);
                 mes_label_2->runAction(pFadeOutAction);
+                // TODO
+                CCActionInterval* pFadeOutFrame = CCFadeOut::create(10.0f);
+                CCMenu* menu_second = (CCMenu*)this->getChildByTag(_MESSAGEBOX_SECOND_);
+                menu_second->runAction(pFadeOutFrame);
+                menu_second->setVisible(true);
                 break;
             }
             case 2:
@@ -236,6 +288,11 @@ void FarmScene::updateMessages()
                 mes_label_3->setString(messageAry[mLoopCount].c_str());
                 CCActionInterval* pFadeOutAction = CCFadeOut::create(10.0f);
                 mes_label_3->runAction(pFadeOutAction);
+                // TODO
+                CCActionInterval* pFadeOutFrame = CCFadeOut::create(10.0f);
+                CCMenu* menu_third = (CCMenu*)this->getChildByTag(_MESSAGEBOX_THIRD_);
+                menu_third->runAction(pFadeOutFrame);
+                menu_third->setVisible(true);
                 break;
             }
             default:
@@ -306,7 +363,8 @@ void FarmScene::update(float delta)
 
 void FarmScene::onClick1()
 {
-    
+    CCEditBox* editBox = (CCEditBox*)this->getChildByTag(_EDITBOX_);
+    editBox->touchDownAction(editBox, CCControlEventTouchUpInside);
 }
 
 void FarmScene::menuNGCallback()
@@ -317,7 +375,6 @@ void FarmScene::menuNGCallback()
 void FarmScene::menuOKCallback()
 {
 	//TODO Debug
-	CCLog("Dev=> %s","onClick1");
     CCLog("FarmScene::load ======> %s", "");
     
     if (strlen(inputText)){
@@ -404,7 +461,7 @@ void FarmScene::onHttpRequestCompleted2(cocos2d::CCNode *sender, void *data){}
 
 void FarmScene::onHttpRequestCompleted(cocos2d::CCNode *sender, void *data)
 {
-   
+    
     cocos2d::extension::CCHttpResponse *response = (cocos2d::extension::CCHttpResponse*)data;
     if (!response)
     {
@@ -454,17 +511,17 @@ void FarmScene::onHttpRequestCompleted(cocos2d::CCNode *sender, void *data)
         }
     }
     
-   
+    
 }
 
 
 void FarmScene::editBoxEditingDidBegin(CCEditBox* editBox){
-   //CCDirector::sharedDirector()->replaceScene(CCTransitionMoveInB::create(2.0f,SendScene::scene()));
+    //CCDirector::sharedDirector()->replaceScene(CCTransitionMoveInB::create(2.0f,SendScene::scene()));
 }
 void FarmScene::editBoxEditingDidEnd(CCEditBox* editBox){}
 void FarmScene::editBoxTextChanged(CCEditBox* editBox, const std::string& text){}
 void FarmScene::editBoxReturn(CCEditBox* editBox){
-     inputText = editBox->getText();
+    inputText = editBox->getText();
     // call from Scene, Layer, etc
     FSAlertLayer *alertLayer = FSAlertLayer::create("CONFIRM SEND", this, callfuncN_selector(FarmScene::menuOKCallback), callfuncN_selector(FarmScene::menuNGCallback));
     this->addChild(alertLayer, 100001);

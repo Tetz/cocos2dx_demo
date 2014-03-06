@@ -23,37 +23,65 @@ bool SocialScene::init()
     
     // Layout
     CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
+    
+    // Background Set tiled image
+    CCSpriteBatchNode* node = CCSpriteBatchNode::create("message_bg1.jpg");
+    CCSprite* bgspr = CCSprite::createWithTexture(node->getTexture());
+    CCSize bgsize = bgspr->getContentSize();
+    this->addChild(node);
+    int bgWidth = bgsize.width;
+    int bgHeight = bgsize.height;
+    int repeatX = visibleSize.width/bgWidth + 1;
+    int repeatY = visibleSize.height/bgHeight + 1;
+    CCSprite* spr[repeatX][repeatY];
+    for(int y=0; y<=repeatY; y++){
+        for(int x=0; x<=repeatX; x++){
+            spr[x][y] = CCSprite::createWithTexture(node->getTexture());
+            spr[x][y]->setPosition(ccp(bgWidth * x, bgHeight * y));
+            node->addChild(spr[x][y]);
+        }
+    }
+    
+    
     // Position
-    float firstPos = visibleSize.height * 17/20;
-    float buttonPosX = visibleSize.width/4*3;
-    float buttonPosY = visibleSize.height/20;
-    float editBoxPosX = visibleSize.width * 7/20;
-    float editBoxPosY = visibleSize.height * 1/20;
-    // Height of Text Box
-    float heightOfBox = visibleSize.height *2/10;
-    float editBoxWidth = visibleSize.width *5/10;
-    float editBoxHeight = visibleSize.height *1/20;
+    
+    // Width and Height
+    float menuBarHeight = visibleSize.height/10;
     
     
     // Background Image for menu bar
-    CCScale9Sprite* scale9Sprite = CCScale9Sprite::create("frame_v.png");
+    CCScale9Sprite* scale9Sprite = CCScale9Sprite::create("menu_bg.png");
     scale9Sprite->setContentSize(ccp(visibleSize.width,visibleSize.height/10));
     scale9Sprite->setPosition(ccp(visibleSize.width/2,visibleSize.height - scale9Sprite->getContentSize().height/2));
     this->addChild(scale9Sprite);
     
     // Go back to privious scene
-    CCMenuItemImage* menuBackItem = CCMenuItemImage::create("frame_g.png","frame_p.png",this,menu_selector(SendScene::goBackScene));
-    menuBackItem->setPosition(ccp(menuBackItem->getContentSize().width/2, visibleSize.height - menuBackItem->getContentSize().height/2));
+    CCMenuItemImage* menuBackItem = CCMenuItemImage::create("back_L_btm.png","back_L_btm.png",this,menu_selector(SendScene::goBackScene));
+    float menuBackPosWidth = menuBackItem->getContentSize().width/2 + (menuBarHeight - menuBackItem->getContentSize().height)/2;
+    float menuBackPosHeight = visibleSize.height - menuBackItem->getContentSize().height/2 - (menuBarHeight - menuBackItem->getContentSize().height)/2;
+    menuBackItem->setPosition(ccp(menuBackPosWidth,menuBackPosHeight));
     CCMenu* menuBack = CCMenu::create(menuBackItem, NULL);
     menuBack->setPosition(CCPointZero);
     this->addChild(menuBack);
     
     // Send a message
-    CCMenuItemImage* sendItemImg = CCMenuItemImage::create("frame_g.png","frame_p.png",this,menu_selector(SendScene::goBackScene));
-    sendItemImg->setPosition(ccp(visibleSize.width - sendItemImg->getContentSize().width/2, visibleSize.height - sendItemImg->getContentSize().height/2));
-    CCMenu* menuSend = CCMenu::create(sendItemImg, NULL);
-    menuSend->setPosition(CCPointZero);
-    this->addChild(menuSend);
+    CCMenuItemImage* menuItemEdit = CCMenuItemImage::create("back_R_btm.png","back_R_btm.png",this,menu_selector(SendScene::goBackScene));
+    float menuEditPosWidth = visibleSize.width - menuItemEdit->getContentSize().width/2 - (menuBarHeight - menuItemEdit->getContentSize().height)/2;
+    float menuEditPosHeight = visibleSize.height - menuItemEdit->getContentSize().height/2 - (menuBarHeight - menuItemEdit->getContentSize().height)/2;
+    menuItemEdit->setPosition(ccp(menuEditPosWidth,menuEditPosHeight));
+    CCMenu* menuEdit = CCMenu::create(menuItemEdit, NULL);
+    menuEdit->setPosition(CCPointZero);
+    this->addChild(menuEdit);
+    
+    // Background image for Comments Board
+    CCScale9Sprite* bgBoard = CCScale9Sprite::create("frame_g.png");
+    float bgBoardWidth = visibleSize.width * 9 /10;
+    float bgBoardHeight = visibleSize.height * 8 /10;
+    float bgBoardPosX = visibleSize.width /2;
+    float bgBoardPosY = visibleSize.height *9/20  ;
+    bgBoard->setContentSize(ccp(bgBoardWidth,bgBoardHeight));
+    bgBoard->setPosition(ccp(bgBoardPosX,bgBoardPosY));
+    this->addChild(bgBoard);
    
     // Main Logic
     SocialScene::load();

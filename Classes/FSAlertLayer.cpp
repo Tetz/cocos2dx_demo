@@ -47,33 +47,33 @@ void FSAlertLayer::setStyle(const char* message, CCObject *target, SEL_CallFuncN
     
     CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
     
-    // message
+    // Label
     CCLabelTTF *pMsg = CCLabelTTF::create(message, "", 40);
     pMsg->setPosition(ccp(visibleSize.width / 2, visibleSize.height / 2  + 50));
     pMsg->setColor(ccc3(0,0,0));
     this->addChild(pMsg);
     
     // OK Button
-    CCMenuItemImage *pOKItem = CCMenuItemImage::create("button_ok.png", "button_ok_dark.png", this, menu_selector(FSAlertLayer::menuAlertOK));
-    
+    CCMenuItemImage *pOKItem = CCMenuItemImage::create("send_mail_btm.png", "send_mail_btm.png", this, menu_selector(FSAlertLayer::menuAlertOK));
     int btnHeight = visibleSize.height / 2 - this->getChildByTag(FSAlertLayerTagFrame)->getContentSize().height / 2 + pOKItem->getContentSize().height / 2 + 10;
-    
     pOKItem->setTag(FSAlertLayerTagOK);
-    pOKItem->setPosition(ccp(visibleSize.width / 2, btnHeight +10));
+    pOKItem->setPosition(ccp(visibleSize.width / 2 , btnHeight +10));
     
     CCMenu* pMenu = CCMenu::create(pOKItem, NULL);
     pMenu->setPosition(CCPointZero);
     pMenu->setTag(FSAlertLayerTagMenu);
     this->addChild(pMenu);
     
-    // set as 2 buttons
+    // Set Cancel button
     if (ngSelector) {
-        pOKItem->setPosition(ccp(visibleSize.width / 2 - pOKItem->getContentSize().width, btnHeight +10));
-        
-        // NG btn
-        CCMenuItemImage* pNGItem = CCMenuItemImage::create("button_no.png", "button_no_2.png", this, menu_selector(FSAlertLayer::menuAlertClose));
+        CCMenuItemImage* pNGItem = CCMenuItemImage::create("close_btn.png", "close_btn.png", this, menu_selector(FSAlertLayer::menuAlertClose));
         pNGItem->setTag(FSAlertLayerTagNG);
-        pNGItem->setPosition(ccp(visibleSize.width / 2 + pOKItem->getContentSize().width, btnHeight +10));
+        int cancelWidth = visibleSize.width/2 + this->getChildByTag(FSAlertLayerTagFrame)->getContentSize().width/2;
+        int cancelHeight = visibleSize.height/2 + this->getChildByTag(FSAlertLayerTagFrame)->getContentSize().height/2;
+        //pNGItem->setPosition(ccp(visibleSize.width / 2 + pOKItem->getContentSize().width, btnHeight +10));
+        CCLog("cancelPosition ===> %i",cancelWidth);
+        CCLog("cancelPosition ===> %i",cancelHeight);
+        pNGItem->setPosition(ccp(cancelWidth,cancelHeight));
         pMenu->addChild(pNGItem);
     }
 }

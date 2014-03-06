@@ -38,6 +38,9 @@ public:
     // backgoround
     void setBackground(CCScale9Sprite* scale9Sprite);
     
+    // Set Height Of TableViewCell
+    virtual void setCellHeight();
+    
     
 };
 

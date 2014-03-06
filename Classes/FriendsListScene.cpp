@@ -22,45 +22,53 @@ bool FriendsListScene::init()
     {
     }
     
-    // Set background
-    //Setter::setBackground_list(this);
+    // Background Set tiled image
     CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
-    CCSpriteBatchNode* node = CCSpriteBatchNode::create("bg.jpg");
-    CCSize bgsize = node->getContentSize();
+    CCSpriteBatchNode* node = CCSpriteBatchNode::create("message_bg1.jpg");
+    CCSprite* bgspr = CCSprite::createWithTexture(node->getTexture());
+    CCSize bgsize = bgspr->getContentSize();
     this->addChild(node);
-    int bgWidth = 390;
-    int bgHeight = 390;
+    int bgWidth = bgsize.width;
+    int bgHeight = bgsize.height;
     int repeatX = visibleSize.width/bgWidth + 1;
     int repeatY = visibleSize.height/bgHeight + 1;
     CCSprite* spr[repeatX][repeatY];
-    // Repeat a image
     for(int y=0; y<=repeatY; y++){
         for(int x=0; x<=repeatX; x++){
-            spr[x][y] = CCSprite::create("bg.jpg");
+            spr[x][y] = CCSprite::createWithTexture(node->getTexture());
             spr[x][y]->setPosition(ccp(bgWidth * x, bgHeight * y));
             node->addChild(spr[x][y]);
         }
     }
+   
+    // Width and Height
+    float menuBarHeight = visibleSize.height/10;
     
     // Background Image for menu bar
-    CCScale9Sprite* scale9Sprite = CCScale9Sprite::create("frame_v.png");
+    CCScale9Sprite* scale9Sprite = CCScale9Sprite::create("menu_bg.png");
     scale9Sprite->setContentSize(ccp(visibleSize.width,visibleSize.height/10));
     scale9Sprite->setPosition(ccp(visibleSize.width/2,visibleSize.height - scale9Sprite->getContentSize().height/2));
     this->addChild(scale9Sprite,500);
     
     // Go back to privious scene
-    CCMenuItemImage* menuBackItem = CCMenuItemImage::create("frame_g.png","frame_p.png",this,menu_selector(SendScene::goBackScene));
-    menuBackItem->setPosition(ccp(menuBackItem->getContentSize().width/2, visibleSize.height - menuBackItem->getContentSize().height/2));
+    CCMenuItemImage* menuBackItem = CCMenuItemImage::create("back_L_btm.png","back_L_btm.png",this,menu_selector(SendScene::goBackScene));
+    float menuBackPosWidth = menuBackItem->getContentSize().width/2 + (menuBarHeight - menuBackItem->getContentSize().height)/2;
+    float menuBackPosHeight = visibleSize.height - menuBackItem->getContentSize().height/2 - (menuBarHeight - menuBackItem->getContentSize().height)/2;
+    menuBackItem->setPosition(ccp(menuBackPosWidth,menuBackPosHeight));
     CCMenu* menuBack = CCMenu::create(menuBackItem, NULL);
     menuBack->setPosition(CCPointZero);
     this->addChild(menuBack,501);
     
     // Send a message
-    CCMenuItemImage* sendItemImg = CCMenuItemImage::create("frame_g.png","frame_p.png",this,menu_selector(SendScene::goBackScene));
-    sendItemImg->setPosition(ccp(visibleSize.width - sendItemImg->getContentSize().width/2, visibleSize.height - sendItemImg->getContentSize().height/2));
-    CCMenu* menuSend = CCMenu::create(sendItemImg, NULL);
-    menuSend->setPosition(CCPointZero);
-    this->addChild(menuSend,501);
+    CCMenuItemImage* menuItemEdit = CCMenuItemImage::create("back_R_btm.png","back_R_btm.png",this,menu_selector(SendScene::goBackScene));
+    float menuEditPosWidth = visibleSize.width - menuItemEdit->getContentSize().width/2 - (menuBarHeight - menuItemEdit->getContentSize().height)/2;
+    float menuEditPosHeight = visibleSize.height - menuItemEdit->getContentSize().height/2 - (menuBarHeight - menuItemEdit->getContentSize().height)/2;
+    menuItemEdit->setPosition(ccp(menuEditPosWidth,menuEditPosHeight));
+    CCMenu* menuEdit = CCMenu::create(menuItemEdit, NULL);
+    menuEdit->setPosition(CCPointZero);
+    this->addChild(menuEdit,501);
+    
+
     
     // number of cells
     numberOfCells = 0;

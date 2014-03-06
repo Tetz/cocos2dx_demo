@@ -5,7 +5,7 @@ using namespace std;
 USING_NS_CC_EXT;
 USING_NS_CC;
 
-const float kMyTableViewCellHeight = 140.f;
+float kMyTableViewCellHeight;
 
 MyTableViewCell::MyTableViewCell() : m_textLabel(NULL), m_detailLabel(NULL), m_imageSprite(NULL), m_scale9Sprite(NULL)
 {
@@ -24,16 +24,23 @@ MyTableViewCell::~MyTableViewCell()
     CC_SAFE_RELEASE(m_scale9Sprite);
 }
 
+void MyTableViewCell::setCellHeight()
+{
+    CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
+    kMyTableViewCellHeight = visibleSize.height/10;
+}
+
 bool MyTableViewCell::init()
 {
     setPosition(0,0);
+    this->setCellHeight();
     CCSprite * image = CCSprite::create();
     CCLabelTTF * label = CCLabelTTF::create("", "Helvetica", 70);
     CCLabelTTF * detail = CCLabelTTF::create("", "Helvetica", 50);
     label->setColor(ccc3(70,70,70));
     detail->setColor(ccc3(70,70,70));
     // text
-    CCScale9Sprite * scale9Sprite = CCScale9Sprite::create("frame_b.png");
+    CCScale9Sprite * scale9Sprite = CCScale9Sprite::create("frame_g.png");
     
     return this->initWithLabel(label, detail, image, scale9Sprite);
 }
