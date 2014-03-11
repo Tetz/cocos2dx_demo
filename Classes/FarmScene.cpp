@@ -44,7 +44,7 @@ bool FarmScene::init()
     firstPos = visibleSize.height * 15/20;
     secondPos = visibleSize.height * 9/20;
     thirdPos = visibleSize.height * 3/20;
-    centerPosX = visibleSize.width/2 +128;
+    centerPosX = visibleSize.width/2;
     float editBoxPosX = visibleSize.width * 7/20;
     float editBoxPosY = visibleSize.height * 1/20;
     
@@ -72,7 +72,7 @@ bool FarmScene::init()
     mes_label->setDimensions(CCSize(visibleSize.width * 7/10,  heightOfBox));
     mes_label->setPosition(CCPointMake(visibleSize.width/2, firstPos));
     mes_label->setTag(_LABEL_MESSAGEBOX_FIRST_);
-    addChild(mes_label);
+    addChild(mes_label,5);
     
     // second text
     CCScale9Sprite * s9s_2 = CCScale9Sprite::create("message_frame_100.png");
@@ -91,7 +91,7 @@ bool FarmScene::init()
     mes_label_2->setDimensions(CCSize(visibleSize.width * 7/10,  heightOfBox));
     mes_label_2->setPosition(CCPointMake(visibleSize.width/2, secondPos));
     mes_label_2->setTag(_LABEL_MESSAGEBOX_SECOND_);
-    addChild(mes_label_2);
+    addChild(mes_label_2,5);
     
     // third text
     CCScale9Sprite * s9s_3 = CCScale9Sprite::create("message_frame_100.png");
@@ -110,7 +110,7 @@ bool FarmScene::init()
     mes_label_3->setDimensions(CCSize(visibleSize.width * 7/10,  heightOfBox));
     mes_label_3->setPosition(CCPointMake(visibleSize.width/2, thirdPos));
     mes_label_3->setTag(_LABEL_MESSAGEBOX_THIRD_);
-    addChild(mes_label_3);
+    addChild(mes_label_3,5);
     
     // Add Menu bar
     // Background Image for menu bar
@@ -158,8 +158,6 @@ bool FarmScene::init()
     editBox->setReturnType(kKeyboardReturnTypeSend);
     this->addChild(editBox,0);
     
-    //Fruit
-
     // Add swipe layer
     CCLayer * swipelayer = SwipeLayer::create();
     this->addChild(swipelayer, 99999);
@@ -191,7 +189,7 @@ void FarmScene::logic()
     CCSprite * pet = CCSprite::createWithTexture(batchNode->getTexture(), CCRect(0,0,128,128));
     pet->setPosition(CCPointMake(visibleSize.width, visibleSize.height/2));
     pet->setTag(_SPRITE_MY_PET_);
-    this->addChild(pet);
+    this->addChild(pet,10);
 
     // Animation
     CCAnimation * animation = CCAnimation::create();
@@ -286,22 +284,40 @@ void FarmScene::updateMessages()
     // update
     if(mNumberOfMessages  > 0){
         CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
+        int cnt = 0;
+        const int numberOfFoods = 3;
+        int cntRand = rand() % numberOfFoods;
+        const char* foods[numberOfFoods];
+        foods[cnt++] = "food_meat.png";
+        foods[cnt++] = "food_fruit_gold.png";
+        foods[cnt++] = "food_medicine_blue.png";
+        foods[cnt++] = "food_medicine_purple.png";
+        // Switch
         switch(mLoopCount%3){
             case 0:
             {
                 // Label
                 CCLabelTTF* mes_label = (CCLabelTTF*)this->getChildByTag(_LABEL_MESSAGEBOX_FIRST_);
                 mes_label->setString(messageAry[mLoopCount].c_str());
-                CCActionInterval* pFadeOutAction = CCFadeOut::create(10.0f);
+                CCActionInterval* pFadeOutAction = CCFadeOut::create(_FADEOUT_TIME_);
                 mes_label->runAction(pFadeOutAction);
                 // Frame
-                CCActionInterval* pFadeOutFrame = CCFadeOut::create(10.0f);
+                CCActionInterval* pFadeOutFrame = CCFadeOut::create(_FADEOUT_TIME_);
                 CCMenu* menu_first = (CCMenu*)this->getChildByTag(_MESSAGEBOX_FIRST_);
                 menu_first->runAction(pFadeOutFrame);
                 menu_first->setVisible(true);
-                // TODO Pet Action
-
+                // Foods
+                CCSprite* food = CCSprite::create(foods[cntRand]);
+                float foodPosX = visibleSize.width/2;
+                float foodPosY = visibleSize.height/2;
+                food->setPosition(ccp(foodPosX,firstPos));
+                food->setTag(_FOOD_FIRST_);
+                this->addChild(food);
+                CCActionInterval* pFadeOutFood = CCFadeOut::create(_FADEOUT_TIME_);
+                CCSequence* seq = CCSequence::create(pFadeOutFood,CCCallFunc::create(food, callfunc_selector(CCSprite::removeFromParent)),NULL);
+                food->runAction(seq);
                 
+                // End of the case
                 break;
             }
             case 1:
@@ -309,15 +325,25 @@ void FarmScene::updateMessages()
                 // Label
                 CCLabelTTF* mes_label_2 = (CCLabelTTF*)this->getChildByTag(_LABEL_MESSAGEBOX_SECOND_);
                 mes_label_2->setString(messageAry[mLoopCount].c_str());
-                CCActionInterval* pFadeOutAction = CCFadeOut::create(10.0f);
+                CCActionInterval* pFadeOutAction = CCFadeOut::create(_FADEOUT_TIME_);
                 mes_label_2->runAction(pFadeOutAction);
                 // Frame
-                CCActionInterval* pFadeOutFrame = CCFadeOut::create(10.0f);
+                CCActionInterval* pFadeOutFrame = CCFadeOut::create(_FADEOUT_TIME_);
                 CCMenu* menu_second = (CCMenu*)this->getChildByTag(_MESSAGEBOX_SECOND_);
                 menu_second->runAction(pFadeOutFrame);
                 menu_second->setVisible(true);
-                // TODO Pet Action
+                // Foods
+                CCSprite* food = CCSprite::create(foods[cntRand]);
+                float foodPosX = visibleSize.width/2;
+                float foodPosY = visibleSize.height/2;
+                food->setPosition(ccp(foodPosX,secondPos));
+                food->setTag(_FOOD_SECOND_);
+                this->addChild(food);
+                CCActionInterval* pFadeOutFood = CCFadeOut::create(_FADEOUT_TIME_);
+                CCSequence* seq = CCSequence::create(pFadeOutFood,CCCallFunc::create(food, callfunc_selector(CCSprite::removeFromParent)),NULL);
+                food->runAction(seq);
                 
+                // End of the case
                 break;
             }
             case 2:
@@ -325,15 +351,25 @@ void FarmScene::updateMessages()
                 // Label
                 CCLabelTTF* mes_label_3 = (CCLabelTTF*)this->getChildByTag(_LABEL_MESSAGEBOX_THIRD_);
                 mes_label_3->setString(messageAry[mLoopCount].c_str());
-                CCActionInterval* pFadeOutAction = CCFadeOut::create(10.0f);
+                CCActionInterval* pFadeOutAction = CCFadeOut::create(_FADEOUT_TIME_);
                 mes_label_3->runAction(pFadeOutAction);
                 // Frame
-                CCActionInterval* pFadeOutFrame = CCFadeOut::create(10.0f);
+                CCActionInterval* pFadeOutFrame = CCFadeOut::create(_FADEOUT_TIME_);
                 CCMenu* menu_third = (CCMenu*)this->getChildByTag(_MESSAGEBOX_THIRD_);
                 menu_third->runAction(pFadeOutFrame);
                 menu_third->setVisible(true);
-                // TODO Pet Action
+                // Foods
+                CCSprite* food = CCSprite::create(foods[cntRand]);
+                float foodPosX = visibleSize.width/2;
+                float foodPosY = visibleSize.height/2;
+                food->setPosition(ccp(foodPosX,thirdPos));
+                food->setTag(_FOOD_THIRD_);
+                this->addChild(food);
+                CCActionInterval* pFadeOutFood = CCFadeOut::create(_FADEOUT_TIME_);
+                CCSequence* seq = CCSequence::create(pFadeOutFood,CCCallFunc::create(food, callfunc_selector(CCSprite::removeFromParent)),NULL);
+                food->runAction(seq);
                 
+                // End of the case
                 break;
             }
             default:
@@ -355,12 +391,15 @@ void FarmScene::onTouchLabel_1()
     int onTouch = (mLoopCount-1)%3;
     if(onTouch == 0 || onTouch == -2){
        	CCLog("onTouchLabel=> %s","Label_first");
-//        CCScene* scene = SocialScene::scene();
-//        CCTransitionMoveInR* tran = CCTransitionMoveInR::create(0.5, scene);
-//        CCDirector::sharedDirector()->pushScene(tran);
-        // TODO Pet Action
-        CCSprite* snakeHand = (CCSprite*)this->getChildByTag(_SPRITE_MY_PET_);
-        snakeHand->runAction(CCMoveTo::create(1.0f, ccp(centerPosX,firstPos)));
+        // Pet Action
+        CCSprite* petSpr = (CCSprite*)this->getChildByTag(_SPRITE_MY_PET_);
+        petSpr->runAction(CCMoveTo::create(1.0f, ccp(centerPosX,firstPos)));
+        // The Eating Effect
+        CCSprite* food = (CCSprite*)this->getChildByTag(_FOOD_FIRST_);
+        CCDelayTime *delay = CCDelayTime::create(1.0f);
+        CCScaleTo *disappear = CCScaleTo::create(1.0f, 0);
+        CCSequence *seq = CCSequence::create(delay,disappear,NULL);
+        food->runAction(seq);
     }
 }
 
@@ -369,12 +408,15 @@ void FarmScene::onTouchLabel_2()
     int onTouch = (mLoopCount-1)%3;
     if(onTouch == 1 || onTouch == -2){
         CCLog("onTouchLabel=> %s","Lable_second");
-//        CCScene* scene = SocialScene::scene();
-//        CCTransitionMoveInR* tran = CCTransitionMoveInR::create(0.5, scene);
-//        CCDirector::sharedDirector()->pushScene(tran);
-        // TODO Pet Action
-        CCSprite* snakeHand = (CCSprite*)this->getChildByTag(_SPRITE_MY_PET_);
-        snakeHand->runAction(CCMoveTo::create(1.0f, ccp(centerPosX,secondPos)));
+        // Pet Action
+        CCSprite* petSpr = (CCSprite*)this->getChildByTag(_SPRITE_MY_PET_);
+        petSpr->runAction(CCMoveTo::create(1.0f, ccp(centerPosX,secondPos)));
+        // The Eating Effect
+        CCSprite* food = (CCSprite*)this->getChildByTag(_FOOD_SECOND_);
+        CCDelayTime *delay = CCDelayTime::create(1.0f);
+        CCScaleTo *disappear = CCScaleTo::create(1.0f, 0);
+        CCSequence *seq = CCSequence::create(delay,disappear,NULL);
+        food->runAction(seq);
     }
 }
 
@@ -383,12 +425,15 @@ void FarmScene::onTouchLabel_3()
     int onTouch = (mLoopCount-1)%3;
     if(onTouch == 2 || onTouch == -2){
         CCLog("onTouchLabel=> %s","Label_third");
-//        CCScene* scene = SocialScene::scene();
-//        CCTransitionMoveInR* tran = CCTransitionMoveInR::create(0.5, scene);
-//        CCDirector::sharedDirector()->pushScene(tran);
-        // TODO Pet Action
-        CCSprite* snakeHand = (CCSprite*)this->getChildByTag(_SPRITE_MY_PET_);
-        snakeHand->runAction(CCMoveTo::create(1.0f, ccp(centerPosX,thirdPos)));
+        // Pet Action
+        CCSprite* petSpr = (CCSprite*)this->getChildByTag(_SPRITE_MY_PET_);
+        petSpr->runAction(CCMoveTo::create(1.0f, ccp(centerPosX,thirdPos)));
+        // The Eating Effect
+        CCSprite* food = (CCSprite*)this->getChildByTag(_FOOD_THIRD_);
+        CCDelayTime *delay = CCDelayTime::create(1.0f);
+        CCScaleTo *disappear = CCScaleTo::create(1.0f, 0);
+        CCSequence *seq = CCSequence::create(delay,disappear,NULL);
+        food->runAction(seq);
     }
 }
 

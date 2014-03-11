@@ -43,6 +43,13 @@
 #define _MESSAGEBOX_SECOND_ 21
 #define _MESSAGEBOX_THIRD_ 22
 
+// Foods
+#define _FOOD_FIRST_ 23
+#define _FOOD_SECOND_ 24
+#define _FOOD_THIRD_ 25
+
+// Feedout Time
+#define _FADEOUT_TIME_ 10.f
 
 
 #endif
