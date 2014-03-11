@@ -7,7 +7,12 @@
 class FarmScene : public cocos2d::CCLayerColor, public CCEditBoxDelegate
 {
 protected:
-   
+    // Position
+    float firstPos;
+    float secondPos;
+    float thirdPos;
+    float centerPosX;
+    
 private:
     const char * monsterAry[4];
     cocos2d::CCSize visibleSize;
@@ -31,6 +36,9 @@ private:
     // Dialog
     virtual void menuOKCallback();
     virtual void menuNGCallback();
+    
+    // GAME LOGIC
+    virtual void logic();
 
     
     //JSON parser

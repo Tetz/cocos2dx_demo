@@ -48,7 +48,6 @@ bool SocialScene::init()
     // Width and Height
     float menuBarHeight = visibleSize.height/10;
     
-    
     // Background Image for menu bar
     CCScale9Sprite* scale9Sprite = CCScale9Sprite::create("menu_bg.png");
     scale9Sprite->setContentSize(ccp(visibleSize.width,visibleSize.height/10));
@@ -82,6 +81,19 @@ bool SocialScene::init()
     bgBoard->setContentSize(ccp(bgBoardWidth,bgBoardHeight));
     bgBoard->setPosition(ccp(bgBoardPosX,bgBoardPosY));
     this->addChild(bgBoard);
+    
+    // Chat Board
+    CCScrollView *scrollView = CCScrollView::create(CCSizeMake(200, 120));
+    scrollView->setContentSize(CCSizeMake(400, 120));
+    scrollView->setPosition(ccp(visibleSize.width/2, visibleSize.height/2));
+    scrollView->setDirection(kCCScrollViewDirectionVertical);
+    this->addChild(scrollView);
+    
+    // TODO font test
+    CCLabelTTF *tapMessage = CCLabelTTF ::create("Tap on Screen", "T3NOWGB", 96);
+    tapMessage->setPosition(ccp(visibleSize.width/2,visibleSize.height/2));
+    tapMessage->setColor(ccc3(10,10,10));
+    this->addChild(tapMessage,3);
    
     // Main Logic
     SocialScene::load();

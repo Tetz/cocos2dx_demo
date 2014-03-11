@@ -233,6 +233,11 @@
 		379BB9D317F03F3700829B88 /* GUIReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 379BB99117F03F3700829B88 /* GUIReader.cpp */; };
 		379BB9D417F03F3700829B88 /* SceneReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 379BB99317F03F3700829B88 /* SceneReader.cpp */; };
 		7855E0E1153FEF240059DD9A /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 7855E0DF153FEF240059DD9A /* Default.png */; };
+		9F018B4018CEE5BC003CBC4F /* food_fruit_gold.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F018B3B18CEE5BC003CBC4F /* food_fruit_gold.png */; };
+		9F018B4118CEE5BC003CBC4F /* food_meat.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F018B3C18CEE5BC003CBC4F /* food_meat.png */; };
+		9F018B4218CEE5BC003CBC4F /* food_medicine_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F018B3D18CEE5BC003CBC4F /* food_medicine_blue.png */; };
+		9F018B4318CEE5BC003CBC4F /* food_medicine_purple.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F018B3E18CEE5BC003CBC4F /* food_medicine_purple.png */; };
+		9F018B4418CEE5BC003CBC4F /* food_tomato.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F018B3F18CEE5BC003CBC4F /* food_tomato.png */; };
 		9F2A721118A49284008D41C4 /* dialog_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F2A721018A49284008D41C4 /* dialog_dark.png */; };
 		9F4465F218AB8D3C00D1E1FC /* baby_pon_smile.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F4465F118AB8D3C00D1E1FC /* baby_pon_smile.png */; };
 		9F4465F418AB8ED300D1E1FC /* gero_front.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F4465F318AB8ED300D1E1FC /* gero_front.png */; };
@@ -310,6 +315,8 @@
 		9FD1ADEF18C80CD700E35E20 /* no_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FD1ADEB18C80CD700E35E20 /* no_btn.png */; };
 		9FD1ADF018C80CD700E35E20 /* pop_up.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FD1ADEC18C80CD700E35E20 /* pop_up.png */; };
 		9FD1ADF118C80CD700E35E20 /* yes_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FD1ADED18C80CD700E35E20 /* yes_btn.png */; };
+		9FD1ADF318CD708800E35E20 /* T3NOWGB.TTC in Resources */ = {isa = PBXBuildFile; fileRef = 9FD1ADF218CD708800E35E20 /* T3NOWGB.TTC */; };
+		9FD1ADF518CDA25E00E35E20 /* pig.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FD1ADF418CDA25E00E35E20 /* pig.png */; };
 		9FD65C3D18C0534E00B75478 /* MainMenuBarLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9FD65C3B18C0534E00B75478 /* MainMenuBarLayer.cpp */; };
 		9FD8609E185F179C00266E1E /* Send.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FD8609C185F179C00266E1E /* Send.png */; };
 		9FD8609F185F179C00266E1E /* SendHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FD8609D185F179C00266E1E /* SendHighlighted.png */; };
@@ -820,6 +827,11 @@
 		379BB99317F03F3700829B88 /* SceneReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SceneReader.cpp; sourceTree = "<group>"; };
 		379BB99417F03F3700829B88 /* SceneReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneReader.h; sourceTree = "<group>"; };
 		7855E0DF153FEF240059DD9A /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = SOURCE_ROOT; };
+		9F018B3B18CEE5BC003CBC4F /* food_fruit_gold.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = food_fruit_gold.png; sourceTree = "<group>"; };
+		9F018B3C18CEE5BC003CBC4F /* food_meat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = food_meat.png; sourceTree = "<group>"; };
+		9F018B3D18CEE5BC003CBC4F /* food_medicine_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = food_medicine_blue.png; sourceTree = "<group>"; };
+		9F018B3E18CEE5BC003CBC4F /* food_medicine_purple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = food_medicine_purple.png; sourceTree = "<group>"; };
+		9F018B3F18CEE5BC003CBC4F /* food_tomato.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = food_tomato.png; sourceTree = "<group>"; };
 		9F2A721018A49284008D41C4 /* dialog_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dialog_dark.png; sourceTree = "<group>"; };
 		9F4465F118AB8D3C00D1E1FC /* baby_pon_smile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = baby_pon_smile.png; sourceTree = "<group>"; };
 		9F4465F318AB8ED300D1E1FC /* gero_front.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gero_front.png; sourceTree = "<group>"; };
@@ -911,6 +923,8 @@
 		9FD1ADEB18C80CD700E35E20 /* no_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = no_btn.png; sourceTree = "<group>"; };
 		9FD1ADEC18C80CD700E35E20 /* pop_up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pop_up.png; sourceTree = "<group>"; };
 		9FD1ADED18C80CD700E35E20 /* yes_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yes_btn.png; sourceTree = "<group>"; };
+		9FD1ADF218CD708800E35E20 /* T3NOWGB.TTC */ = {isa = PBXFileReference; lastKnownFileType = file; path = T3NOWGB.TTC; sourceTree = "<group>"; };
+		9FD1ADF418CDA25E00E35E20 /* pig.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pig.png; sourceTree = "<group>"; };
 		9FD65C3B18C0534E00B75478 /* MainMenuBarLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MainMenuBarLayer.cpp; path = ../Classes/MainMenuBarLayer.cpp; sourceTree = "<group>"; };
 		9FD65C3C18C0534E00B75478 /* MainMenuBarLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainMenuBarLayer.h; path = ../Classes/MainMenuBarLayer.h; sourceTree = "<group>"; };
 		9FD8609B185F166000266E1E /* picojson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = picojson.h; path = ../Classes/picojson.h; sourceTree = "<group>"; };
@@ -1925,6 +1939,12 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9F018B3B18CEE5BC003CBC4F /* food_fruit_gold.png */,
+				9F018B3C18CEE5BC003CBC4F /* food_meat.png */,
+				9F018B3D18CEE5BC003CBC4F /* food_medicine_blue.png */,
+				9F018B3E18CEE5BC003CBC4F /* food_medicine_purple.png */,
+				9F018B3F18CEE5BC003CBC4F /* food_tomato.png */,
+				9FD1ADF418CDA25E00E35E20 /* pig.png */,
 				9FD1ADEA18C80CD700E35E20 /* close_btn.png */,
 				9FD1ADEB18C80CD700E35E20 /* no_btn.png */,
 				9FD1ADEC18C80CD700E35E20 /* pop_up.png */,
@@ -2018,6 +2038,7 @@
 		9F4465FA18BAFC7200D1E1FC /* fonts */ = {
 			isa = PBXGroup;
 			children = (
+				9FD1ADF218CD708800E35E20 /* T3NOWGB.TTC */,
 				9F4465FB18BAFC7200D1E1FC /* arial.ttf */,
 				9F4465FC18BAFC7200D1E1FC /* Marker Felt.ttf */,
 			);
@@ -2212,6 +2233,7 @@
 				D4EF94A015BD2D9800D803EB /* Icon-144.png in Resources */,
 				9FD8609E185F179C00266E1E /* Send.png in Resources */,
 				9F44660818BAFC7200D1E1FC /* Marker Felt.ttf in Resources */,
+				9F018B4218CEE5BC003CBC4F /* food_medicine_blue.png in Resources */,
 				9FD1ADDA18C5A19200E35E20 /* message_frame_100_1050.png in Resources */,
 				9FD1ADCA18C5A19200E35E20 /* face3_204x208.png in Resources */,
 				9F4465F218AB8D3C00D1E1FC /* baby_pon_smile.png in Resources */,
@@ -2227,6 +2249,7 @@
 				9FD1ADE918C6E35200E35E20 /* send_mail_btm.png in Resources */,
 				9FD1ADC118C5A19200E35E20 /* face_04.png in Resources */,
 				9FD1ADE218C5A19200E35E20 /* write_132x108.png in Resources */,
+				9F018B4418CEE5BC003CBC4F /* food_tomato.png in Resources */,
 				9F44660B18BAFC7200D1E1FC /* frame_p.png in Resources */,
 				9FD1ADE718C5EFA300E35E20 /* back_R_btm.png in Resources */,
 				15A3D9961682F7F9002FB0C5 /* CMakeLists.txt in Resources */,
@@ -2235,6 +2258,7 @@
 				9FDFC020189A77B3009CE01A /* button_ok.png in Resources */,
 				9F44660C18BAFC7200D1E1FC /* frame_v.png in Resources */,
 				1AFAF8BC16D35E4900DB1158 /* CloseNormal.png in Resources */,
+				9FD1ADF318CD708800E35E20 /* T3NOWGB.TTC in Resources */,
 				9FD1ADCD18C5A19200E35E20 /* face11_204x208.png in Resources */,
 				9FDFC026189A825B009CE01A /* button_ok_dark.png in Resources */,
 				9FD1ADE318C5A19200E35E20 /* write.png in Resources */,
@@ -2257,6 +2281,7 @@
 				9FDFC024189A825B009CE01A /* button_no_2.png in Resources */,
 				9F472EF718A4C34F003D3201 /* editbox.png in Resources */,
 				9F44661018BAFC7200D1E1FC /* img_v.png in Resources */,
+				9F018B4318CEE5BC003CBC4F /* food_medicine_purple.png in Resources */,
 				9FD1ADEF18C80CD700E35E20 /* no_btn.png in Resources */,
 				9FD1ADDB18C5A19200E35E20 /* message_frame_100.png in Resources */,
 				9FD1ADF118C80CD700E35E20 /* yes_btn.png in Resources */,
@@ -2265,13 +2290,16 @@
 				9F44660618BAFC7200D1E1FC /* dialog.png in Resources */,
 				9FD1ADBC18C5A19200E35E20 /* back_btm.png in Resources */,
 				379BB9CC17F03F3700829B88 /* json_internalarray.inl in Resources */,
+				9FD1ADF518CDA25E00E35E20 /* pig.png in Resources */,
 				379BB9CD17F03F3700829B88 /* json_internalmap.inl in Resources */,
 				9FD1ADC918C5A19200E35E20 /* face2_204x208.png in Resources */,
 				379BB9D017F03F3700829B88 /* json_valueiterator.inl in Resources */,
 				379BB9D217F03F3700829B88 /* sconscript in Resources */,
 				9F44660E18BAFC7200D1E1FC /* img_g.png in Resources */,
 				9F44660918BAFC7200D1E1FC /* frame_b.png in Resources */,
+				9F018B4018CEE5BC003CBC4F /* food_fruit_gold.png in Resources */,
 				9FD1ADD418C5A19200E35E20 /* menu_bg.png in Resources */,
+				9F018B4118CEE5BC003CBC4F /* food_meat.png in Resources */,
 				9FD1ADBF18C5A19200E35E20 /* face_02.png in Resources */,
 				9FD1ADE018C5A19200E35E20 /* visitor_152x108.png in Resources */,
 				9FD1ADD918C5A19200E35E20 /* message_frame_50.png in Resources */,

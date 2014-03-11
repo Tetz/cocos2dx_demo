@@ -329,9 +329,9 @@ void FriendsListScene::onHttpRequestCompleted(CCNode *sender, void *data)
     string friends_count;
     if(picoError.empty()) {
         picojson::object& o = picoValue.get<picojson::object>();
-        friends_count = o["friends_count"].get<string>();
+        friends_count = o["count"].get<string>();
         string& info = o["info"].get<string>();
-        picojson::array& picoArray = o["friends"].get<picojson::array>();
+        picojson::array& picoArray = o["worlds"].get<picojson::array>();
         int picoArraySize = picoArray.size();
         id = new string[picoArraySize];
         name = new string[picoArraySize];
@@ -341,10 +341,10 @@ void FriendsListScene::onHttpRequestCompleted(CCNode *sender, void *data)
             picojson::object& friendObject = i->get<picojson::object>();
             id[cnt] = friendObject["id"].get<string>();
             name[cnt] = friendObject["name"].get<string>();
-            monster_id[cnt] = friendObject["monster_id"].get<string>();
+            monster_id[cnt] = friendObject["host"].get<string>();
             CCLog("pico id : %s", id[cnt].c_str());
-            CCLog("pico name : %s", name[cnt].c_str());
-            CCLog("pico monster_id : %s", monster_id[cnt].c_str());
+            CCLog("pico host : %s", name[cnt].c_str());
+            CCLog("pico name : %s", monster_id[cnt].c_str());
             cnt++;
         }
        

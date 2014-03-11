@@ -41,9 +41,10 @@ bool FarmScene::init()
     }
     
     // Position
-    float firstPos = visibleSize.height * 15/20;
-    float secondPos = visibleSize.height * 9/20;
-    float thirdPos = visibleSize.height * 3/20;
+    firstPos = visibleSize.height * 15/20;
+    secondPos = visibleSize.height * 9/20;
+    thirdPos = visibleSize.height * 3/20;
+    centerPosX = visibleSize.width/2 +128;
     float editBoxPosX = visibleSize.width * 7/20;
     float editBoxPosY = visibleSize.height * 1/20;
     
@@ -66,7 +67,7 @@ bool FarmScene::init()
     
     // Text label
     const char* mes_str = "";
-    CCLabelTTF* mes_label = CCLabelTTF::create(mes_str, "arial", 48);
+    CCLabelTTF* mes_label = CCLabelTTF::create(mes_str, "T3NOWGB", 48);
     mes_label->setColor(ccc3(255, 0, 127));
     mes_label->setDimensions(CCSize(visibleSize.width * 7/10,  heightOfBox));
     mes_label->setPosition(CCPointMake(visibleSize.width/2, firstPos));
@@ -85,7 +86,7 @@ bool FarmScene::init()
     this->addChild(menu_second);
     // Text label
     const char* mes_str_2 = "";
-    CCLabelTTF* mes_label_2 = CCLabelTTF::create(mes_str_2, "arial", 48);
+    CCLabelTTF* mes_label_2 = CCLabelTTF::create(mes_str_2, "T3NOWGB", 48);
     mes_label_2->setColor(ccc3(255, 0, 127));
     mes_label_2->setDimensions(CCSize(visibleSize.width * 7/10,  heightOfBox));
     mes_label_2->setPosition(CCPointMake(visibleSize.width/2, secondPos));
@@ -104,7 +105,7 @@ bool FarmScene::init()
     this->addChild(menu_third);
     // Text label
     const char* mes_str_3 = "";
-    CCLabelTTF* mes_label_3 = CCLabelTTF::create(mes_str_3, "arial", 48);
+    CCLabelTTF* mes_label_3 = CCLabelTTF::create(mes_str_3, "T3NOWGB", 48);
     mes_label_3->setColor(ccc3(255, 0, 127));
     mes_label_3->setDimensions(CCSize(visibleSize.width * 7/10,  heightOfBox));
     mes_label_3->setPosition(CCPointMake(visibleSize.width/2, thirdPos));
@@ -157,7 +158,7 @@ bool FarmScene::init()
     editBox->setReturnType(kKeyboardReturnTypeSend);
     this->addChild(editBox,0);
     
-
+    //Fruit
 
     // Add swipe layer
     CCLayer * swipelayer = SwipeLayer::create();
@@ -171,13 +172,42 @@ bool FarmScene::init()
     // call main logic
     this->schedule(schedule_selector(FarmScene::updateMessages), 5.0f);
     
-    // TODO load
+    // load
     this->load();
     
+    // TODO GAME LOGIC
+    this->logic();
     
     // === End ===
     return true;
 }
+
+
+void FarmScene::logic()
+{
+    CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
+    // My Pet
+    CCSpriteBatchNode * batchNode = CCSpriteBatchNode::create("kopute.png");
+    CCSprite * pet = CCSprite::createWithTexture(batchNode->getTexture(), CCRect(0,0,128,128));
+    pet->setPosition(CCPointMake(visibleSize.width, visibleSize.height/2));
+    pet->setTag(_SPRITE_MY_PET_);
+    this->addChild(pet);
+
+    // Animation
+    CCAnimation * animation = CCAnimation::create();
+    animation->addSpriteFrameWithTexture(batchNode->getTexture(), CCRect(128*0,0,128,128));
+    animation->addSpriteFrameWithTexture(batchNode->getTexture(), CCRect(128*3,0,128,128));
+    animation->addSpriteFrameWithTexture(batchNode->getTexture(), CCRect(128*0,0,128,128));
+    animation->addSpriteFrameWithTexture(batchNode->getTexture(), CCRect(128*4,0,128,128));
+    animation->setDelayPerUnit(0.8f / 4.0f);
+    animation->setRestoreOriginalFrame(true);
+    CCAnimate * action = CCAnimate::create(animation);
+    CCRepeatForever * actionreq = CCRepeatForever::create(action);
+    pet->runAction(actionreq);
+    
+}
+
+
 
 void FarmScene::load()
 {
@@ -255,44 +285,55 @@ void FarmScene::updateMessages()
     if(mLoopCount<0){mLoopCount=0;}
     // update
     if(mNumberOfMessages  > 0){
+        CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
         switch(mLoopCount%3){
             case 0:
             {
+                // Label
                 CCLabelTTF* mes_label = (CCLabelTTF*)this->getChildByTag(_LABEL_MESSAGEBOX_FIRST_);
                 mes_label->setString(messageAry[mLoopCount].c_str());
                 CCActionInterval* pFadeOutAction = CCFadeOut::create(10.0f);
                 mes_label->runAction(pFadeOutAction);
-                // TODO
+                // Frame
                 CCActionInterval* pFadeOutFrame = CCFadeOut::create(10.0f);
                 CCMenu* menu_first = (CCMenu*)this->getChildByTag(_MESSAGEBOX_FIRST_);
                 menu_first->runAction(pFadeOutFrame);
                 menu_first->setVisible(true);
+                // TODO Pet Action
+
+                
                 break;
             }
             case 1:
             {
+                // Label
                 CCLabelTTF* mes_label_2 = (CCLabelTTF*)this->getChildByTag(_LABEL_MESSAGEBOX_SECOND_);
                 mes_label_2->setString(messageAry[mLoopCount].c_str());
                 CCActionInterval* pFadeOutAction = CCFadeOut::create(10.0f);
                 mes_label_2->runAction(pFadeOutAction);
-                // TODO
+                // Frame
                 CCActionInterval* pFadeOutFrame = CCFadeOut::create(10.0f);
                 CCMenu* menu_second = (CCMenu*)this->getChildByTag(_MESSAGEBOX_SECOND_);
                 menu_second->runAction(pFadeOutFrame);
                 menu_second->setVisible(true);
+                // TODO Pet Action
+                
                 break;
             }
             case 2:
             {
+                // Label
                 CCLabelTTF* mes_label_3 = (CCLabelTTF*)this->getChildByTag(_LABEL_MESSAGEBOX_THIRD_);
                 mes_label_3->setString(messageAry[mLoopCount].c_str());
                 CCActionInterval* pFadeOutAction = CCFadeOut::create(10.0f);
                 mes_label_3->runAction(pFadeOutAction);
-                // TODO
+                // Frame
                 CCActionInterval* pFadeOutFrame = CCFadeOut::create(10.0f);
                 CCMenu* menu_third = (CCMenu*)this->getChildByTag(_MESSAGEBOX_THIRD_);
                 menu_third->runAction(pFadeOutFrame);
                 menu_third->setVisible(true);
+                // TODO Pet Action
+                
                 break;
             }
             default:
@@ -314,9 +355,12 @@ void FarmScene::onTouchLabel_1()
     int onTouch = (mLoopCount-1)%3;
     if(onTouch == 0 || onTouch == -2){
        	CCLog("onTouchLabel=> %s","Label_first");
-        CCScene* scene = SocialScene::scene();
-        CCTransitionMoveInR* tran = CCTransitionMoveInR::create(0.5, scene);
-        CCDirector::sharedDirector()->pushScene(tran);
+//        CCScene* scene = SocialScene::scene();
+//        CCTransitionMoveInR* tran = CCTransitionMoveInR::create(0.5, scene);
+//        CCDirector::sharedDirector()->pushScene(tran);
+        // TODO Pet Action
+        CCSprite* snakeHand = (CCSprite*)this->getChildByTag(_SPRITE_MY_PET_);
+        snakeHand->runAction(CCMoveTo::create(1.0f, ccp(centerPosX,firstPos)));
     }
 }
 
@@ -325,9 +369,12 @@ void FarmScene::onTouchLabel_2()
     int onTouch = (mLoopCount-1)%3;
     if(onTouch == 1 || onTouch == -2){
         CCLog("onTouchLabel=> %s","Lable_second");
-        CCScene* scene = SocialScene::scene();
-        CCTransitionMoveInR* tran = CCTransitionMoveInR::create(0.5, scene);
-        CCDirector::sharedDirector()->pushScene(tran);
+//        CCScene* scene = SocialScene::scene();
+//        CCTransitionMoveInR* tran = CCTransitionMoveInR::create(0.5, scene);
+//        CCDirector::sharedDirector()->pushScene(tran);
+        // TODO Pet Action
+        CCSprite* snakeHand = (CCSprite*)this->getChildByTag(_SPRITE_MY_PET_);
+        snakeHand->runAction(CCMoveTo::create(1.0f, ccp(centerPosX,secondPos)));
     }
 }
 
@@ -336,9 +383,12 @@ void FarmScene::onTouchLabel_3()
     int onTouch = (mLoopCount-1)%3;
     if(onTouch == 2 || onTouch == -2){
         CCLog("onTouchLabel=> %s","Label_third");
-        CCScene* scene = SocialScene::scene();
-        CCTransitionMoveInR* tran = CCTransitionMoveInR::create(0.5, scene);
-        CCDirector::sharedDirector()->pushScene(tran);
+//        CCScene* scene = SocialScene::scene();
+//        CCTransitionMoveInR* tran = CCTransitionMoveInR::create(0.5, scene);
+//        CCDirector::sharedDirector()->pushScene(tran);
+        // TODO Pet Action
+        CCSprite* snakeHand = (CCSprite*)this->getChildByTag(_SPRITE_MY_PET_);
+        snakeHand->runAction(CCMoveTo::create(1.0f, ccp(centerPosX,thirdPos)));
     }
 }
 
@@ -437,6 +487,17 @@ void FarmScene::menuOKCallback()
         request->setTag("POST Request");
         CCHttpClient::getInstance()->send(request);
         
+        // Display posted message
+        CCLabelTTF* mes_label_2 = (CCLabelTTF*)this->getChildByTag(_LABEL_MESSAGEBOX_SECOND_);
+        mes_label_2->setString(inputText);
+        CCActionInterval* pFadeOutAction = CCFadeOut::create(10.0f);
+        mes_label_2->runAction(pFadeOutAction);
+        // TODO
+        CCActionInterval* pFadeOutFrame = CCFadeOut::create(10.0f);
+        CCMenu* menu_second = (CCMenu*)this->getChildByTag(_MESSAGEBOX_SECOND_);
+        menu_second->runAction(pFadeOutFrame);
+        menu_second->setVisible(true);
+        
         // Reset EditBox
         CCEditBox* editbox = (CCEditBox*)this->getChildByTag(_EDITBOX_);
         editbox->setText("");
@@ -510,7 +571,6 @@ void FarmScene::onHttpRequestCompleted(cocos2d::CCNode *sender, void *data)
             cnt++;
         }
     }
-    
     
 }
 
