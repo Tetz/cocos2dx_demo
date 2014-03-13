@@ -23,24 +23,25 @@ bool SocialScene::init()
     
     // Layout
     CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
+    Setter::setBackground(this);
     
-    // Background Set tiled image
-    CCSpriteBatchNode* node = CCSpriteBatchNode::create("message_bg1.jpg");
-    CCSprite* bgspr = CCSprite::createWithTexture(node->getTexture());
-    CCSize bgsize = bgspr->getContentSize();
-    this->addChild(node);
-    int bgWidth = bgsize.width;
-    int bgHeight = bgsize.height;
-    int repeatX = visibleSize.width/bgWidth + 1;
-    int repeatY = visibleSize.height/bgHeight + 1;
-    CCSprite* spr[repeatX][repeatY];
-    for(int y=0; y<=repeatY; y++){
-        for(int x=0; x<=repeatX; x++){
-            spr[x][y] = CCSprite::createWithTexture(node->getTexture());
-            spr[x][y]->setPosition(ccp(bgWidth * x, bgHeight * y));
-            node->addChild(spr[x][y]);
-        }
-    }
+//    // Background Set tiled image
+//    CCSpriteBatchNode* node = CCSpriteBatchNode::create("message_bg1.jpg");
+//    CCSprite* bgspr = CCSprite::createWithTexture(node->getTexture());
+//    CCSize bgsize = bgspr->getContentSize();
+//    this->addChild(node);
+//    int bgWidth = bgsize.width;
+//    int bgHeight = bgsize.height;
+//    int repeatX = visibleSize.width/bgWidth + 1;
+//    int repeatY = visibleSize.height/bgHeight + 1;
+//    CCSprite* spr[repeatX][repeatY];
+//    for(int y=0; y<=repeatY; y++){
+//        for(int x=0; x<=repeatX; x++){
+//            spr[x][y] = CCSprite::createWithTexture(node->getTexture());
+//            spr[x][y]->setPosition(ccp(bgWidth * x, bgHeight * y));
+//            node->addChild(spr[x][y]);
+//        }
+//    }
     
     
     // Position
@@ -75,9 +76,9 @@ bool SocialScene::init()
     // Background image for Comments Board
     CCScale9Sprite* bgBoard = CCScale9Sprite::create("frame_g.png");
     float bgBoardWidth = visibleSize.width * 9 /10;
-    float bgBoardHeight = visibleSize.height * 8 /10;
+    float bgBoardHeight = visibleSize.height * 4 /10;
     float bgBoardPosX = visibleSize.width /2;
-    float bgBoardPosY = visibleSize.height *9/20  ;
+    float bgBoardPosY = visibleSize.height *5/20  ;
     bgBoard->setContentSize(ccp(bgBoardWidth,bgBoardHeight));
     bgBoard->setPosition(ccp(bgBoardPosX,bgBoardPosY));
     this->addChild(bgBoard);
@@ -90,10 +91,19 @@ bool SocialScene::init()
     this->addChild(scrollView);
     
     // TODO font test
-    CCLabelTTF *tapMessage = CCLabelTTF ::create("Tap on Screen", "T3NOWGB", 96);
+    CCLabelTTF *tapMessage = CCLabelTTF ::create("", "T3NOWGB", 96);
     tapMessage->setPosition(ccp(visibleSize.width/2,visibleSize.height/2));
     tapMessage->setColor(ccc3(10,10,10));
     this->addChild(tapMessage,3);
+    
+    // Pet Status Info
+    string satiety_str = _SATIETY_;
+    satiety_str += "80";
+    const char* satiety_char = satiety_str.c_str();
+    CCLabelTTF* satiety = CCLabelTTF ::create(satiety_char, "T3NOWGB", 48);
+    satiety->setPosition(ccp(visibleSize.width/2,visibleSize.height/3));
+    satiety->setColor(ccc3(44, 62, 80));
+    this->addChild(satiety,3);
    
     // Main Logic
     SocialScene::load();
@@ -104,17 +114,63 @@ bool SocialScene::init()
 
 void SocialScene::main()
 {
-
+    CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
+    // My Pet
+    CCSpriteBatchNode * batchNode = CCSpriteBatchNode::create("kopute.png");
+    CCSprite * pet = CCSprite::createWithTexture(batchNode->getTexture(), CCRect(0,0,128,128));
+    pet->setPosition(CCPointMake(visibleSize.width/2, visibleSize.height/3 * 2));
+    pet->setTag(_SPRITE_MY_PET_);
+    this->addChild(pet,10);
+    
+    // Animation
+    CCAnimation * animation = CCAnimation::create();
+    animation->addSpriteFrameWithTexture(batchNode->getTexture(), CCRect(128*0,0,128,128));
+    animation->addSpriteFrameWithTexture(batchNode->getTexture(), CCRect(128*3,0,128,128));
+    animation->addSpriteFrameWithTexture(batchNode->getTexture(), CCRect(128*0,0,128,128));
+    animation->addSpriteFrameWithTexture(batchNode->getTexture(), CCRect(128*4,0,128,128));
+    animation->setDelayPerUnit(0.8f / 4.0f);
+    animation->setRestoreOriginalFrame(true);
+    CCAnimate * action = CCAnimate::create(animation);
+    CCRepeatForever * actionreq = CCRepeatForever::create(action);
+    pet->runAction(actionreq);
+    this->schedule(schedule_selector(SocialScene::petAction), 3);
 }
 
 void SocialScene::onClick1()
 {
-    
 }
                                                           
-void SocialScene::onClick2()
+void SocialScene::petAction()
 {
     
+    CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
+    int cnt = 0;
+    const int numberOfVertex = 6;
+    int cntRand = rand() % numberOfVertex;
+    float centerPosX = visibleSize.width/2;
+    float centerPosY = visibleSize.height/3 * 2;
+    // Position
+    CCPoint vertex[numberOfVertex];
+    vertex[cnt++] = ccp(centerPosX + 0/2, centerPosY + 314/2);
+    vertex[cnt++] = ccp(centerPosX + 157/2, centerPosY + 272/2);
+    vertex[cnt++] = ccp(centerPosX + 157/2, centerPosY - 272/2);
+    vertex[cnt++] = ccp(centerPosX + 0/2, centerPosY - 314/2);
+    vertex[cnt++] = ccp(centerPosX - 157/2, centerPosY - 272/2);
+    vertex[cnt++] = ccp(centerPosX - 157/2, centerPosY + 272/2);
+    
+    // Pet Action
+    CCSprite* petSpr = (CCSprite*)this->getChildByTag(_SPRITE_MY_PET_);
+    CCPoint nextVertex = vertex[cntRand];
+    if (nextVertex.x > petSpr->getPositionX()){
+        petSpr->setScaleX(-1.0f);
+    } else {
+        petSpr->setScaleX(1.0f);
+    }
+    petSpr->runAction(CCMoveTo::create(2.0f, nextVertex));
+    
+    // TODO Status
+    CCUserDefault::sharedUserDefault()->setStringForKey("Pon", "test");
+    string pon = CCUserDefault::sharedUserDefault()->getStringForKey("Pon");
 }
 
 void SocialScene::load()

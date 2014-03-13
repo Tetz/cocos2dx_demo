@@ -22,7 +22,7 @@ public:
     
     // button
     virtual void onClick1();
-    virtual void onClick2();
+    virtual void petAction();
     
     // EditBox
     virtual void editBoxEditingDidBegin(CCEditBox* editBox);
@@ -30,7 +30,6 @@ public:
     virtual void editBoxTextChanged(CCEditBox* editBox, const std::string& text);
     virtual void editBoxReturn(CCEditBox* editBox);
     const char* inputText;
-
 
     
 };

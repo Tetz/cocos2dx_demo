@@ -238,6 +238,7 @@
 		9F018B4218CEE5BC003CBC4F /* food_medicine_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F018B3D18CEE5BC003CBC4F /* food_medicine_blue.png */; };
 		9F018B4318CEE5BC003CBC4F /* food_medicine_purple.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F018B3E18CEE5BC003CBC4F /* food_medicine_purple.png */; };
 		9F018B4418CEE5BC003CBC4F /* food_tomato.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F018B3F18CEE5BC003CBC4F /* food_tomato.png */; };
+		9F018B4718D014A3003CBC4F /* StatusLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F018B4518D014A3003CBC4F /* StatusLayer.cpp */; };
 		9F2A721118A49284008D41C4 /* dialog_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F2A721018A49284008D41C4 /* dialog_dark.png */; };
 		9F4465F218AB8D3C00D1E1FC /* baby_pon_smile.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F4465F118AB8D3C00D1E1FC /* baby_pon_smile.png */; };
 		9F4465F418AB8ED300D1E1FC /* gero_front.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F4465F318AB8ED300D1E1FC /* gero_front.png */; };
@@ -832,6 +833,8 @@
 		9F018B3D18CEE5BC003CBC4F /* food_medicine_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = food_medicine_blue.png; sourceTree = "<group>"; };
 		9F018B3E18CEE5BC003CBC4F /* food_medicine_purple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = food_medicine_purple.png; sourceTree = "<group>"; };
 		9F018B3F18CEE5BC003CBC4F /* food_tomato.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = food_tomato.png; sourceTree = "<group>"; };
+		9F018B4518D014A3003CBC4F /* StatusLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StatusLayer.cpp; sourceTree = "<group>"; };
+		9F018B4618D014A3003CBC4F /* StatusLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusLayer.h; sourceTree = "<group>"; };
 		9F2A721018A49284008D41C4 /* dialog_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dialog_dark.png; sourceTree = "<group>"; };
 		9F4465F118AB8D3C00D1E1FC /* baby_pon_smile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = baby_pon_smile.png; sourceTree = "<group>"; };
 		9F4465F318AB8ED300D1E1FC /* gero_front.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gero_front.png; sourceTree = "<group>"; };
@@ -2112,6 +2115,8 @@
 				9F44661518BB097200D1E1FC /* MenuBarLayer.h */,
 				9FD65C3B18C0534E00B75478 /* MainMenuBarLayer.cpp */,
 				9FD65C3C18C0534E00B75478 /* MainMenuBarLayer.h */,
+				9F018B4518D014A3003CBC4F /* StatusLayer.cpp */,
+				9F018B4618D014A3003CBC4F /* StatusLayer.h */,
 			);
 			name = Layer;
 			sourceTree = "<group>";
@@ -2505,6 +2510,7 @@
 				379BB9A217F03F3700829B88 /* CCDisplayFactory.cpp in Sources */,
 				379BB9A317F03F3700829B88 /* CCDisplayManager.cpp in Sources */,
 				379BB9A417F03F3700829B88 /* CCSkin.cpp in Sources */,
+				9F018B4718D014A3003CBC4F /* StatusLayer.cpp in Sources */,
 				379BB9A517F03F3700829B88 /* CCColliderDetector.cpp in Sources */,
 				379BB9A617F03F3700829B88 /* CCArmatureDataManager.cpp in Sources */,
 				379BB9A717F03F3700829B88 /* CCArmatureDefine.cpp in Sources */,
