@@ -281,6 +281,12 @@ void FarmScene::updateMessages()
 {
     // Init
     if(mLoopCount<0){mLoopCount=0;}
+    
+    // TODO
+    if(mNumberOfMessages == 0){
+        this->load();
+    }
+    
     // update
     if(mNumberOfMessages  > 0){
         CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
@@ -376,12 +382,13 @@ void FarmScene::updateMessages()
                 break;
         }
         
-        // Messages
+        // Reload
         mLoopCount++;
         if(mLoopCount >= mNumberOfMessages){
             mLoopCount = -1;
             this->load();
         }
+        
     }
 }
 
@@ -601,7 +608,7 @@ void FarmScene::onHttpRequestCompleted(cocos2d::CCNode *sender, void *data)
     if(picoError.empty()) {
         picojson::object& o = picoValue.get<picojson::object>();
         string& info = o["info"].get<string>();
-        picojson::array& picoArray = o["messages"].get<picojson::array>();
+        picojson::array& picoArray = o["tweets"].get<picojson::array>();
         int picoArraySize = picoArray.size();
         mNumberOfMessages = picoArraySize;
         userAry = new string[picoArraySize];
@@ -610,7 +617,7 @@ void FarmScene::onHttpRequestCompleted(cocos2d::CCNode *sender, void *data)
         for(picojson::array::iterator i = picoArray.begin(); i != picoArray.end(); i++){
             picojson::object& messageObject = i->get<picojson::object>();
             userAry[cnt] = messageObject["user_id"].get<string>();
-            messageAry[cnt] = messageObject["message"].get<string>();
+            messageAry[cnt] = messageObject["tweet"].get<string>();
             CCLog("pico user_id : %s", userAry[cnt].c_str());
             CCLog("pico message : %s", messageAry[cnt].c_str());
             cnt++;
